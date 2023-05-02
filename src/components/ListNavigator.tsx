@@ -1,6 +1,10 @@
 import Image from 'next/image'
 
 export default function ListNavigator() {
+    const user = {
+        'name': 'John'
+    }
+
     return (
         <nav className="flex flex-row justify-between h-14 mx-4">
                 {/**<!-- logo -->*/}
@@ -17,7 +21,7 @@ export default function ListNavigator() {
                 </div>
                 {/**<!-- primary nav --> */}
                 <div className="flex flex-row">
-                    <a href="#" className="text-gray-700 hover:text-gray-900 place-self-center"></a>
+                    <span className="text-gray-700 hover:text-gray-900 place-self-center">👋 Welcome &#123;User&#125;!</span>
                 </div>
                 {/**<!-- secondary nav --> */}
                 <div className="flex flex-row mr-2">
