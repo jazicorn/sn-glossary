@@ -5,6 +5,7 @@ export default function ListOfTerms() {
     const [getTerm, setTerm] = useState({
         "id": 1,
         "term": "definition",
+        "ref": "https://docs.servicenow.com/en-US/",
         "tags": ["tag1", "tag2", "tag3"]
     });
 
@@ -12,16 +13,19 @@ export default function ListOfTerms() {
     //     {
     //         "id": 1,
     //         "term": "definition",
+    //         "ref:" "",
     //         "tags": ["tag1", "tag2", "tag3"]
     //     },
     //     {
     //         "id": 2,
     //         "term": "definition",
+    //         "ref:" "",
     //         "tags": ["tag1", "tag2", "tag3"]
     //     },
     //     {
     //         "id": 3,
     //         "term": "definition",
+    //         "ref:" "",
     //         "tags": ["tag1", "tag2", "tag3"]
     //     }
     // ]
@@ -52,7 +56,7 @@ export default function ListOfTerms() {
                             </label>
                             <input
                                 className='
-                                    mt-1 text-left ml-1 text-sm self-center
+                                    mt-1 p-0 text-left ml-1 text-sm self-center
                                     bg-gray-100 border-0'
                                 type='text'
                                 name='term'
@@ -60,26 +64,49 @@ export default function ListOfTerms() {
                                 onChange={changeTerm}
                             />
                         </div>
-                        <div className='flex flex-row bg-gray-100 rounded m-1 p-1 items-baseline'>
-                            <label className='m-1 basis-14 text-sm bg-blue-300 rounded border-2 border-slate-400'>Tags:</label>
-                            <div className='m-1 text-left flex flex-row text-xs'>
-                                {getTerm.tags.map((tag, index) => (
-                                    <>
-                                        <div className='ml-1'>
-                                            <input
-                                                className='
-                                                    text-xs p-0 items-baseline text-center inline
-                                                    h-6 w-12 bg-slate-200  
-                                                    border-0 rounded
-                                                    focus:border-2 focus:border-slate-400'
-                                                type='text'
-                                                name='tag'
-                                                value={tag}
-                                                onChange={(e) => changeTermTags(index, e)}
-                                            />
-                                        </div>
-                                    </>
-                                ))}
+                        
+                        <div className='flex flex-row rounded p-1 items-baseline'>
+                            <div className='flex flex-row mr-1 bg-gray-100 rounded'>
+                                <label className='m-1 mx-2 px-2 basis-14 text-sm
+                                                bg-blue-300 rounded border-2 border-slate-400'>
+                                    Ref:
+                                </label>
+                                <div className='m-1 text-left flex flex-row text-xs'>
+                                    <div className='mr-1 py-1 pr-1'>
+                                        <a className='
+                                                text-xs py-1 px-2 items-baseline text-center inline whitespace-nowrap 
+                                                h-6 w-12 bg-slate-200 self-baseline
+                                                border-0 rounded
+                                                focus:border-2 focus:border-slate-400'
+                                            target="_blank"
+                                            href={getTerm.ref}>
+                                            ServiceNow: Product Documentation
+                                        </a>                                              
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div className='flex flex-row bg-gray-100 rounded'>
+                                <label className='m-1 mx-2 px-2 basis-14 text-sm bg-blue-300 rounded border-2 border-slate-400'>Tags:</label>
+                                <div className='m-1 text-left flex flex-row text-xs'>
+                                    {getTerm.tags.map((tag, index) => (
+                                        <>
+                                            <div className='ml-1'>
+                                                <input
+                                                    className='
+                                                        text-xs p-0 items-baseline text-center inline
+                                                        h-6 w-12 bg-slate-200  
+                                                        border-0 rounded
+                                                        focus:border-2 focus:border-slate-400'
+                                                    type='text'
+                                                    name='tag'
+                                                    value={tag}
+                                                    onChange={(e) => changeTermTags(index, e)}
+                                                />
+                                            </div>
+                                        </>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </div>
