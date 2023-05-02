@@ -10,12 +10,12 @@ export default function ListMenu() {
             </h2>
             <div className=''>
                 <h3 className='text-l italic mx-2 mb-1 bg-violet-100 text-blue-500 rounded border-4 border-blue-200 hover:bg-gray-300
-                                bg-gradient-to-r from-slate-100 to-blue-100'>
-                   <a className='inline-block h-full w-full hover:bg-gray-400'>New List</a>
+                                bg-gradient-to-r from-slate-100 to-violet-100'>
+                   <a className='inline-block h-full w-full hover:bg-gray-300'>New List</a>
                 </h3>
                 <ul className="flex flex-col text-l">
                     {examples.map((example) => (
-                        <li key={example} className='my-1 mx-2 bg-violet-100 rounded border-4 hover:bg-gray-200'>
+                        <li key={example} className='my-1 mx-2 bg-violet-100 rounded border-4 hover:bg-gray-100'>
                             <a className='inline-block h-full w-full hover:bg-gradient-to-r from-violet-200 to-blue-200'>{example}</a>
                         </li>
                     ))}
