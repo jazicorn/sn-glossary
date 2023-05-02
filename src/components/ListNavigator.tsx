@@ -16,11 +16,11 @@ export default function ListNavigator() {
                         width={24}
                         height={24}
                     />
-                    <span className="pl-2.5 font-bold">SN-Glossary</span>
+                    <span className="pl-2.5 font-bold whitespace-nowrap">SN-Glossary</span>
                     </a>
                 </div>
                 {/**<!-- primary nav --> */}
-                <div className="flex flex-row">
+                <div className="flex flex-row invisible md:visible">
                     <span className="text-gray-700 hover:text-gray-900 place-self-center">👋 Welcome &#123;User&#125;!</span>
                 </div>
                 {/**<!-- secondary nav --> */}
