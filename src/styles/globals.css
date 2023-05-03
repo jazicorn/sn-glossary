@@ -14,7 +14,7 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-body {
+.custom-background {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
