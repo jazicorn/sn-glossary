@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function ListNavigator() {
     const user = {
@@ -9,7 +10,7 @@ export default function ListNavigator() {
         <nav className="flex flex-row justify-between h-14 mx-4">
                 {/**<!-- logo -->*/}
                 <div className="place-self-center">
-                    <a href="#" className="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900">
+                    <Link href="/" target="_blank" className="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900">
                     <Image
                         src="blue-book.svg"
                         alt="Home"
@@ -17,7 +18,7 @@ export default function ListNavigator() {
                         height={24}
                     />
                     <span className="pl-2.5 font-bold whitespace-nowrap">SN-Glossary</span>
-                    </a>
+                    </Link>
                 </div>
                 {/**<!-- primary nav --> */}
                 <div className="flex flex-row invisible md:visible">
