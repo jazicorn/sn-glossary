@@ -43,7 +43,7 @@ export default function Home() {
                   height={24}
               />
             </span> 
-            <span className='pr-1 '>Want to use this product?</span>
+            <span className='pr-1 hidden lg:inline'>Want to use this product?</span>
             <span className='italic'>Sign-up</span>
             <span className='ml-1 '>
               <Image
@@ -87,6 +87,18 @@ export default function Home() {
           <input className="m-4 py-2 px-4 w-3/5 md:w-2/5 bg-blue-300 rounded-full text-center" placeholder='Type word here...'></input>
         </div>
       </div>
+<footer className="bg-secondary-100 text-center dark:bg-secondary-600">
+
+  <div
+    className="bg-secondary-200 p-4 text-center text-secondary-700 dark:bg-secondary-700 dark:text-secondary-200">
+    © 2023 Copyright:
+    <a
+      className="pl-1 text-blue-400 dark:text-blue-300"
+      href="#"
+      >SN-Glossary</a
+    >
+  </div>
+</footer>
    </div>
   )
 }
