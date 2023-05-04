@@ -22,7 +22,7 @@ export default function Home() {
               </Link>
           </div>
           {/**<!-- call-to-action --> */}
-        <div className="flex flex-row md:basis-10/12 place-self-center place-content-center invisible md:visible">
+        <div className="hidden md:flex flex-row md:basis-10/12 place-self-center place-content-center ">
           <div className="
               flex flex-row items-center         
               text-gray-600 hover:text-gray-900">
@@ -43,7 +43,7 @@ export default function Home() {
                   height={24}
               />
             </span> 
-            <span className='pr-1 hidden lg:inline'>Want to use this product?</span>
+            <span className='hidden lg:inline pr-1'>Want to use this product?</span>
             <span className='italic'>Sign-up</span>
             <span className='ml-1 '>
               <Image
