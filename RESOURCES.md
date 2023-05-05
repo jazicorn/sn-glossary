@@ -48,16 +48,22 @@
 
 ---
 ## Database
-> *Microsoft implementation of SQl database utilizing T-SQl*
 
 #### Technologies: SQL-Server
+> *Microsoft implementation of SQl database utilizing T-SQl*
 - [MS-SQL & Node.js](https://learn.microsoft.com/en-us/sql/connect/node-js/step-3-proof-of-concept-connecting-to-sql-using-node-js?view=sql-server-ver16)
 - [MacOS Setup](https://learn.microsoft.com/en-us/sql/linux/quickstart-install-connect-docker?view=sql-server-ver16&pivots=cs1-bash)
 - [Next.js SQL db-connection example](https://github.com/vercel/next.js/tree/canary/examples/with-postgres)
+- [Next.js Dynamic imports: allow commonjs syntax](https://nextjs.org/docs/pages/building-your-application/optimizing/lazy-loading#nextdynamic)
+- [Basic sql-server config](https://www.mickpatterson.com.au/blog/connecting-to-a-sql-server-database-via-nodejs)
 
 #### Technologies: Tedious Node Package
 >*Tedious is a Node package that provides an implementation of the TDS protocol, which is used to interact with instances of Microsoft's SQL Server.* 
-- [Official Site](https://tediousjs.github.io/tedious/)
+- [Documentation](https://tediousjs.github.io/tedious/)
+
+#### Technologies: Sequelize Node Package
+> *Feature-rich ORM for modern Node.js and TypeScript*
+- [Documentation](https://sequelize.org/docs/v6/getting-started/)
 
 #### Articles: Configuration
 - https://sqlchoice.azurewebsites.net/en-us/sql-server/developer-get-started/node/windows/step/2.html
@@ -68,6 +74,7 @@
 - https://jasonwatmore.com/post/2022/06/18/nodejs-ms-sql-server-crud-api-example-and-tutorial
 - https://jasonwatmore.com/post/2022/06/20/nodejs-mssql-connect-to-sql-server-with-sequelize-tedious
 - https://jasonwatmore.com/post/2022/07/01/nodejs-ms-sql-server-simple-api-for-authentication-registration-and-user-management
+- https://www.freecodecamp.org/news/how-to-bypass-es-modules-error-in-next-js/
 
 #### Articles: Security
 - [SQL Injection Prevention](https://www.stackhawk.com/blog/node-js-sql-injection-guide-examples-and-prevention/)
