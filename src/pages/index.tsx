@@ -87,7 +87,7 @@ export default function Home() {
         <div className='mr-2 flex flex-row md:basis-1/12'>
           <a
             href=''
-            className='text-grey-900 hover:text-grey-300 place-self-center rounded bg-blue-300 
+            className='text-grey-900 hover:text-grey-300 place-self-center rounded-md bg-blue-300 
                       px-3 py-1 transition duration-300 hover:bg-blue-400'
           >
             Login
@@ -95,8 +95,8 @@ export default function Home() {
         </div>
       </nav>
       {/**Feature bar*/}
-      <div className='grid md:h-32 grow-0 border-y-2 border-blue-200 pb-2'>
-        <h1 className='place-self-center text-2xl m-2 md:m-1 px-2 bg-slate-200 border border-gray-400 rounded'>Features</h1>
+      <div className='grid md:h-32 grow-0 border-y-2 border-blue-200 pt-1 pb-2'>
+        <h1 className='custom-feature-word-search place-self-center text-xl md:text-2xl m-2 md:m-1 px-2 bg-gradient-to-r from-blue-50 to-gray-200 border border-gray-300 rounded border-2'>Features</h1>
         <div className='place-self-center justify-items-center text-center grid gap-3 md:grid-cols-4 md:gap-1'>
           <div className='custom-feature-bar-tabs text-sm'><h2>Word Search</h2><p className='italic text-xs text-yellow-500'>*In Progress*</p></div>
           <div className='custom-feature-bar-tabs text-sm'><h2>Word List</h2><p className='italic text-xs text-rose-400'>*Coming Soon*</p></div>
@@ -105,16 +105,19 @@ export default function Home() {
         </div>     
       </div>
       {/**<!-- body --> */}
-      <div className='custom-background flex h-screen flex-col place-content-center bg-slate-300 text-center'>
-        <h2 className='text-4xl font-extrabold'>ServiceNow Terms</h2>
-        <p className='color: rgba(96, 165, 250, var(--tw-text-opacity));'>all in one place</p>
-        <div>
-          <input
-            className='m-4 w-3/5 rounded-full bg-blue-300 px-4 py-2 text-center md:w-2/5'
-            placeholder='Type word here...'
-          ></input>
+      <div className='custom-background h-screen flex flex-col bg-slate-300 text-center'>
+        {/**!--landing message */}
+        <div className='flex flex-col basis-1/4'>
+          <h2 className='text-4xl font-extrabold mt-auto'>ServiceNow Terms</h2>
+          <p className=''>all in one place</p>
+        </div>
+        {/**<!--search-->*/}
+        <div className="m-3 flex flex-row place-content-center "> 
+          <input type="search" id="word-search" placeholder="search" className="relative m-0 min-w-0 basis-96 rounded border border-solid border-neutral-300 bg-blue-100 bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary">
+          </input>
         </div>
       </div>
+      {/**<!--footer--> */}
       <footer className='bg-secondary-100 text-center dark:bg-secondary-600'>
         <div className='bg-secondary-200 p-4 text-center text-secondary-700 dark:bg-secondary-700 dark:text-secondary-200'>
           © 2023 Copyright:
