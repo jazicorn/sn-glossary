@@ -3,6 +3,7 @@
 
 ---
 ## Tools
+> *developer tools and documentation*
 
 #### Documentation: Markdown
 - [Markdown Guide](https://www.markdownguide.org/)
@@ -21,6 +22,7 @@
 - [CSS Gradients](https://gradients.shecodes.io/)
 - [Emoji Icons](https://emojipedia.org/)
 - [Emoji SVG Vector and Icons](https://www.svgrepo.com/)
+- [Emoji to Favicon Generator](https://favicon.io/)
 
 #### Technologies: CSS | TailwindCSS
 - [Documentation](https://tailwindcss.com/docs/installation)
