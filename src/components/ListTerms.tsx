@@ -44,7 +44,7 @@ export default function ListOfTerms() {
 
   //capalize title
   const titleUpper = getTerm.term[0].toUpperCase() + getTerm.term.slice(1);
-    
+
   return (
     <div
       className='mx-5 mb-5 mt-1 h-fit 
@@ -78,9 +78,7 @@ export default function ListOfTerms() {
             <div className='flex flex-col items-baseline rounded px-1 md:flex md:flex-row'>
               {/**Ref*/}
               <div className='mr-1 flex flex-row rounded bg-gray-100'>
-                <label
-                  className='m-1 mx-2 basis-14 rounded border-2 border-slate-400 bg-blue-300 px-2 text-sm'
-                >
+                <label className='m-1 mx-2 basis-14 rounded border-2 border-slate-400 bg-blue-300 px-2 text-sm'>
                   Ref:
                 </label>
                 <div className='m-1 flex flex-row text-left text-xs'>

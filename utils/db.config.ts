@@ -1,4 +1,3 @@
-
 import { config, ConnectionPool } from 'mssql';
 
 // types: node_modules > @types > mssql > index.d.ts > config (interface) > server (key-value pair)
@@ -23,7 +22,7 @@ import { config, ConnectionPool } from 'mssql';
     /**
      * Invoked before opening the connection. The parameter conn is the configured
      * tedious Connection. It can be used for attaching event handlers.
-     *//**
+     */ /**
     beforeConnect?: ((conn: Connection) => void) | undefined
   }
  */
