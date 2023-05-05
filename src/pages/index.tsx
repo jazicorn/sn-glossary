@@ -11,10 +11,11 @@ export default function Home() {
       <nav className='custom-nav-background flex h-14 flex-row justify-between px-4 md:basis-1/12'>
         {/**<!-- logo -->*/}
         <div className='place-self-center'>
+          <Image className='inline md:hidden' src='hamburger-menu.svg' alt='Menu' width={24} height={24} />
           <Link
             href='/'
             target='_blank'
-            className='flex items-center px-2 py-5 text-gray-700 hover:text-gray-900'
+            className='hidden md:flex items-center px-2 py-5 text-gray-700 hover:text-gray-900'
           >
             <Image src='blue-book.svg' alt='Home' width={24} height={24} />
             <span className='whitespace-nowrap pl-2.5 font-bold'>
@@ -88,20 +89,21 @@ export default function Home() {
           <a
             href=''
             className='text-grey-900 hover:text-grey-300 place-self-center rounded-md bg-blue-300 
-                      px-3 py-1 transition duration-300 hover:bg-blue-400'
+                      my-2 p-1 md:px-3 md:py-1 transition duration-300 hover:bg-blue-400'
           >
             Login
           </a>
         </div>
       </nav>
       {/**Feature bar*/}
-      <div className='grid md:h-48 md:m-full grow-0 border-t-4 border-b-2 border-blue-300 pt-1 pb-2'>
+      <div className='grid h-fit md:h-48 md:m-full grow-0 border-t-4 border-b-2 border-blue-300 pt-1 pb-2'>
         <h1 className='place-self-center md:text-2xl m-2 md:m-1 px-2 bg-gradient-to-r from-blue-50 to-gray-200 border rounded text-xl'>Features</h1>
-        <div className='place-self-center justify-items-center text-center grid gap-3 md:grid-cols-4 md:gap-1'>
-          <div className='custom-feature-bar-tabs text-sm'><h2>Word Search</h2><p className='italic text-xs text-yellow-500'>*In Progress*</p></div>
-          <div className='custom-feature-bar-tabs text-sm'><h2>Word List</h2><p className='italic text-xs text-rose-400'>*Coming Soon*</p></div>
-          <div className='custom-feature-bar-tabs text-sm'><h2>Flashcards</h2><p className='italic text-xs text-rose-400'>*Coming Soon*</p></div>
-          <div className='custom-feature-bar-tabs text-sm'><h2>Desktop Support</h2><p className='italic text-xs text-rose-400'>*Coming Soon*</p></div>
+        {/**feature options */}
+        <div className='place-self-center justify-items-center text-center grid gap-3 grid-row-2 grid-cols-3 md:grid-row-1 md:grid-cols-4 md:gap-1'>
+          <div className='custom-feature-bar-tabs text-sm col-start-2 col-end-2 md:col-start-1 md:col-end-1'><h2>Word Search</h2><p className='italic text-xs text-yellow-500'>*In Progress*</p></div>
+          <div className='custom-feature-bar-tabs text-sm col-start-1 md:col-start-2'><h2>Word List</h2><p className='italic text-xs text-rose-400'>*Coming Soon*</p></div>
+          <div className='custom-feature-bar-tabs text-sm col-start-2 md:col-start-3'><h2>Flashcards</h2><p className='italic text-xs text-rose-400'>*Coming Soon*</p></div>
+          <div className='custom-feature-bar-tabs text-sm col-start-3 md:col-start-4'><h2>Desktop Support</h2><p className='italic text-xs text-rose-400'>*Coming Soon*</p></div>
         </div>     
       </div>
       {/**<!-- body --> */}
