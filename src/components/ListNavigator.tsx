@@ -24,7 +24,7 @@ export default function ListNavigator() {
       {/**<!-- primary nav --> */}
       <div className='invisible flex flex-row md:visible'>
         <span className='place-self-center text-gray-700 hover:text-gray-900'>
-          👋 Welcome &#123;User&#125;!
+          👋 Welcome {user.name}!
         </span>
       </div>
       {/**<!-- secondary nav --> */}
