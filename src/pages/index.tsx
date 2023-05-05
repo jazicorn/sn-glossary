@@ -95,8 +95,8 @@ export default function Home() {
         </div>
       </nav>
       {/**Feature bar*/}
-      <div className='grid md:h-32 grow-0 border-y-2 border-blue-200 pt-1 pb-2'>
-        <h1 className='custom-feature-word-search place-self-center text-xl md:text-2xl m-2 md:m-1 px-2 bg-gradient-to-r from-blue-50 to-gray-200 border border-gray-300 rounded border-2'>Features</h1>
+      <div className='grid md:h-48 md:m-full grow-0 border-t-4 border-b-2 border-blue-300 pt-1 pb-2'>
+        <h1 className='place-self-center md:text-2xl m-2 md:m-1 px-2 bg-gradient-to-r from-blue-50 to-gray-200 border rounded text-xl'>Features</h1>
         <div className='place-self-center justify-items-center text-center grid gap-3 md:grid-cols-4 md:gap-1'>
           <div className='custom-feature-bar-tabs text-sm'><h2>Word Search</h2><p className='italic text-xs text-yellow-500'>*In Progress*</p></div>
           <div className='custom-feature-bar-tabs text-sm'><h2>Word List</h2><p className='italic text-xs text-rose-400'>*Coming Soon*</p></div>
@@ -107,13 +107,13 @@ export default function Home() {
       {/**<!-- body --> */}
       <div className='custom-background h-screen flex flex-col bg-slate-300 text-center'>
         {/**!--landing message */}
-        <div className='flex flex-col basis-1/4'>
-          <h2 className='text-4xl font-extrabold mt-auto'>ServiceNow Terms</h2>
-          <p className=''>all in one place</p>
+        <div className='flex flex-col basis-1/3'>
+          <h2 className='text-4xl text-sn-dark font-extrabold mt-auto'>ServiceNow </h2>
+          <h2 className='text-xl text-sn-light'>Glossary</h2>
         </div>
         {/**<!--search-->*/}
         <div className="m-3 flex flex-row place-content-center "> 
-          <input type="search" id="word-search" placeholder="search" className="relative m-0 min-w-0 basis-96 rounded border border-solid border-neutral-300 bg-blue-100 bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary">
+          <input type="search" id="word-search" placeholder="search" className="relative m-0 min-w-0 basis-96 rounded border-2 border-solid border-neutral-300 bg-grayish-100 bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary">
           </input>
         </div>
       </div>
