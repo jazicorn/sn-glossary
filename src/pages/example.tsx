@@ -14,7 +14,7 @@ export default function Example() {
       {/**<!-- navbar -->*/}
       <Nav />
       {/**<!-- content goes here --> */}
-      <div className='flex grow flex-row bg-white bg-gradient-to-r from-rose-100 to-blue-100 text-center'>
+      <div className='flex grow flex-row bg-white bg-gradient-to-r from-gray-100 to-blue-100 text-center'>
         <div className='flex grow flex-col rounded-lg md:flex md:flex-row'>
           {/**React Component that shows all avaiable list; click list to generate terms to the right of this component */}
           {/**Click plus button to create new list */}
