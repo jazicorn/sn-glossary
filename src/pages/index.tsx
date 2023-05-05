@@ -94,9 +94,20 @@ export default function Home() {
           </a>
         </div>
       </nav>
+      {/**Feature bar*/}
+      <div className='grid md:h-32 grow-0 border-y-2 border-blue-200 pb-2'>
+        <h1 className='place-self-center text-2xl m-2 md:m-1 px-2 bg-slate-200 border border-gray-400 rounded'>Features</h1>
+        <div className='place-self-center justify-items-center text-center grid gap-3 md:grid-cols-4 md:gap-1'>
+          <div className='custom-feature-bar-tabs text-sm'><h2>Word Search</h2><p className='italic text-xs text-yellow-500'>*In Progress*</p></div>
+          <div className='custom-feature-bar-tabs text-sm'><h2>Word List</h2><p className='italic text-xs text-rose-400'>*Coming Soon*</p></div>
+          <div className='custom-feature-bar-tabs text-sm'><h2>Flashcards</h2><p className='italic text-xs text-rose-400'>*Coming Soon*</p></div>
+          <div className='custom-feature-bar-tabs text-sm'><h2>Desktop Support</h2><p className='italic text-xs text-rose-400'>*Coming Soon*</p></div>
+        </div>     
+      </div>
       {/**<!-- body --> */}
       <div className='custom-background flex h-screen flex-col place-content-center bg-slate-300 text-center'>
-        <h2 className='text-4xl font-extrabold'>Welcome!</h2>
+        <h2 className='text-4xl font-extrabold'>ServiceNow Terms</h2>
+        <p className='color: rgba(96, 165, 250, var(--tw-text-opacity));'>all in one place</p>
         <div>
           <input
             className='m-4 w-3/5 rounded-full bg-blue-300 px-4 py-2 text-center md:w-2/5'
