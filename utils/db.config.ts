@@ -1,4 +1,4 @@
-import 'dotenv/config'
+
 import { config, ConnectionPool } from 'mssql';
 
 // types: node_modules > @types > mssql > index.d.ts > config (interface) > server (key-value pair)
