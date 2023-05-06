@@ -1,14 +1,16 @@
 import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import Link from 'next/link';
-// Initialization for ES Users
+//tw-elements: dynamic import necssary for next.js v12
+import dynamic from "next/dynamic";
+const {} = dynamic(import("tw-elements"), { ssr: false });
+//tw-elements: Initialization for ES Users
 import {
   Input,
   Modal,
   Ripple,
   initTE,
 } from "tw-elements";
-
 initTE({ Input, Modal, Ripple });
 
 const inter = Inter({ subsets: ['latin'] });
