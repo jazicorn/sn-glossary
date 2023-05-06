@@ -7,7 +7,9 @@ const inter = Inter({ subsets: ['latin'] });
 export default function Home() {
   return (
     <div className={`flex h-screen min-h-full flex-col ${inter.className}`}>
+      {/****************** */}
       {/**<!-- nav bar --> */}
+      {/****************** */}
       <nav className='custom-nav-background flex h-14 flex-row justify-between px-4 md:basis-1/12'>
         {/**<!-- logo -->*/}
         <div className='place-self-center'>
@@ -95,7 +97,9 @@ export default function Home() {
           </a>
         </div>
       </nav>
-      {/**Feature bar*/}
+      {/****************** */}
+      {/**<!--Feature bar->*/}
+      {/****************** */}
       <div className='grid h-fit md:h-48 md:m-full grow-0 border-t-4 border-b-2 border-blue-300 pt-1 pb-2'>
         <h1 className='place-self-center md:text-2xl m-2 md:m-1 px-2 bg-gradient-to-r from-blue-50 to-gray-200 border rounded text-xl'>Features</h1>
         {/**feature options */}
@@ -106,7 +110,9 @@ export default function Home() {
           <div className='custom-feature-bar-tabs text-sm col-start-3 md:col-start-4'><h2>Desktop Support</h2><p className='italic text-xs text-rose-400'>*Coming Soon*</p></div>
         </div>     
       </div>
-      {/**<!-- body --> */}
+      {/****************** */}
+      {/**<!--- body ----> */}
+      {/****************** */}
       <div className='custom-background h-screen flex flex-col bg-slate-300 text-center'>
         {/**!--landing message */}
         <div className='flex flex-col basis-1/3'>
@@ -119,7 +125,9 @@ export default function Home() {
           </input>
         </div>
       </div>
-      {/**<!--footer--> */}
+      {/****************** */}
+      {/**<!----footer---> */}
+      {/****************** */}
       <footer className='bg-secondary-100 text-center dark:bg-secondary-600'>
         <div className='bg-secondary-200 p-4 text-center text-secondary-700 dark:bg-secondary-700 dark:text-secondary-200'>
           © 2023 Copyright:
