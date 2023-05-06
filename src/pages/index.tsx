@@ -177,14 +177,10 @@ export default function Home() {
           </div>
         </div>
         {/**<!-- login/logout --> */}
-        <div className='mr-2 flex flex-row md:basis-1/12'>
-            <a
-              href=''
-              className='text-grey-900 hover:text-grey-300 place-self-center rounded-md bg-blue-300 
-                        my-2 p-1 md:px-3 md:py-1 transition duration-300 hover:bg-blue-400'
-            >
-              Login
-            </a>
+        <div className='md:m-full md:justify-end flex flex-row md:basis-1/12'>
+          <a href='login' className='md:w-20 text-grey-900 hover:text-grey-300 place-self-center rounded-md bg-blue-300 p-1 md:px-3 md:py-1 transition duration-300 hover:bg-blue-400'>
+            Login
+          </a>
         </div>
       </nav>
       {/****************** */}
