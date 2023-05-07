@@ -99,8 +99,7 @@ export default function Home() {
             <div className='place-self-center'>
                 <Image className='inline md:hidden' src='hamburger-menu.svg' alt='Menu' width={24} height={24} />
                 <Link
-                    href='/'
-                    target='_blank'
+                    href='/'                  
                     className='hidden md:flex items-center px-2 py-5 text-gray-700 hover:text-gray-900'
                 >
                     <Image src='blue-book.svg' alt='Home' width={24} height={24} />
