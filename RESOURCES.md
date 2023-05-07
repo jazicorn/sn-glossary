@@ -9,6 +9,11 @@
 - [Markdown Guide](https://www.markdownguide.org/)
 - [Docsify](https://docsify.js.org/#/) ***A magical documentation site generator***
 
+#### Version Control: Github
+- [Website](https://github.com/)
+- [Cheatsheet: Github](https://education.github.com/git-cheat-sheet-education.pdf)
+- [Semantic Versioning](https://semver.org/)
+
 ---
 ## Front-End
 > *UI/UX, Web Development*
@@ -17,6 +22,8 @@
 - [Cheatsheet: HTML](https://cheatsheets.shecodes.io/html)
 
 #### Technologies: CSS
+- [Cheatsheet: Flexbox](https://flexbox.malven.co/)
+- [CheatsheetL Grid](https://grid.malven.co/)
 - [CSS Box Model](https://www.w3schools.com/css/css_boxmodel.asp)
 - [CSS Generators](https://generators.shecodes.io/)
 - [CSS Gradients](https://gradients.shecodes.io/)
@@ -27,11 +34,79 @@
 #### Technologies: CSS | TailwindCSS
 - [Documentation](https://tailwindcss.com/docs/installation)
 - [Tailwindcss-Forms](https://github.com/tailwindlabs/tailwindcss-forms)
-- [Tailwind Elements: Next.js Integration](https://tailwind-elements.com/docs/standard/integrations/next-integration/) | Third Party TailwindCSS Component Library
+ 
+#### Technologies: CSS | TailwindCSS | Tailwind Elements (NPM Package)
+> Next.js v13 (src > pages)
+- [Tailwind Elements](https://tailwind-elements.com/)
+- [Tailwind Elements: Next.js Integration](https://tailwind-elements.com/docs/standard/integrations/next-integration/)
 - [Tailwind Elements: Next.js Configuration Fix](https://github.com/mdbootstrap/Tailwind-Elements/issues/1058#issuecomment-1176988692)
+
+##### Configuration:
+```typescript
+/**
+ * File: _app.tsx
+**/
+import type { AppProps } from 'next/app';
+import { useEffect } from 'react';
+
+export default function App({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    const use = async () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (await import('tw-elements' as any)).default;
+    };
+    use();
+  }, []);
+  return <Component {...pageProps} />;
+}
+```
+🚨***!!!Dynamic import required for nextjs compatibility!!!***🚨
+Example:
+```typescript
+/**
+ * File: index.tsx
+**/
+import dynamic from "next/dynamic";
+const NavBar = dynamic(import("../components/HomeNavigator"), { ssr: false });
+
+export default function Home() {
+  return (
+    <div>
+      <NavBar/>
+      <h1>Hello World</h1>
+    </div>
+  )
+}
+```
+🚨***!!!Must be initialized in a COMPONENT!!!***🚨
+```typescript
+/**
+ * File: HomeNavigator.tsx
+**/
+import { useEffect } from "react";
+//tw-elements: Initialization for ES Users
+import {
+  Input,
+  Modal,
+  Ripple,
+  initTE,
+} from "tw-elements";
+
+export default function Home() {
+    useEffect(() => {
+        initTE({ Input, Modal, Ripple, });
+    }, []);
+    return (
+        <div>
+            <h1>Hello World</h1>
+        </div>
+    )
+}
+```
   
 #### Technologies: Javascript
 - [Cheatsheet: Javascript](https://cheatsheets.shecodes.io/javascript)
+- [Notifications: Toastify](https://github.com/apvarun/toastify-js/tree/master)
   
 #### Technologies: Next.js
 - [Documentation](https://nextjs.org/docs)
@@ -64,7 +139,7 @@
 - [Documentation](https://tediousjs.github.io/tedious/)
 
 #### Technologies: Sequelize Node Package
-> *Feature-rich ORM for modern Node.js and TypeScript*
+>*Feature-rich ORM for modern Node.js and TypeScript*
 - [Documentation](https://sequelize.org/docs/v6/getting-started/)
 
 #### Articles: Configuration
@@ -90,3 +165,30 @@
 - [Product Documentation](https://www.google.com/search?client=firefox-b-1-d&q=servicenow+product+documentation)
 - [ServiceNow StyleGuide](https://hi.service-now.com/styles/heisenberg/styleguide/docs/index.html)
 - [ServiceNow StyleGuide: Colors](https://hi.service-now.com/styles/heisenberg/styleguide/docs/guidelines_-_colors.html)
+- [Brand Color Scheme](https://www.schemecolor.com/servicenow-logo-colors.php)
+- [Product Documentation: Virtual Agent](https://docs.servicenow.com/bundle/utah-servicenow-platform/page/administer/virtual-agent/task/add-portable-va-client-website.html)
+
+---
+## Security
+- [Cloudflare](https://www.cloudflare.com/)
+> *Cloudflare is a global network designed to make everything you connect to the Internet secure, private, fast, and reliable.*
+
+---
+## Desktop Support
+> *Additional Support for: MacOS, Linux, Windows*
+
+### Tauri
+> *Tauri is an app construction toolkit that lets you build software for all major desktop operating systems using web technologies.*
+
+Desktop support allows users to build personal glossaries for offline use
+
+#### Documentation
+- [Tauri + Next.js](https://tauri.app/v1/guides/getting-started/setup/next-js/)
+
+### SQLite
+> *SQLite is an in-process library that implements a self-contained, serverless, zero-configuration, transactional SQL database engine.*
+
+Perfect database for desktop use
+
+#### Documentation
+- [Website](https://www.sqlite.org/index.html)
