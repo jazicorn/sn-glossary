@@ -11,7 +11,8 @@
     "tauri:info": "tauri info",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "clean": "rm -rf .next"
   },
   "dependencies": {
     "@tauri-apps/api": "^1.3.0",
