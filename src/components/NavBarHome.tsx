@@ -110,11 +110,7 @@ export default function Home() {
             </div>
             {/**<!-- call-to-action --> */}
             <div className='hidden flex-row place-content-center place-self-center md:flex md:basis-10/12 '>
-                <div
-                    className='
-              flex flex-row items-center         
-              text-gray-600 hover:text-gray-900'
-                >
+                <div className='flex flex-row items-center text-gray-600 hover:text-gray-900'>
                     <span className='mr-1 '>
                         <Image
                             src='partying-face.svg'
