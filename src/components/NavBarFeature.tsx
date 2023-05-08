@@ -15,14 +15,14 @@ export default function Home() {
             <div
                 className='grid flex-initial h-fit md:h-36 md:m-full grow-0 border-t-4 border-b-2 border-blue-300 pt-1 pb-2'>
                 {/**Title */}
-                <h1 className='place-self-center md:text-2xl m-2 md:m-1 px-2 bg-gradient-to-r from-blue-50 to-gray-200 border rounded text-xl'>Features</h1>
+                <h1 className='place-self-center md:text-2xl m-2 md:m-1 px-2 border-b-2 text-xl'>Features</h1>
                 {/**Tabs */}
                 <div className='place-self-center justify-items-center text-center grid gap-3 grid-row-2 grid-cols-3 md:grid-row-1 md:grid-cols-4 md:gap-1'>
                     <div
                         className='custom-feature-bar-tabs text-sm col-start-2 col-end-2 md:col-start-1 md:col-end-1'>
                         <button
                             onClick={() => setShowComponent(<Search />)}
-                            className="px-1 border border-transparent rounded focus:border-blue-200">
+                            className="px-1 border-b border-transparent focus:border-blue-200">
                             Word Search
                         </button>
                         <p className='italic text-xs text-yellow-500'>*In Progress*</p>
@@ -30,7 +30,7 @@ export default function Home() {
                     <div className='custom-feature-bar-tabs text-sm col-start-1 md:col-start-2'>
                         <button
                             onClick={() => setShowComponent(<CustomList />)}
-                            className="px-1 border border-transparent rounded focus:border-blue-200">
+                            className="px-1 border-b border-transparent focus:border-blue-200">
                             Customized List
                         </button>
                         <p className='italic text-xs text-rose-400'>*Coming Soon*</p>
@@ -38,14 +38,14 @@ export default function Home() {
                     <div className='custom-feature-bar-tabs text-sm col-start-2 md:col-start-3'>
                         <button
                             onClick={() => setShowComponent(<FlashCards />)}
-                            className="px-1 border border-transparent rounded focus:border-blue-200">
+                            className="px-1 border-b border-transparent focus:border-blue-200">
                             Flashcards
                         </button>
                         <p className='italic text-xs text-rose-400'>*Coming Soon*</p></div>
                     <div className='custom-feature-bar-tabs text-sm col-start-3 md:col-start-4'>
                         <button
                             onClick={() => setShowComponent(<Desktop />)}
-                            className="px-1 border border-transparent rounded focus:border-blue-200">
+                            className="px-1 border-b border-transparent focus:border-blue-200">
                             Desktop Support
                         </button>
                         <p className='italic text-xs text-rose-400'>*Coming Soon*</p>
