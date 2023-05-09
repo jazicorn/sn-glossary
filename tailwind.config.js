@@ -16,7 +16,8 @@ module.exports = {
       colors: {
         'grayish': '#D6DBDC',
         'sn-dark': '#293e40',
-        'sn-light': '#80b6a1'
+        'sn-light': '#80b6a1',
+        'deep-blue': '#334155'
       }
     },
   },
