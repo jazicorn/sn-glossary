@@ -9,17 +9,21 @@ import {
 export default function ListTermsNew() {
   const [input, setInput] = useState('');
   const [tags, setTags] = useState([]);
-  const addTags = (e) => {
-      if (e.key === "Enter" && e.target.value !== "") {
-          setTags([...tags, e.target.value]);
-          e.target.value = "";
-      }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const addTags = (e: any) => {
+    if (e.key === "Enter" && e.target.value !== "") {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-ignore
+        setTags([...tags, e.target.value]);
+        e.target.value = "";
+    }
   };
-  const removeTags = (index) => {
+  const removeTags = (index:number) => {
       setTags([...tags.filter(tag => tags.indexOf(tag) !== index)]);
   };
 
-  const onChange = (e) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onChange = (e:any) => {
     const { value } = e.target;
     setInput(value);
   };
