@@ -35,3 +35,16 @@
 .custom-feature-bar-tabs > h2 {
   text-decoration: underline;
 }
+
+.custom-input-id {
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  -khtml-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+.custom-term-details input {
+  background-color: rgb(241 245 249);
+}
