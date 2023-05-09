@@ -172,9 +172,11 @@ export default function Home() {
             </div>
             {/**<!-- login/logout --> */}
             <div className='md:m-full md:justify-end flex flex-row md:basis-1/12'>
-                <a href='login' className='md:w-20 text-grey-900 hover:text-grey-300 place-self-center rounded-md bg-blue-300 p-1 md:px-3 md:py-1 transition duration-300 hover:bg-blue-400'>
+                <Link
+                    href='/login'
+                    className='xs:invisible sm:visible md:w-18 text-center text-grey-900 hover:text-grey-300 place-self-center rounded-md bg-blue-300 p-1 md:px-3 md:py-1 transition duration-300 hover:bg-blue-400'>                       
                     Login
-                </a>
+                </Link>
             </div>
         </nav>
         </div>
