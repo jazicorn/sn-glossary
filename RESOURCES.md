@@ -103,7 +103,42 @@ export default function Home() {
     )
 }
 ```
-  
+#### Technologies: CSS | TailwindCSS | [Flowbite](https://flowbite.com/)
+> *Flowbite is an open-source library of UI components based on the utility-first Tailwind CSS framework*
+
+[Set-up](https://flowbite.com/docs/getting-started/quickstart/)
+```
+#install packages
+npm install flowbite flowbite-react --save
+```
+```javascript
+// File: tailwind.config.js
+// add to content: "./node_modules/flowbite-react/**/*.js" 
+// add to plugins: require("flowbite/plugin")
+module.exports = {
+  content: [
+    "./node_modules/flowbite-react/**/*.js",
+    "./pages/**/*.{ts,tsx}",
+    "./public/**/*.html",
+  ],
+  plugins: [
+    require("flowbite/plugin")
+  ],
+  theme: {},
+};
+```
+```
+// File: _document.tsx
+// JS Configurations (https://flowbite.com/docs/getting-started/quickstart/)
+// Next.js Error: must add async to body script (https://nextjs.org/docs/messages/no-sync-scripts)
+<head>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js" async/>
+</body>
+```
+
 #### Technologies: Javascript
 - [Cheatsheet: Javascript](https://cheatsheets.shecodes.io/javascript)
 - [Notifications: Toastify](https://github.com/apvarun/toastify-js/tree/master)
