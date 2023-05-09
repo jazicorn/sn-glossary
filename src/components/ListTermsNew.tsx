@@ -38,26 +38,26 @@ export default function ListTermsNew() {
           {/**All Term Information*/}
           <div className='mx-2 my-1 flex flex-row justify-between rounded bg-gray-200 p-1'>
             {/**#TODO Change to flex-col and move create button to end term line */}
-            {/**Line: Term Definition */} {/**col 1 */}
+            {/**Line: Term Definition */} {/**row 1 */}
             <div className='m-1 flex flex-row  grow rounded bg-gray-100 p-1 '>
               <input
-                maxLength={30}
+                maxLength={25}
                 type='text'
                 name='term'
                 placeholder='Term Name'
-                className=' w-24 p-1 rounded-l border-2 border-blue-300 bg-slate-200 text-center text-base text-sm focus:outline-none focus:border focus:border-slate-400'>
+                className=' w-24 p-1 rounded-l border-2 border-blue-300 bg-slate-200 text-center text-base text-sm focus:outline-none focus:border-2 focus:border-blue-400'>
               </input>
               <input
                 maxLength={300}
-                className='text-ellipsis grow w-auto self-center rounded-r border border-gray-300 bg-gray-100 text-left text-sm focus:outline-none focus:border-slate-400'
+                className='text-ellipsis grow w-auto self-center text-left text-sm rounded-r border border-gray-300 bg-gray-100 focus:outline-none focus:border-slate-400'
                 type='text'
                 name='def'
                 placeholder='Definition'
               />
             </div>
-            {/**Create New Term */} {/**col-2 */}
+            {/**Create New Term */} {/**row-2 */}
             <div className='mr-1 flex flex-row place-self-center rounded px-1'>
-              <button className=' my-1 ml-1 w-20 items-baseline rounded border-2 border-slate-400 bg-emerald-300 px-2 text-sm font-medium uppercase'>
+              <button className='my-1 ml-1 w-18 items-baseline rounded border-2 border-slate-400 bg-green-300 px-2 text-sm font-medium uppercase'>
                 Create
               </button>
             </div>
@@ -65,27 +65,27 @@ export default function ListTermsNew() {
           {/** */}
           {/** Term Details */}
           {/** */}
-          <div className='custom-term-details mx-2 flex flex-col-reverse rounded bg-gray-200 p-1 md:flex-row'>
+          <div className='custom-term-details mx-2 flex rounded bg-gray-200 p-1 md:flex md:flex-row'>
             {/**Lines: Refs & Tags*/}
-            <div className='mt-1 flex flex-col items-baseline rounded px-1 md:m-0 md:flex md:flex-row'>
+            <div className='mt-1 px-1 flex flex-wrap md:flex-nowrap items-baseline rounded  md:m-0 md:flex md:flex-row'>
               {/**ID*/}
-              <div className='pl-1 mr-1 flex flex-row w-auto grow rounded bg-gray-100'>
-                <label className='m-1 mx-1 rounded border-2 border-slate-400 bg-slate-400 px-2 text-sm'>
+              <div className=' mr-1 flex flex-row md:w-auto md:grow rounded bg-gray-100'>
+                <label className='mt-1 mb-1 ml-1 pl-2 pr-1 text-sm bg-slate-400 rounded-l border-2 border-blue-300'>
                   ID:
                 </label>
-                <div className='custom-input-id m-1 inline text-left text-xs'>
+                <div className='custom-input-id mt-1 mb-1 mr-1 inline text-left text-xs'>
                   <input
                     type='text'
                     name='id'
                     placeholder='123456789'
                     readOnly={true}
-                    className='h-6 pl-1 w-[74px] rounded border-0 bg-slate-200 p-0 text-left text-xs focus:border-2 focus:border-slate-400'
+                    className='h-6 pl-1 w-[74px] p-0 text-left text-xs bg-transparent border border-gray-300 rounded-r focus:outline-none focus:border-slate-400'
                   />
                 </div>
               </div>
               {/**Ref*/}
-              <div className='mr-1 flex w-full flex-row rounded bg-gray-100'>
-                <label className='m-1 mx-2 basis-14 rounded border-2 border-slate-400 bg-blue-300 px-2 text-sm'>
+              <div className='mr-1 mt-1 md:mt-0 flex w-min md:w-full flex-row rounded bg-gray-100'>
+                <label className='mt-1 mb-1 ml-1 pl-2 pr-1 basis-14 text-sm rounded-l border-2 border-slate-400 bg-violet-100  '>
                   Ref:
                 </label>
                 <div className='mr-1 mt-1 inline text-left text-xs'>
@@ -93,14 +93,14 @@ export default function ListTermsNew() {
                     type='text'
                     maxLength={200}
                     name='ref'
-                    placeholder='ServiceNow: Product Doc URL'
-                    className='h-6 pl-1 w-[14rem] rounded border-0 bg-slate-200 p-0 text-left text-xs focus:border-2 focus:border-slate-400'   
+                    placeholder='ServiceNow: Product Documentation URL'
+                    className='h-6 p-0 pl-1 w-[18rem] text-left text-xs bg-transparent border border-gray-300 rounded-r focus:outline-none focus:border-slate-400'   
                   />
                 </div>
               </div>
               {/**Category */}
-              <div className='mr-1 flex w-full flex-row rounded bg-gray-100'>
-                <label className='m-1 mx-2 basis-14 rounded border-2 border-slate-400 bg-blue-300 px-2 text-sm'>
+              <div className='mr-1 mt-1 md:mt-0 flex w-min md:w-full flex-row rounded bg-gray-100'>
+                <label className='mt-1 mb-1 ml-1 pl-2 pr-1 text-sm basis-14 rounded-l border-2 border-slate-400 bg-blue-300 '>
                   Category:
                 </label>
                 <div className='mr-1 mt-1 inline text-left text-xs'>
@@ -109,15 +109,25 @@ export default function ListTermsNew() {
                     maxLength={30}
                     name='category'
                     placeholder='Subject'
-                    className='h-6 pl-1 w-[10rem] rounded border-0 bg-slate-200 p-0 text-left text-xs focus:border-2 focus:border-slate-400'   
+                    className='h-6 p-0 pl-1 w-[10rem] text-left text-xs bg-transparent border border-gray-300 rounded-r focus:outline-none focus:border-slate-400'   
                   />
                 </div>
               </div>
               {/**Tags*/}
-              <div className='mr-1 flex w-full flex-row rounded bg-gray-100 md:m-0'>
-                <label className='my-1 ml-2 mr-1 basis-14 rounded border-2 border-slate-400 bg-violet-100 px-2 text-sm'>
+              <div className='mr-1 mt-1 md:mt-0 flex w-min md:w-full flex-row rounded bg-gray-100'>
+                <label className='mt-1 mb-1 ml-1 pl-2 pr-1 basis-14 text-sm rounded-l border-2 border-slate-400 bg-blue-300 '>
                   Tags:
                 </label>
+                <input
+                  className='h-6 mt-1 w-auto items-baseline text-left text-xs bg-transparent border border-gray-300 rounded-r focus:outline-none focus:border-slate-400'
+                  type='text'
+                  maxLength={25}
+                  name='tag'
+                  placeholder="'tag'"
+                  value={input}
+                  onKeyUp={e => addTags(e)}
+                  onChange={onChange}
+                />
                 {/**Input-tags */}
                 <div className='mr-1 flex flex-row content-center items-center text-xs'>
                   {tags.map((tag, index) => (
@@ -130,18 +140,7 @@ export default function ListTermsNew() {
                       </span>
                     </div>
                   ))}
-                  <>
-                    <input
-                      className='ml-1 pl-2 h-6 w-auto items-baseline rounded border-0 bg-slate-200 p-0 text-left text-sm focus:border-2 focus:border-slate-400'
-                      type='text'
-                      maxLength={30}
-                      name='tag'
-                      placeholder="...type 'tag'"
-                      value={input}
-                      onKeyUp={e => addTags(e)}
-                      onChange={onChange}
-                    />
-                  </>
+                  
                 </div>
               </div>
             </div>
