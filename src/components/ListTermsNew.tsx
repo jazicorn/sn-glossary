@@ -89,6 +89,9 @@ export default function ListTermsNew() {
                 <label className='mt-1 mb-1 ml-1 pl-2 pr-1 basis-14 text-sm rounded-l border-2 border-slate-400 bg-violet-100  '>
                   Ref:
                 </label>
+                <label className='mt-1 mb-1 pr-0.5 pl-1 pt-0.5 basis-14 align-bottom text-right text-xs bg-transparent border border-gray-300 border-r-0'>
+                  https://
+                </label>
                 <div className='mr-1 mt-1 inline text-left text-xs'>
                   <input
                     type='text'
