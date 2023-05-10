@@ -40,6 +40,7 @@ const sqlConfig: config = {
   connectionTimeout: 30000,
 };
 
+//module.exports = config
 export const sqlConnect = async () => {
   const sqlDb = await new ConnectionPool(sqlConfig).connect();
   return sqlDb;
