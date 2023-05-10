@@ -14,7 +14,7 @@ export default function ListMenuCollapse() {
   return (
     <div>
       {/** Expand/Collapse*/}
-      <div className='mb-1 md:mb-0'>
+      <div className='mb-1 xl:mb-0'>
         <button onClick={() => handleMoreClick()}>
           {showMore ? (
             <FontAwesomeIcon icon={faChevronCircleUp} size='lg' inverse />

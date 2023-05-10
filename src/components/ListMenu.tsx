@@ -5,14 +5,14 @@ import Static from './ListMenuStatic';
 export default function ListMenu() {
   const [isView, setView] = useState(false);
   useEffect(() => {
-    if (window.innerWidth > 768) {
+    if (window.innerWidth > 1280) {
       setView(true);
     } else {
       setView(false);
     }
 
     const updateMedia = () => {
-      if (window.innerWidth > 768) {
+      if (window.innerWidth > 1280) {
         setView(true);
       } else {
         setView(false);
@@ -23,7 +23,7 @@ export default function ListMenu() {
   }, []);
 
   return (
-    <div className='mx-5 mb-1 mt-5 h-fit w-auto rounded-lg border border-slate-400 bg-slate-700 pb-1 md:my-5 md:ml-5 md:mr-2 md:h-fit md:shrink-0 md:basis-60'>
+    <div className='mx-5 mb-1 mt-5 h-fit w-auto rounded-xl border border-slate-400 bg-slate-700 pb-1 xl:my-5 xl:ml-5 xl:mr-2 xl:h-auto xl:shrink-0 xl:basis-60'>
       <div className=''>
         <h2 className='m-2 mx-2 rounded border-4 border-slate-100 bg-blue-100 text-xl'>
           List: Menu

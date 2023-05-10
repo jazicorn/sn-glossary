@@ -11,14 +11,14 @@ export default function ListNavigator() {
 
   const [isView, setView] = useState(false);
   useEffect(() => {
-    if (window.innerWidth > 768) {
+    if (window.innerWidth > 1280) {
       setView(true);
     } else {
       setView(false);
     }
 
     const updateMedia = () => {
-      if (window.innerWidth > 768) {
+      if (window.innerWidth > 1280) {
         setView(true);
       } else {
         setView(false);
@@ -45,14 +45,14 @@ export default function ListNavigator() {
         </div>
       ) : (
         <div className='flex flex-row place-self-center pl-1'>
-          <div className='md:hidden'>
+          <div className='xl:hidden'>
             <FontAwesomeIcon icon={faBars} color='deep-blue' size='xl' />
           </div>
         </div>
       )}
 
       {/**<!-- primary nav --> */}
-      <div className='invisible flex flex-row md:visible'>
+      <div className='invisible flex flex-row xl:visible'>
         <span className='place-self-center text-gray-700 hover:text-gray-900'>
           👋 Welcome {user.name}!
         </span>

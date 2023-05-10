@@ -4,6 +4,7 @@ import {
   faSquareXmark
 } from '@fortawesome/free-solid-svg-icons';
 
+//#TODO add verion of servienow word found | ex. Rome, San Diego, Tokyo, Utah | un-editable droptown list
 
 // This page will be example editor using user browser memory as datastore
 export default function ListTermsNew() {
@@ -65,11 +66,11 @@ export default function ListTermsNew() {
           {/** */}
           {/** Term Details */}
           {/** */}
-          <div className='custom-term-details mx-2 flex rounded bg-gray-200 p-1 md:flex md:flex-row'>
+          <div className='custom-term-details mx-2 p-1 flex rounded bg-gray-200  xl:flex xl:flex-row'>
             {/**Lines: Refs & Tags*/}
-            <div className='mt-1 px-1 flex flex-wrap md:flex-nowrap items-baseline rounded  md:m-0 md:flex md:flex-row'>
+            <div className='mt-1 px-1 flex flex-wrap xl:flex-nowrap items-baseline rounded  xl:m-0 xl:flex xl:flex-row'>
               {/**ID*/}
-              <div className=' mr-1 flex flex-row md:w-auto md:grow rounded bg-gray-100'>
+              <div className=' mr-1 flex flex-row xl:w-auto xl:grow rounded bg-gray-100'>
                 <label className='mt-1 mb-1 ml-1 pl-2 pr-1 text-sm bg-slate-400 rounded-l border-2 border-blue-300'>
                   ID:
                 </label>
@@ -84,7 +85,7 @@ export default function ListTermsNew() {
                 </div>
               </div>
               {/**Ref*/}
-              <div className='mr-1 mt-1 md:mt-0 flex w-min md:w-full flex-row rounded bg-gray-100'>
+              <div className='mr-1 mt-1 xl:mt-0 flex w-min xl:w-full flex-row rounded bg-gray-100'>
                 <label className='mt-1 mb-1 ml-1 pl-2 pr-1 basis-14 text-sm rounded-l border-2 border-slate-400 bg-violet-100  '>
                   Ref:
                 </label>
@@ -99,7 +100,7 @@ export default function ListTermsNew() {
                 </div>
               </div>
               {/**Category */}
-              <div className='mr-1 mt-1 md:mt-0 flex w-min md:w-full flex-row rounded bg-gray-100'>
+              <div className='mr-1 mt-1 xl:mt-0 flex w-min xl:w-full flex-row rounded bg-gray-100'>
                 <label className='mt-1 mb-1 ml-1 pl-2 pr-1 text-sm basis-14 rounded-l border-2 border-slate-400 bg-blue-300 '>
                   Category:
                 </label>
@@ -114,7 +115,7 @@ export default function ListTermsNew() {
                 </div>
               </div>
               {/**Tags*/}
-              <div className='mr-1 mt-1 md:mt-0 flex w-min md:w-full flex-row rounded bg-gray-100'>
+              <div className='mr-1 mt-1 xl:mt-0 flex w-min xl:w-full flex-row rounded bg-gray-100'>
                 <label className='mt-1 mb-1 ml-1 pl-2 pr-1 basis-14 text-sm rounded-l border-2 border-slate-400 bg-blue-300 '>
                   Tags:
                 </label>
