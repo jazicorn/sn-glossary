@@ -3,8 +3,8 @@ import dynamic from 'next/dynamic';
 import { invoke } from '@tauri-apps/api/tauri';
 import { useEffect } from 'react';
 
-const NavBar = dynamic(import('../components/NavBarHome'), { ssr: false });
-const NavFeature = dynamic(import('../components/NavBarFeature'), {
+const NavBar = dynamic(import('../components/HomeNavigator'), { ssr: false });
+const NavFeature = dynamic(import('../components/feature/FeatureNavigator'), {
   ssr: false,
 });
 

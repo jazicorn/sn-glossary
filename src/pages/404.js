@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-const NavBar = dynamic(import('../components/NavBarHome'), { ssr: false });
+const NavBar = dynamic(import('../components/HomeNavigator'), { ssr: false });
 
 export default function Custom404() {
   return (

@@ -1,9 +1,9 @@
 // import Image from 'next/image';
 // import Link from 'next/link';
-import Search from './NavBarFeatureSearch';
-import CustomList from './NavBarFeatureList';
-import FlashCards from './NavBarFeatureCards';
-import Desktop from './NavBarFeatureDesktop';
+import Search from './FeatureSearch';
+import CustomList from './FeatureList';
+import FlashCards from './FeatureCards';
+import Desktop from './FeatureDesktop';
 import React, { useState } from 'react';
 
 export default function Home() {
