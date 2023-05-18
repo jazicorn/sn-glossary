@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faSquareXmark
-} from '@fortawesome/free-solid-svg-icons';
+import { faSquareXmark } from '@fortawesome/free-solid-svg-icons';
 
 //#TODO add verion of servienow word found | ex. Rome, San Diego, Tokyo, Utah | un-editable droptown list
 
@@ -12,19 +10,19 @@ export default function ListTermsNew() {
   const [tags, setTags] = useState([]);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const addTags = (e: any) => {
-    if (e.key === "Enter" && e.target.value !== "") {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //@ts-ignore
-        setTags([...tags, e.target.value]);
-        e.target.value = "";
+    if (e.key === 'Enter' && e.target.value !== '') {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore
+      setTags([...tags, e.target.value]);
+      e.target.value = '';
     }
   };
-  const removeTags = (index:number) => {
-      setTags([...tags.filter(tag => tags.indexOf(tag) !== index)]);
+  const removeTags = (index: number) => {
+    setTags([...tags.filter((tag) => tags.indexOf(tag) !== index)]);
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onChangeTags = (e:any) => {
+  const onChangeTags = (e: any) => {
     const { value } = e.target;
     setInputTags(value);
   };
@@ -32,9 +30,9 @@ export default function ListTermsNew() {
   const [newTerm, setNewTerm] = useState({});
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function handleSubmit(e:any) {
+  function handleSubmit(e: any) {
     e.preventDefault();
-    
+
     setNewTerm(newTerm);
   }
 
@@ -49,25 +47,28 @@ export default function ListTermsNew() {
           <div className='mx-2 my-1 flex flex-row justify-between rounded bg-gray-200 p-1'>
             {/**#TODO Change to flex-col and move create button to end term line */}
             {/**Line: Term Definition */} {/**row 1 */}
-            <div className='m-1 flex flex-row  grow rounded bg-gray-100 p-1 '>
+            <div className='m-1 flex grow  flex-row rounded bg-gray-100 p-1 '>
               <input
                 maxLength={25}
                 type='text'
                 name='term'
                 placeholder='Term Name'
-                className=' w-24 p-1 rounded-l border-2 border-blue-300 bg-slate-200 text-center text-base text-sm focus:outline-none focus:border-2 focus:border-blue-400'>
-              </input>
+                className=' w-24 rounded-l border-2 border-blue-300 bg-slate-200 p-1 text-center text-base text-sm focus:border-2 focus:border-blue-400 focus:outline-none'
+              ></input>
               <input
                 maxLength={300}
                 type='text'
                 name='def'
                 placeholder='Definition'
-                className='text-ellipsis grow w-auto self-center text-left text-sm rounded-r border border-gray-300 bg-gray-100 focus:outline-none focus:border-slate-400'
+                className='w-auto grow self-center text-ellipsis rounded-r border border-gray-300 bg-gray-100 text-left text-sm focus:border-slate-400 focus:outline-none'
               />
             </div>
             {/**Create New Term */} {/**row-2 */}
             <div className='mr-1 flex flex-row place-self-center rounded px-1'>
-              <button type="submit" className='my-1 ml-1 w-18 items-baseline rounded border-2 border-slate-400 bg-green-300 px-2 text-sm font-medium uppercase'>
+              <button
+                type='submit'
+                className='w-18 my-1 ml-1 items-baseline rounded border-2 border-slate-400 bg-green-300 px-2 text-sm font-medium uppercase'
+              >
                 Create
               </button>
             </div>
@@ -75,30 +76,30 @@ export default function ListTermsNew() {
           {/** */}
           {/** Term Details */}
           {/** */}
-          <div className='custom-term-details mx-2 p-1 flex rounded bg-gray-200  xl:flex xl:flex-row'>
+          <div className='custom-term-details mx-2 flex rounded bg-gray-200 p-1  xl:flex xl:flex-row'>
             {/**Lines: Refs & Tags*/}
-            <div className='mt-1 px-1 flex flex-wrap xl:flex-nowrap items-baseline rounded  xl:m-0 xl:flex xl:flex-row'>
+            <div className='mt-1 flex flex-wrap items-baseline rounded px-1 xl:m-0  xl:flex xl:flex-row xl:flex-nowrap'>
               {/**ID*/}
-              <div className=' mr-1 flex flex-row xl:w-auto xl:grow rounded bg-gray-100'>
-                <label className='mt-1 mb-1 ml-1 pl-2 pr-1 text-sm bg-slate-400 rounded-l border-2 border-blue-300'>
+              <div className=' mr-1 flex flex-row rounded bg-gray-100 xl:w-auto xl:grow'>
+                <label className='mb-1 ml-1 mt-1 rounded-l border-2 border-blue-300 bg-slate-400 pl-2 pr-1 text-sm'>
                   ID:
                 </label>
-                <div className='custom-input-id mt-1 mb-1 mr-1 inline text-left text-xs'>
+                <div className='custom-input-id mb-1 mr-1 mt-1 inline text-left text-xs'>
                   <input
                     type='text'
                     name='id'
                     placeholder='123456789'
                     readOnly={true}
-                    className='h-6 pl-1 w-[74px] p-0 text-left text-xs bg-transparent border border-gray-300 rounded-r focus:outline-none focus:border-slate-400'
+                    className='h-6 w-[74px] rounded-r border border-gray-300 bg-transparent p-0 pl-1 text-left text-xs focus:border-slate-400 focus:outline-none'
                   />
                 </div>
               </div>
               {/**Ref*/}
-              <div className='mr-1 mt-1 xl:mt-0 flex w-min xl:w-full flex-row rounded bg-gray-100'>
-                <label className='mt-1 mb-1 ml-1 pl-2 pr-1 basis-14 text-sm rounded-l border-2 border-slate-400 bg-violet-100  '>
+              <div className='mr-1 mt-1 flex w-min flex-row rounded bg-gray-100 xl:mt-0 xl:w-full'>
+                <label className='mb-1 ml-1 mt-1 basis-14 rounded-l border-2 border-slate-400 bg-violet-100 pl-2 pr-1 text-sm  '>
                   Ref:
                 </label>
-                <label className='mt-1 mb-1 pr-0.5 pl-1 pt-0.5 basis-14 align-bottom text-right text-xs bg-transparent border border-gray-300 border-r-0'>
+                <label className='mb-1 mt-1 basis-14 border border-r-0 border-gray-300 bg-transparent pl-1 pr-0.5 pt-0.5 text-right align-bottom text-xs'>
                   https://
                 </label>
                 <div className='mr-1 mt-1 inline text-left text-xs'>
@@ -107,13 +108,13 @@ export default function ListTermsNew() {
                     maxLength={200}
                     name='ref'
                     placeholder='ServiceNow: Product Documentation URL'
-                    className='h-6 p-0 pl-1 w-[18rem] text-left text-xs bg-transparent border border-gray-300 rounded-r focus:outline-none focus:border-slate-400'   
+                    className='h-6 w-[18rem] rounded-r border border-gray-300 bg-transparent p-0 pl-1 text-left text-xs focus:border-slate-400 focus:outline-none'
                   />
                 </div>
               </div>
               {/**Category */}
-              <div className='mr-1 mt-1 xl:mt-0 flex w-min xl:w-full flex-row rounded bg-gray-100'>
-                <label className='mt-1 mb-1 ml-1 pl-2 pr-1 text-sm basis-14 rounded-l border-2 border-slate-400 bg-blue-300 '>
+              <div className='mr-1 mt-1 flex w-min flex-row rounded bg-gray-100 xl:mt-0 xl:w-full'>
+                <label className='mb-1 ml-1 mt-1 basis-14 rounded-l border-2 border-slate-400 bg-blue-300 pl-2 pr-1 text-sm '>
                   Product:
                 </label>
                 <div className='mr-1 mt-1 inline text-left text-xs'>
@@ -122,13 +123,13 @@ export default function ListTermsNew() {
                     maxLength={30}
                     name='product'
                     placeholder='Product'
-                    className='h-6 p-0 pl-1 w-[10rem] text-left text-xs bg-transparent border border-gray-300 rounded-r focus:outline-none focus:border-slate-400'   
+                    className='h-6 w-[10rem] rounded-r border border-gray-300 bg-transparent p-0 pl-1 text-left text-xs focus:border-slate-400 focus:outline-none'
                   />
                 </div>
               </div>
               {/**Tags*/}
-              <div className='mr-1 mt-1 xl:mt-0 flex w-min xl:w-full flex-row rounded bg-gray-100'>
-                <label className='mt-1 mb-1 ml-1 pl-2 pr-1 basis-14 text-sm rounded-l border-2 border-slate-400 bg-blue-300 '>
+              <div className='mr-1 mt-1 flex w-min flex-row rounded bg-gray-100 xl:mt-0 xl:w-full'>
+                <label className='mb-1 ml-1 mt-1 basis-14 rounded-l border-2 border-slate-400 bg-blue-300 pl-2 pr-1 text-sm '>
                   Tags:
                 </label>
                 <input
@@ -137,19 +138,26 @@ export default function ListTermsNew() {
                   name='tag'
                   placeholder="'tag'"
                   value={inputTags}
-                  onKeyUp={e => addTags(e)}
+                  onKeyUp={(e) => addTags(e)}
                   onChange={onChangeTags}
-                  className='h-6 mt-1 w-auto items-baseline text-left text-xs bg-transparent border border-gray-300 rounded-r focus:outline-none focus:border-slate-400'
+                  className='mt-1 h-6 w-auto items-baseline rounded-r border border-gray-300 bg-transparent text-left text-xs focus:border-slate-400 focus:outline-none'
                 />
                 {/**Input-tags */}
                 <div className='mr-1 flex flex-row content-center items-center text-xs'>
                   {tags.map((tag, index) => (
                     <div
-                      key="tag"
-                      className='flex flex-row h-6 w-auto mx-1 pr-2 text-sm content-center items-center rounded border-0 bg-slate-200 focus:border-2 focus:border-slate-400'>
-                      <span className='w-4/6 text-right pl-1 pb-0.5'>{tag}</span>
-                      <span className='w-2/6 text-center pl-3'>
-                        <FontAwesomeIcon icon={faSquareXmark} size='sm' onClick={() => removeTags(index)} />
+                      key='tag'
+                      className='mx-1 flex h-6 w-auto flex-row content-center items-center rounded border-0 bg-slate-200 pr-2 text-sm focus:border-2 focus:border-slate-400'
+                    >
+                      <span className='w-4/6 pb-0.5 pl-1 text-right'>
+                        {tag}
+                      </span>
+                      <span className='w-2/6 pl-3 text-center'>
+                        <FontAwesomeIcon
+                          icon={faSquareXmark}
+                          size='sm'
+                          onClick={() => removeTags(index)}
+                        />
                       </span>
                     </div>
                   ))}

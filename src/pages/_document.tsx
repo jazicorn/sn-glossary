@@ -29,11 +29,16 @@ export default function Document() {
           href='https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap'
           rel='stylesheet'
         />
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
-
+        <link
+          href='https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css'
+          rel='stylesheet'
+        />
       </Head>
       <body>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js" async />
+        <script
+          src='https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js'
+          async
+        />
 
         <Main />
         <NextScript />
