@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { GlossaryContextType } from './contextGlossary';
+import { GlossaryContextType } from '../../lib/types';
 
 // list interface
 export interface ListType {
