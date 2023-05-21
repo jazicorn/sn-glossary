@@ -2,8 +2,6 @@ import { Inter } from 'next/font/google';
 import Nav from '@/components/dashboard/ListNavigator';
 import Menu from '@/components/dashboard/ListMenu';
 import Terms from '@/components/dashboard/ListTerms';
-import { GlossaryContext } from '@/context/contextGlossary';
-import { UserContext } from '@/context/contextUser';
 
 const inter = Inter({ subsets: ['latin'] });
 
