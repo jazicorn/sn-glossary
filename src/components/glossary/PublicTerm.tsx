@@ -1,77 +1,18 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleChevronDown,
   faChevronCircleUp,
 } from '@fortawesome/free-solid-svg-icons';
-import { GlossaryContext } from '../context/contextGlossary';
+import { GlossaryContextType } from '../../../lib/types';
 
-// render list:https://react.dev/learn/rendering-lists
-
-export default function Glossary() {
-  const publicGlossary = useContext(GlossaryContext);
-
+const PublicTerm = ({ term }: {term: GlossaryContextType}) => {
   const [showMore, setShowMore] = useState(false);
   function handleMoreClick() {
     setShowMore(!showMore);
   }
-  const tags = ['tag1', 'tag2', 'tag3'];
-  return (
-    <>
-      {/**Page Title */}
-      <h1
-        key='undefined'
-        className='text-bold m-2 my-4 rounded border bg-gray-100 py-1 text-xl text-sn-dark xl:text-2xl'
-      >
-        ServiceNow{' '}
-        <span key='undefined' className='text-md text-sn-light xl:text-lg'>
-          Glossary
-        </span>
-      </h1>
-      <hr
-        key='undefined'
-        className='my-2 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-50 dark:opacity-100'
-      />
-      <div key='undefined' className='flex flex-col '>
-        {/**Search Bar */}
-        <div
-          key='undefined'
-          className='mx-2 my-1 flex flex-row justify-between rounded bg-gray-200 p-1'
-        >
-          <div
-            key='undefined'
-            className='mb-1 ml-1 mr-2 mt-1 flex grow flex-row justify-between rounded bg-gray-100 p-1 '
-          >
-            <div key='undefined' className='content-left flex grow flex-row'>
-              <span
-                key='undefined'
-                className='text-md text-bold w-24 rounded-l border-2 border-blue-300 bg-slate-200 p-1 text-center text-base focus:border-2 focus:border-blue-400 focus:outline-none'
-              >
-                Search
-              </span>
-              <input
-                key='search'
-                maxLength={50}
-                className='w-full self-center border border-r-0 border-gray-300 bg-gray-100 text-left text-sm focus:border-slate-400 focus:outline-none'
-                type='text'
-                name='def'
-                placeholder='Type Word Here...'
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <hr
-        key='undefined'
-        className='my-2 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-50 dark:opacity-100'
-      />
-
-      <>
-        {/******************* */}
-        {/**Display All Terms */}
-        {/******************* */}
-        {publicGlossary?.map((term) => (
-          <div key='term'>
+    return (
+        <div key='term'>
             <div
               key='undefined'
               className='mx-2 my-1 flex flex-row justify-between rounded bg-gray-200 p-1'
@@ -83,7 +24,7 @@ export default function Glossary() {
               >
                 <div
                   key='undefined'
-                  className='content-left flex grow flex-row'
+                  className='content-left flex grow flex-row border border-r-0 border-gray-300 rounded-l'
                 >
                   <div
                     key={term.name}
@@ -93,7 +34,7 @@ export default function Glossary() {
                   </div>
                   <div
                     key={term.def}
-                    className='w-full px-1 py-2 self-center border border-r-0 border-gray-300 bg-gray-100 text-left text-sm focus:border-slate-400 focus:outline-none'
+                    className='w-full px-1 py-2 self-center bg-gray-100 text-left text-sm'
                     placeholder='Definition'
                   >{term.def}</div>
                 </div>
@@ -120,9 +61,11 @@ export default function Glossary() {
               </div>
             </div>
             {/**More Info */}
+            {/**More Info */}
+            {/**More Info */}
             {showMore && (
               <div
-                key='undefined'
+                key='termshowmore'
                 className='custom-term-details mx-2 flex rounded bg-gray-200 p-1  xl:flex xl:flex-row'
               >
                 {/**Lines: Refs & Tags*/}
@@ -143,16 +86,12 @@ export default function Glossary() {
                     </label>
                     <div
                       key='undefined'
-                      className='custom-input-id mb-1 mr-1 mt-1 inline text-left text-xs'
+                      className='custom-input-id mr-1 mt-1 inline'
                     >
-                      <input
+                      <div
                         key={term.id}
-                        type='text'
-                        name='id'
                         placeholder='123456789'
-                        readOnly={true}
-                        className='h-6 w-[74px] rounded-r border border-gray-300 bg-transparent p-0 pl-1 text-left text-xs focus:border-slate-400 focus:outline-none'
-                      />
+                        className='h-6 w-[74px] rounded-r border border-gray-300 bg-transparent pt-0.5 pl-1 text-left text-sm focus:border-slate-400 focus:outline-none'>{term.id}</div>
                     </div>
                   </div>
                   {/**Ref*/}
@@ -162,35 +101,35 @@ export default function Glossary() {
                   >
                     <label
                       key='undefined'
-                      className='mb-1 ml-1 mt-1 basis-14 rounded-l border-2 border-slate-400 bg-violet-100 pl-2 pr-1 text-sm  '
+                      className='mb-1 ml-1 mt-1 basis-14 rounded-l border-2 border-slate-400 bg-violet-100 pl-2 pr-1 text-sm'
                     >
                       Ref:
                     </label>
                     <label
                       key='undefined'
-                      className='mb-1 mt-1 basis-14 border border-r-0 border-gray-300 bg-transparent pl-1 pr-0.5 pt-0.5 text-right align-bottom text-xs'
+                      className='mb-1 mt-1 basis-14 border border-r-0 border-gray-300 bg-transparent pl-1 pr-0.5 pt-1 text-right align-bottom text-xs'
                     >
                       https://
                     </label>
                     <div
                       key='undefined'
-                      className='mr-1 mt-1 inline text-left text-xs'
+                      className='mr-1 mt-1 inline text-left text-xs w-auto'
                     >
-                      <input
-                        key='termURL'
-                        type='text'
-                        maxLength={200}
-                        name='ref'
-                        readOnly={true}
-                        placeholder='ServiceNow: Product Documentation URL'
-                        className='h-6 w-[18rem] rounded-r border border-gray-300 bg-transparent p-0 pl-1 text-left text-xs focus:border-slate-400 focus:outline-none'
-                      />
+                      <div
+                        key={term.ref}
+                        className='h-6 min-w-[18rem] w-auto rounded-r border border-gray-300 bg-transparent pt-1 pl-1 text-left text-xs focus:border-slate-400 focus:outline-none overflow-hidden text-ellipsis'>
+                        <a
+                          href={'https:' + term.ref}
+                          target="_blank">
+                          ServiceNow: Product Documentation URL
+                        </a>
+                      </div>
                     </div>
                   </div>
                   {/**Category */}
                   <div
                     key='undefined'
-                    className='mr-1 mt-1 flex w-min flex-row rounded bg-gray-100 xl:mt-0 xl:w-full'
+                    className='mr-1 mt-1 flex w-min flex-row rounded bg-gray-100 xl:mt-0 xl:w-fit'
                   >
                     <label
                       key='undefined'
@@ -202,21 +141,16 @@ export default function Glossary() {
                       key='undefined'
                       className='mr-1 mt-1 inline text-left text-xs'
                     >
-                      <input
-                        key='termCategory'
-                        type='text'
-                        maxLength={30}
-                        readOnly={true}
-                        name='product'
+                      <div
+                        key={term.product}
                         placeholder='(Product) Category'
-                        className='h-6 w-[10rem] rounded-r border border-gray-300 bg-transparent p-0 pl-1 text-left text-xs focus:border-slate-400 focus:outline-none'
-                      />
+                        className='h-6 w-[10rem] rounded-r border border-gray-300 bg-transparent pt-0.5 pl-1 text-left text-sm focus:border-slate-400 focus:outline-none'>{term.product}</div>
                     </div>
                   </div>
                   {/**Tags*/}
                   <div
                     key='undefined'
-                    className='mr-1 mt-1 flex w-min flex-row rounded bg-gray-100 xl:mt-0 xl:w-full'
+                    className='mr-1 mt-1 flex w-min flex-row rounded bg-gray-100 xl:mt-0 xl:w-fit'
                   >
                     <label
                       key='undefined'
@@ -224,17 +158,16 @@ export default function Glossary() {
                     >
                       Tags:
                     </label>
-                    {/**Input-tags */}
                     <div
                       key='tags'
-                      className='mr-1 flex flex-row content-center items-center text-xs'
+                      className='mr-1 flex flex-row content-center items-center'
                     >
-                      {tags.map((tag) => (
+                      {term?.tags?.map((tag) => (
                         <div
                           key='tag'
-                          className='mx-1 flex h-6 w-auto flex-row content-center items-center rounded border-0 bg-slate-200 pr-2 text-sm focus:border-2 focus:border-slate-400'
+                          className='mx-1 h-6 w-auto flex flex-row content-center items-center rounded border-0 bg-slate-200 pr-2 text-sm focus:border-2 focus:border-slate-400'
                         >
-                          <span className='w-4/6 pb-0.5 pl-1 text-right'>
+                          <span className='w-auto pb-0.5 pl-1 text-left truncate'>
                             {tag}
                           </span>
                         </div>
@@ -245,8 +178,7 @@ export default function Glossary() {
               </div>
             )}
           </div>
-        ))}
-      </>
-    </>
-  );
+    )
 }
+
+export default PublicTerm; 
