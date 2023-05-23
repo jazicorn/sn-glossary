@@ -24,17 +24,17 @@ const PublicTerm = ({ term }: {term: GlossaryContextType}) => {
               >
                 <div
                   key='undefined'
-                  className='content-left flex grow flex-row border border-r-0 border-gray-300 rounded-l'
+                  className='text-sm tracking-tighter leading-tight content-left flex grow flex-row border border-r-0 border-gray-300 rounded-l'
                 >
                   <div
                     key={term.name}
-                    className='w-24 p-1 rounded-l border-2 border-blue-300 bg-slate-200 text-center text-base text-sm focus:border-2 focus:border-blue-400 focus:outline-none'
+                    className='w-24 p-0.5 rounded-l border-2 border-blue-300 bg-slate-200 text-center focus:border-2 focus:border-blue-400 focus:outline-none'
                             >
                                 {term.name}
                   </div>
                   <div
                     key={term.def}
-                    className='w-full px-1 py-2 self-center bg-gray-100 text-left text-sm'
+                    className='w-full px-1 py-1 self-center bg-gray-100 text-left'
                     placeholder='Definition'
                   >{term.def}</div>
                 </div>
