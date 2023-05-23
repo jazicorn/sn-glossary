@@ -20,9 +20,9 @@ export default function NavigatorSitePublic() {
     initTE({ Input, Modal, Ripple });
   }, []);
   return (
-    <div className=''>
+    <div className='flex flex-row px-4 h-10'>
       {/**<!-- nav bar --> */}
-      <nav className='flex flex-row justify-between px-4 h-10'>
+      <nav className='flex flex-row w-full justify-between px-4 h-10'>
         {/**<!-- logo -->*/}
         <div className='place-self-center min-h-[34px] min-w-[34px]'>
           <Image
@@ -34,7 +34,7 @@ export default function NavigatorSitePublic() {
           />
           <Link
             href='/'
-            className='hidden items-center px-2 py-5 text-gray-700 hover:text-gray-900 lg:flex'
+            className='hidden lg:visible lg:flex items-center px-2 py-5 text-gray-700 hover:text-gray-900 '
           >
             <Image src='blue-book.svg' alt='Home' width={24} height={24} />
             <span className='whitespace-nowrap pl-2.5 font-semibold'>
@@ -43,7 +43,7 @@ export default function NavigatorSitePublic() {
           </Link>
         </div>
         {/**<!-- Links --> */}
-        <div className='my-2 flex flex-row justify-end divide-x divide-x-{12px} divide-deep-blue invisible lg:visible'>
+        <div className='hidden lg:visible my-2 lg:flex lg:flex-row lg:justify-end divide-x divide-x-{12px} divide-deep-blue '>
           {/**<!-- External Links --> */}
           <div className=' flex flex-row pl-2'>
             <div className=' flex flex-row px-2'>
