@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google';
 import dynamic from 'next/dynamic';
 import { invoke } from '@tauri-apps/api/tauri';
 import { useEffect } from 'react';
+import Link from 'next/link';
 const NavBar = dynamic(import('../components/NavigatorSitePublic'), { ssr: false });
 const CallToAction = dynamic(import('../components/CallToAction'), { ssr: false });
 const NavFeature = dynamic(import('../components/feature/NavigatorFeature'), {
@@ -77,19 +78,54 @@ export default function Home() {
               </button>
             </div>
 
-            <div className='space-y-6 p-6'>
-              <p className='text-base leading-relaxed text-gray-500 dark:text-gray-400'>
-                With less than a month to go before the European Union enacts
-                new consumer privacy laws for its citizens, companies around the
-                world are updating their terms of service agreements to comply.
+            <div className='custom-disclaimer space-y-6 p-6 text-sm'>
+              <h2 className='text-sm'>Last updated: 05/23/23</h2>
+              <h1 className=''>Interpretation</h1>
+              <p className='leading-relaxed text-gray-500 dark:text-gray-400'>
+                The words of which the initial letter is capitalized have meanings defined under the following conditions.
+                The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.
               </p>
-              <p className='text-base leading-relaxed text-gray-500 dark:text-gray-400'>
-                The European Union’s General Data Protection Regulation
-                (G.D.P.R.) goes into effect on May 25 and is meant to ensure a
-                common set of data rights in the European Union. It requires
-                organizations to notify users as soon as possible of high-risk
-                data breaches that could personally affect them.
+              <h1 className=''>Definitions</h1>
+              <div className='leading-relaxed text-gray-500 dark:text-gray-400'>
+                For the purposes of this Disclaimer:
+                <ul className='list-disc list-inside'>
+                  <li>Company (referred to as either &quot;the Company&quot;, &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot; in this Disclaimer) refers to SN-Glossary.</li>
+                  <li>Service refers to the Website.</li>
+                  <li>You means the individual accessing the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.</li>
+                  <li>Website refers to SN-Glossary, accessible from https://www.sn-glossary.com</li>
+                </ul>
+              </div>
+              <h1 className=''>Disclaimer</h1>
+              <p className='leading-relaxed text-gray-500 dark:text-gray-400'>
+                The information contained on the Service is for general information purposes only.
+                The Company assumes no responsibility for errors or omissions in the contents of the Service.
+                In no event shall the Company be liable for any special, direct, indirect, consequential, or incidental damages or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use of the Service or the contents of the Service. The Company reserves the right to make additions, deletions, or modifications to the contents on the Service at any time without prior notice. This Disclaimer has been created with the help of the TermsFeed Disclaimer Generator.
+                The Company does not warrant that the Service is free of viruses or other harmful components.
               </p>
+              <h1 className='text-base text-sn-light'>External Links Disclaimer</h1>
+              <p className='leading-relaxed text-gray-500 dark:text-gray-400'>
+                The Service may contain links to external websites that are not provided or maintained by or in any way affiliated with the Company.
+                Please note that the Company does not guarantee the accuracy, relevance, timeliness, or completeness of any information on these external websites.
+              </p>
+              <h1 className=''>Fair Use Disclaimer</h1>
+              <p className='leading-relaxed text-gray-500 dark:text-gray-400'>
+                The Company may use copyrighted material which has not always been specifically authorized by the copyright owner. The Company is making such material available for criticism, comment, news reporting, teaching, scholarship, or research.
+                The Company believes this constitutes a &quot;fair use&quot; of any such copyrighted material as provided for in section 107 of the United States Copyright law.
+                If You wish to use copyrighted material from the Service for your own purposes that go beyond fair use, You must obtain permission from the copyright owner.
+              </p>
+              <h1 className=''>&quot;Use at Your Own Risk&quot; Disclaimer</h1>
+              <p className='leading-relaxed text-gray-500 dark:text-gray-400'>
+                All information in the Service is provided &quot;as is&quot;, with no guarantee of completeness, accuracy, timeliness or of the results obtained from the use of this information, and without warranty of any kind, express or implied, including, but not limited to warranties of performance, merchantability and fitness for a particular purpose.
+                The Company will not be liable to You or anyone else for any decision made or action taken in reliance on the information given by the Service or for any consequential, special or similar damages, even if advised of the possibility of such damages.
+              </p>
+              <h1 className=''>Contact Us</h1>
+              <div className='leading-relaxed text-gray-700 dark:text-gray-800'>
+                If you have any questions about this Disclaimer, You can contact Us:
+                <ul className='list-disc list-inside'>
+                  <li><span className='underline'>By email</span>: <span className='text-blue-700'>legal@sn-glossary.com</span></li>
+                  <li><span className='underline'>By website page</span>: <Link href='' className='text-blue-700'>https://www.sn-glossary.com/support</Link></li>
+                </ul>
+              </div>
             </div>
 
             <div className='flex items-center space-x-2 rounded-b border-t border-gray-200 p-6 dark:border-gray-600'>
