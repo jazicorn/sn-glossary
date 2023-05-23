@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,7 +5,9 @@ import {
   faGithub
 } from '@fortawesome/free-brands-svg-icons';
 import {
-  faArrowUpRightFromSquare
+  faArrowUpRightFromSquare,
+  faHouseChimney,
+  faBars
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faSun
@@ -20,32 +21,47 @@ export default function NavigatorSitePublic() {
     initTE({ Input, Modal, Ripple });
   }, []);
   return (
-    <div className='flex flex-row px-4 h-10'>
+    <div className='flex flex-row h-10 border-b border-slate-200'>
       {/**<!-- nav bar --> */}
-      <nav className='flex flex-row w-full justify-between px-4 h-10'>
+      <nav className='flex flex-row w-full justify-between px-4 h-[42px]'>
         {/**<!-- logo -->*/}
-        <div className='place-self-center min-h-[34px] min-w-[34px]'>
-          <Image
-            className='inline lg:hidden'
-            src='hamburger-menu.svg'
-            alt='Menu'
-            width={24}
-            height={24}
-          />
+        <div className='flex flex-row place-items-center min-h-[34px] min-w-[34px]'>
+          <button
+            onCLick={''}
+            className='lg:hidden items-center pl-2 py-5 text-gray-700 hover:text-gray-900 '
+          >
+            <FontAwesomeIcon icon={faBars} color='' size='xl' />
+          </button>
           <Link
             href='/'
-            className='hidden lg:visible lg:flex items-center px-2 py-5 text-gray-700 hover:text-gray-900 '
+            className='hidden lg:flex items-center pl-2 py-5 text-gray-700 hover:text-gray-900 '
           >
-            <Image src='blue-book.svg' alt='Home' width={24} height={24} />
-            <span className='whitespace-nowrap pl-2.5 font-semibold'>
-              SN-Glossary
-            </span>
+            <FontAwesomeIcon icon={faHouseChimney} color='' size='lg' />
           </Link>
+          <div className='hidden lg:flex lg:visible whitespace-nowrap pl-1.5 font-medium'>
+              SN-Glossary
+          </div>
         </div>
         {/**<!-- Links --> */}
+        
         <div className='hidden lg:visible my-2 lg:flex lg:flex-row lg:justify-end divide-x divide-x-{12px} divide-deep-blue '>
-          {/**<!-- External Links --> */}
-          <div className=' flex flex-row pl-2'>
+          {/**<!-- ServiceNow External Link --> */}
+          <div className='flex flex-row pr-2'>
+            <div className='flex flex-row no-wrap'>
+                <button className='flex flex-row mx-1'>
+                  <a
+                    href='https://docs.servicenow.com/'
+                    target='_blank'
+                    className='place-self-center h-fit w-auto py-0 px-0.5 text-grey-900 hover:text-grey-300 truncate text-center text-sn-light'
+                  >
+                    ServiceNow
+                  </a>
+                  <FontAwesomeIcon icon={faArrowUpRightFromSquare} color='' size='2xs' />
+                </button>
+              </div>
+          </div>
+          {/**<!-- SN-GLossary External Links --> */}
+          <div className=' flex flex-row'>
             <div className=' flex flex-row px-2'>
               {/**<!-- FAQ--> */}
               <div className='flex flex-row no-wrap'>
@@ -83,25 +99,26 @@ export default function NavigatorSitePublic() {
                   <FontAwesomeIcon icon={faArrowUpRightFromSquare} color='' size='2xs' />
                 </button>
               </div>
-              {/**<!-- ServiceNow Docs--> */}
-              <div className='flex flex-row no-wrap'>
-                <button className='flex flex-row mx-1'>
-                  <a
-                    href='https://docs.servicenow.com/'
-                    target='_blank'
-                    className='place-self-center h-fit w-auto py-0 px-0.5 text-grey-900 hover:text-grey-300 truncate text-center text-sn-light'
-                  >
-                    ServiceNow
-                  </a>
-                  <FontAwesomeIcon icon={faArrowUpRightFromSquare} color='' size='2xs' />
-                </button>
+              {/**<!-- Github --> */}
+              <div className=' flex flex-row pl-1 pr-2'>
+                <a
+                  href='https://github.com/jazicorn/sn-glossary'
+                  target='_blank'
+                  className='place-self-center h-fit w-auto mx-1 p-0 text-grey-900 hover:text-grey-300 text-center'
+                >
+                  <FontAwesomeIcon
+                    icon={faGithub}
+                    size='xl'
+                  />
+                </a>
               </div>
             </div>
           </div>
           {/**<!-- Brands/Social Media --> */}
           <div className='flex flex-row'>
-            <div className='flex flex-row pl-2'>
-              <button
+            <div className='bg-deep-blue rounded-full flex flex-row mx-2 my-0 pr-4 border border-deep-blue'>
+              <div className='bg-slate-100 rounded-full'>
+                <button
                 className='place-self-center h-fit w-auto mx-1 p-0 text-grey-900 hover:text-grey-300 text-center'
               >
                 <FontAwesomeIcon
@@ -109,18 +126,8 @@ export default function NavigatorSitePublic() {
                   size='lg'
                 />
               </button>
-            </div>
-            <div className=' flex flex-row pl-1 pr-2'>
-              <a
-                href='https://github.com/jazicorn/sn-glossary'
-                target='_blank'
-                className='place-self-center h-fit w-auto mx-1 p-0 text-grey-900 hover:text-grey-300 text-center'
-              >
-                <FontAwesomeIcon
-                  icon={faGithub}
-                  size='lg'
-                />
-              </a>
+              </div>
+              
             </div>
           </div>
           {/**<!-- login/logout --> */}
