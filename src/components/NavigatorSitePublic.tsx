@@ -8,6 +8,9 @@ import {
 import {
   faArrowUpRightFromSquare
 } from '@fortawesome/free-solid-svg-icons';
+import {
+  faSun
+} from '@fortawesome/free-regular-svg-icons';
 
 //tw-elements: Initialization for ES Users
 import { Input, Modal, Ripple, initTE } from 'tw-elements';
@@ -17,9 +20,9 @@ export default function NavigatorSitePublic() {
     initTE({ Input, Modal, Ripple });
   }, []);
   return (
-    <div>
+    <div className=''>
       {/**<!-- nav bar --> */}
-      <nav className='custom-nav-background flex flex-row justify-between px-4 h-10'>
+      <nav className='flex flex-row justify-between px-4 h-10'>
         {/**<!-- logo -->*/}
         <div className='place-self-center min-h-[34px] min-w-[34px]'>
           <Image
@@ -69,15 +72,26 @@ export default function NavigatorSitePublic() {
             </div>
           </div>
           {/**<!-- Brands/Social Media --> */}
-          <div className=' flex flex-row'>
-            <div className=' flex flex-row px-2'>
+          <div className='flex flex-row'>
+            <div className='flex flex-row pl-2'>
+              <button
+                className='place-self-center h-fit w-auto mx-1 p-0 text-grey-900 hover:text-grey-300 text-center'
+              >
+                <FontAwesomeIcon
+                  icon={faSun}
+                  size='lg'
+                />
+              </button>
+            </div>
+            <div className=' flex flex-row pl-1 pr-2'>
               <a
-                href=''
+                href='https://github.com/jazicorn/sn-glossary'
+                target='_blank'
                 className='place-self-center h-fit w-auto mx-1 p-0 text-grey-900 hover:text-grey-300 text-center'
               >
                 <FontAwesomeIcon
                   icon={faGithub}
-                  size='xl'
+                  size='lg'
                 />
               </a>
             </div>
