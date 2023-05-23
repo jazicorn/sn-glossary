@@ -7,5 +7,5 @@ Create a list of terms used in the ServiceNow Documentation, Courses, and Platfo
 
 ---
 ## Links
-- [SN-Glossary Official Website](sn-glossary.vercel.app)
+- [SN-Glossary Official Website](https://sn-glossary.vercel.app)
 - [ServiceNow: Product Documentation (Utah Version)](https://docs.servicenow.com/bundle/utah-product-directory/page/product-directory/reference/product-directory.html)
