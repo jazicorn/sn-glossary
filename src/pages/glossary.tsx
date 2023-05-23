@@ -1,7 +1,7 @@
 import { Inter } from 'next/font/google';
 // import React, { Dispatch, ReactNode, SetStateAction, createContext, useContext, useState } from "react"
 import dynamic from 'next/dynamic';
-const NavBar = dynamic(import('../components/HomeNavigator'), { ssr: false });
+const NavBar = dynamic(import('../components/NavigatorSitePublic'), { ssr: false });
 import PublicGlossary from '@/components/glossary/PublicGlossary';
 
 const inter = Inter({ subsets: ['latin'] });

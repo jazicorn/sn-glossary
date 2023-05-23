@@ -21,15 +21,14 @@ import {
 {/* <hr className='my-2 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-50 dark:opacity-100' /> */}
 
 
-export default function Home() {
+export default function NavigatorFeature() {
   const [showMoreFeatures, setShowMoreFeatures] = useState(true);
   function handleMoreClick() {
     setShowMoreFeatures(!showMoreFeatures);
   }
   return (
     <div className='flex basis-full flex-col'>
-      {/**<!--Tabs navigation-->*/}
-      <div className='pb-2 pt-1 lg:m-full grid h-fit flex-initial grow-0 border-b-2 border-t-4 border-blue-300 '>
+      <div className='pb-2 lg:m-full grid h-fit flex-initial grow-0 '>
         {/**Title */}
         <h1 className='m-2 place-self-center border-b-2 px-2 text-xl lg:m-1 lg:text-2xl'>
           Features
