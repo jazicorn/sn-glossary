@@ -94,7 +94,7 @@ export default function CallToAction() {
       {/****************** */}
       {/**<!-- nav bar --> */}
       {/****************** */}
-      <nav className='px-4 flex h-10 flex-row justify-center border-b border-t-2 border-blue-300 bg-[#DDFCE5]'>
+      <nav className='hidden px-4 lg:flex h-10 lg:flex-row justify-center border-b border-t-2 border-blue-300 bg-[#DDFCE5]'>
         {/**<!-- call-to-action --> */}
         <div className='hidden flex-row place-content-center place-self-center md:flex md:basis-10/12 '>
           <div className='flex flex-row items-center text-gray-600 hover:text-gray-900'>
