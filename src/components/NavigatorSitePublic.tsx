@@ -44,9 +44,22 @@ export default function NavigatorSitePublic() {
         </div>
         {/**<!-- Links --> */}
         <div className='my-2 flex flex-row justify-end divide-x divide-x-{12px} divide-deep-blue invisible lg:visible'>
-          {/**<!-- Brands/Social Media --> */}
+          {/**<!-- External Links --> */}
           <div className=' flex flex-row pl-2'>
             <div className=' flex flex-row px-2'>
+              {/**<!-- FAQ--> */}
+              <div className='flex flex-row no-wrap'>
+                <button className='flex flex-row mx-1'>
+                  <Link
+                    href=''
+                    className='place-self-center h-fit w-auto py-0 px-0.5 text-grey-900 hover:text-grey-300 truncate text-center tracking-tighter'
+                  >
+                    F.A.Q
+                  </Link>
+                  <FontAwesomeIcon icon={faArrowUpRightFromSquare} color='' size='2xs' />
+                </button>
+              </div>
+              {/**<!-- Docs--> */}
               <div className='flex flex-row no-wrap'>
                 <button className='flex flex-row mx-1'>
                   <Link
@@ -58,6 +71,7 @@ export default function NavigatorSitePublic() {
                   <FontAwesomeIcon icon={faArrowUpRightFromSquare} color='' size='2xs' />
                 </button>
               </div>
+              {/**<!-- Support --> */}
               <div>
                 <button className='flex flex-row mx-1'>
                   <Link
@@ -66,6 +80,19 @@ export default function NavigatorSitePublic() {
                   >
                     Support
                   </Link>
+                  <FontAwesomeIcon icon={faArrowUpRightFromSquare} color='' size='2xs' />
+                </button>
+              </div>
+              {/**<!-- ServiceNow Docs--> */}
+              <div className='flex flex-row no-wrap'>
+                <button className='flex flex-row mx-1'>
+                  <a
+                    href='https://docs.servicenow.com/'
+                    target='_blank'
+                    className='place-self-center h-fit w-auto py-0 px-0.5 text-grey-900 hover:text-grey-300 truncate text-center text-sn-light'
+                  >
+                    ServiceNow
+                  </a>
                   <FontAwesomeIcon icon={faArrowUpRightFromSquare} color='' size='2xs' />
                 </button>
               </div>
