@@ -2,9 +2,9 @@ import { Inter } from 'next/font/google';
 import dynamic from 'next/dynamic';
 import { invoke } from '@tauri-apps/api/tauri';
 import { useEffect } from 'react';
-
-const NavBar = dynamic(import('../components/HomeNavigator'), { ssr: false });
-const NavFeature = dynamic(import('../components/feature/FeatureNavigator'), {
+const NavBar = dynamic(import('../components/NavigatorSitePublic'), { ssr: false });
+const CallToAction = dynamic(import('../components/CallToAction'), { ssr: false });
+const NavFeature = dynamic(import('../components/feature/NavigatorFeature'), {
   ssr: false,
 });
 
@@ -18,12 +18,16 @@ export default function Home() {
     <div className={`flex h-screen min-h-full flex-col ${inter.className}`}>
       {/**Navbar component */}
       <NavBar />
+
+      {/**CalltoAction component */}
+      <CallToAction/>
+      
       {/**Feature component*/}
       <NavFeature />
 
       {/**<!----footer---> */}
       <footer className='bg-secondary-100 text-center dark:bg-secondary-600'>
-        <div className='bg-secondary-200 p-4 text-center text-secondary-700 dark:bg-secondary-900 dark:text-secondary-200'>
+        <div className='bg-secondary-200 px-4 text-center text-secondary-700 dark:bg-secondary-900 dark:text-secondary-200'>
           <button
             data-modal-target='defaultModal'
             data-modal-toggle='defaultModal'
