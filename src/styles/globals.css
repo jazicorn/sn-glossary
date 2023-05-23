@@ -28,10 +28,6 @@
     rgb(var(--background-start-rgb));
 }
 
-.custom-feature-bar-tabs {
-  width: 140px;
-}
-
 .custom-feature-bar-tabs > h2 {
   text-decoration: underline;
 }
