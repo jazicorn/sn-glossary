@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, Resolver } from "react-hook-form";
 //tw-elements: Initialization for ES Users
 import { Input, Modal, Ripple, initTE } from 'tw-elements';
@@ -32,8 +32,38 @@ export default function CallToAction() {
   useEffect(() => {
     initTE({ Input, Modal, Ripple });
   }, []);
+  const [emailSuccess, setEmailSuccess] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({ resolver });
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const onSubmit = handleSubmit(async (data) => {
+    console.log('Email sent:'+ data);
+    // Send the data to the server in JSON format.
+    const JSONdata = JSON.stringify(data.email);
+ 
+    // API endpoint where we send form data.
+    const endpoint = '/api/send-email';
+ 
+    // Form the request for sending data to the server.
+    const options = {
+      // The method is POST because we are sending data.
+      method: 'POST',
+      // Tell the server we're sending JSON.
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      // Body of the request is the JSON data we created above.
+      body: JSONdata,
+    };
+      // Send the form data to our forms API on Vercel and get a response.
+      const response = await fetch(endpoint, options);
+  
+      // Get the response data from server as JSON.
+      // If server returns the name submitted, that means the form works.
+      const result = await response.json();
+      if (result) {
+        console.log('Email received');
+        setEmailSuccess(true);
+      }
+    });
   return (
     <div>
       {/**************************/}
@@ -59,12 +89,13 @@ export default function CallToAction() {
                 className='text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200'
                 id='mailListModalLabel'
               >
-                <span className='text-base font-semibold'>SN-Glossary: </span>
-                <span className='text-base font-light'>Mailing List</span>
+                <span className='text-sn-dark text-base font-semibold'>SN-Glossary: </span>
+                <span className='text-sn-light text-base font-light'>Mailing List</span>
               </h5>
               {/**<!--Close button-->*/}
               <button
                 type='button'
+                name='close'
                 className='box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none'
                 data-te-modal-dismiss
                 aria-label='Close'
@@ -108,6 +139,7 @@ export default function CallToAction() {
                 
               </div>
               {errors?.email && <p className='ml-4 mt-2 text-xs text-red-500'> {errors.email.message}</p>}
+              {emailSuccess && <p className='ml-4 mt-2 text-xs text-green-500'>Email Sent</p>}
               {/**<!--Modal footer-->*/}
               <div className='flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md p-4 '>
                 
@@ -119,7 +151,7 @@ export default function CallToAction() {
                   data-te-ripple-color='light'
                 >
                   <FontAwesomeIcon icon={faEnvelope} />
-                  <span className='pl-2'>Notify Me</span>
+                  <span className='pl-2'>Waitlist</span>
                 </button>
               </div>
             </form>
