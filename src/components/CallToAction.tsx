@@ -28,7 +28,7 @@ const resolver: Resolver<FormValues> = async (values) => {
 };
 
 
-export default function CallToAction() {
+export default function CallToAction(this: any) {
   useEffect(() => {
     initTE({ Input, Modal, Ripple });
   }, []);
@@ -96,6 +96,7 @@ export default function CallToAction() {
               <button
                 type='button'
                 name='close'
+                onClick={() => setEmailSuccess(false)}
                 className='box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none'
                 data-te-modal-dismiss
                 aria-label='Close'
@@ -126,6 +127,7 @@ export default function CallToAction() {
                 
                 <input
                   {...register("email")}
+                  onInput={() => setEmailSuccess(false)}
                   className='peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
                   id='exampleFormControlInput1'
                   placeholder=''
@@ -140,6 +142,7 @@ export default function CallToAction() {
               </div>
               {errors?.email && <p className='ml-4 mt-2 text-xs text-red-500'> {errors.email.message}</p>}
               {emailSuccess && <p className='ml-4 mt-2 text-xs text-green-500'>Email Sent</p>}
+           
               {/**<!--Modal footer-->*/}
               <div className='flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md p-4 '>
                 
