@@ -1,11 +1,27 @@
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 export default function NavBarFeatureSearch() {
   return (
-    <div className='flex h-full w-full flex-initial flex-row place-content-center bg-blue-100 text-center'>
-      <div className='h-full w-full bg-green-100 opacity-100 transition-opacity duration-150 ease-linear'>
+    <div className='flex h-full w-full flex-initial flex-row place-content-center text-center'>
+      <div className='h-full w-full opacity-100 transition-opacity duration-150 ease-linear'>
+        
         {/**<!--search bar--> */}
-        <div className='custom-background flex h-full flex-col bg-slate-300 text-center'>
-          {/**!--landing message */}
+        <div className='flex h-full flex-col text-center'>
+          {/**!--Feature Name */}
           <div className='flex basis-1/3 flex-col'>
+            <div className='w-auto mb-4 lg:mb-2 mx-2 flex flex-col place-content-center place-items-center truncate text-sm '>
+                  <button
+                    className='flex flex-col px-1 border-b border-blue-200'
+                  >
+                    <FontAwesomeIcon icon={faMagnifyingGlass} size='lg' color={'#334155'} className='mr-1 mb-1'/>
+                    <span>
+                      <span className='mx-1'>Word Search</span>
+                    </span>
+                  </button>
+                  <p className='text-xs italic text-yellow-500'>*In Progress*</p>
+            </div>
+            {/**!--Feature Title*/}
             <h2 className='mt-auto text-4xl font-extrabold text-sn-dark'>
               ServiceNow{' '}
             </h2>
