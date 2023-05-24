@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function NavigatorSitePublicMenu() { 
     return (
-        <div className="bg-blue-100 py-4 my-4 mx-24 flex flex-col place-items-center text-slate-700 text-center border rounded-lg">
+        <div className="py-4 my-4 mx-24 flex flex-col place-items-center text-slate-700 text-center border rounded-lg">
             <h1 className="text-2xl w-full border-b border-slate-300 pb-2">Links</h1>
             <div className="divide-y-2">
                 <ul className="">
