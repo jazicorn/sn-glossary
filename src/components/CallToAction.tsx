@@ -1,12 +1,39 @@
 import Image from 'next/image';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useForm, Resolver } from "react-hook-form";
 //tw-elements: Initialization for ES Users
 import { Input, Modal, Ripple, initTE } from 'tw-elements';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faEnvelope,
+  faEnvelopeCircleCheck
+} from '@fortawesome/free-solid-svg-icons';
+
+type FormValues = {
+  email: string;
+};
+
+const resolver: Resolver<FormValues> = async (values) => {
+  return {
+    values: values.email ? values : {},
+    errors: !values.email
+      ? {
+          email: {
+            type: 'required',
+            message: 'Valid email is required',
+          },
+        }
+      : {},
+  };
+};
+
 
 export default function CallToAction() {
   useEffect(() => {
     initTE({ Input, Modal, Ripple });
   }, []);
+  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({ resolver });
+  const onSubmit = handleSubmit((data) => console.log(data));
   return (
     <div>
       {/**************************/}
@@ -63,32 +90,40 @@ export default function CallToAction() {
             {/**<div className="relative flex-auto p-4 italic" data-te-modal-body-ref>
               search
             </div>*/}
-            <div className='relative m-3' data-te-input-wrapper-init>
-              <input
-                type='text'
-                className='peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
-                id='exampleFormControlInput1'
-                placeholder=''
-              />
-              <label
-                htmlFor='exampleFormControlInput1'
-                className='pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] italic leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary'
-              >
-                email
-              </label>
-            </div>
-            {/**<!--Modal footer-->*/}
-            <div className='flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md p-4 '>
-              <button
-                type='button'
-                className='ml-1 inline-block rounded bg-primary px-4 py-1.5 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]'
-                data-te-ripple-init
-                data-te-ripple-color='light'
-              >
-                Subscribe
-              </button>
-            </div>
-          </div>
+            <form onSubmit={onSubmit}>
+              <div className='relative bg-gray-100 mx-3 rounded border-0' data-te-input-wrapper-init>
+                
+                <input
+                  {...register("email")}
+                  className='peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
+                  id='exampleFormControlInput1'
+                  placeholder=''
+                />
+                <label
+                  htmlFor='exampleFormControlInput1'
+                  className='pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] italic leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary'
+                >
+                  email
+                  </label>
+                
+              </div>
+              {errors?.email && <p className='ml-4 mt-2 text-xs text-red-500'> {errors.email.message}</p>}
+              {/**<!--Modal footer-->*/}
+              <div className='flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md p-4 '>
+                
+                <button
+                  type='submit'
+                  onClick={onSubmit}
+                  className='ml-1 inline-block rounded-lg bg-primary px-4 py-1.5 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]'
+                  data-te-ripple-init
+                  data-te-ripple-color='light'
+                >
+                  <FontAwesomeIcon icon={faEnvelope} />
+                  <span className='pl-2'>Notify Me</span>
+                </button>
+              </div>
+            </form>
+          </div> 
         </div>
       </div>
       {/****************** */}
