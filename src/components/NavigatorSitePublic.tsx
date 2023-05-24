@@ -6,7 +6,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import {
   faArrowUpRightFromSquare,
-  faHouseChimney,
+  faBookOpen,
   faBars,
   faCircleUser
 } from '@fortawesome/free-solid-svg-icons';
@@ -43,7 +43,7 @@ export default function NavigatorSitePublic() {
               href='/'
               className='hidden lg:flex items-center pl-2 py-5 text-deep-blue hover:text-slate-500 '
             >
-              <FontAwesomeIcon icon={faHouseChimney} color='' size='lg' />
+              <FontAwesomeIcon icon={faBookOpen} color='' size='lg' />
             </Link>
             <div className='hidden lg:flex lg:visible whitespace-nowrap pl-1.5 pt-0.5 font-medium'>
                 SN-Glossary
