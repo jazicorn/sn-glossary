@@ -10,7 +10,6 @@ import {
   faChevronUp,
   faBolt,
   faDesktop,
-  faMagnifyingGlass,
   faRectangleList,
   faImages
 } from '@fortawesome/free-solid-svg-icons';
@@ -22,15 +21,15 @@ import {
 
 
 export default function NavigatorFeature() {
-  const [showMoreFeatures, setShowMoreFeatures] = useState(true);
+  const [showMoreFeatures, setShowMoreFeatures] = useState((window.innerWidth > 1024) ? true : false );
   function handleMoreClick() {
     setShowMoreFeatures(!showMoreFeatures);
   }
   return (
-    <div className='flex basis-full flex-col'>
+    <div className='custom-background-2 flex basis-full flex-col'>
       <div className='pb-2 lg:m-full grid h-fit flex-initial grow-0 '>
         {/**Title */}
-        <h1 className='m-2 place-self-center border-b-2 px-2 text-xl lg:m-1 lg:text-2xl'>
+        <h1 className='m-2 place-self-center border-b-2 px-2 text-xl font-semibold text-deep-blue lg:m-1 lg:text-2xl'>
           Features
         </h1>
         {/**Tabs */}
@@ -51,7 +50,7 @@ export default function NavigatorFeature() {
             <hr className='my-1 h-0.5 bg-transparent bg-gradient-to-r from-transparent via-sn-dark to-transparent opacity-25 dark:opacity-100'/>
           </div>
           {/**More Features */}
-          <button onClick={() => handleMoreClick()} className='w-fit ml-1 mb-1 italic row-span-2 col-span-4 '>
+          <button onClick={() => handleMoreClick()} className='w-fit ml-1 italic row-span-2 col-span-4 '>
             <span className='mr-1'>
               <FontAwesomeIcon
               icon={faBolt}
@@ -76,20 +75,10 @@ export default function NavigatorFeature() {
               )}
             </span>
           </button>
+          {/**More Features */}
           <div className='w-full grid col-span-3 lg:col-span-4'>
             {showMoreFeatures &&
               <div className='w-auto lg:pt-2 flex flex-col lg:flex-row place-content-center place-items-center'>
-                <div className='w-auto mb-4 lg:mb-2 mx-2 truncate text-sm '>
-                  <button
-                    className='flex flex-col px-1 border-b border-blue-200'
-                  >
-                    <FontAwesomeIcon icon={faMagnifyingGlass} size='lg' color={'#334155'} className='mr-1 mb-1'/>
-                    <span>
-                      <span className='mx-1'>Word Search</span>
-                    </span>
-                  </button>
-                  <p className='text-xs italic text-yellow-500'>*In Progress*</p>
-                </div>
                 <div className='w-auto mb-4 lg:mb-2 mx-2 truncate text-sm '>
                   <button
                     className='flex flex-col px-1'
@@ -131,8 +120,12 @@ export default function NavigatorFeature() {
           </div>
         </div>
       </div>
+      {/**Divider */}
+      <div className='w-full row-span-2 col-span-4'>
+        <hr className=' h-0.5 bg-transparent bg-gradient-to-r from-transparent via-sn-dark to-transparent opacity-25 dark:opacity-100'/>
+      </div>
       {/** <!--Tabs content--> */}
-      <div className='bg-grayish-100 flex h-full w-full flex-initial flex-row place-content-center text-center'>
+      <div className='mt-4 flex h-full w-full flex-initial flex-row place-content-center text-center'>
         <Search />
       </div>
     </div>
