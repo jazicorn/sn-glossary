@@ -21,7 +21,7 @@ const PublicSearch = () => {
               <input
                 key='search'
                 maxLength={50}
-                className='bg-transparent border-none text-left placeholder:text-sm text-sm '
+                className='bg-transparent w-full border-none text-left placeholder:text-sm text-sm '
                 type='text'
                 name='def'
                 placeholder='Type Word Here...'/>

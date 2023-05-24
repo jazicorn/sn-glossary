@@ -12,7 +12,7 @@ const PublicTerm = ({ term }: {term: GlossaryContextType}) => {
     setShowMore(!showMore);
   }
     return (
-        <div key='term'>
+        <div key='term' className=''>
             <div
               key='undefined'
               className='mx-2 my-1 flex flex-row justify-between rounded bg-gray-200 p-1'
@@ -28,9 +28,8 @@ const PublicTerm = ({ term }: {term: GlossaryContextType}) => {
                 >
                   <div
                     key={term.name}
-                    className='w-24 p-0.5 rounded-l border-2 border-blue-300 bg-slate-200 text-center focus:border-2 focus:border-blue-400 focus:outline-none'
-                            >
-                                {term.name}
+                    className='w-24 p-0.5 rounded-l border-2 border-blue-300 bg-slate-200 text-center focus:border-2 focus:border-blue-400 focus:outline-none'>
+                      {term.name}
                   </div>
                   <div
                     key={term.def}
@@ -66,7 +65,7 @@ const PublicTerm = ({ term }: {term: GlossaryContextType}) => {
             {showMore && (
               <div
                 key='termshowmore'
-                className='custom-term-details mx-2 flex rounded bg-gray-200 p-1  xl:flex xl:flex-row'
+                className='custom-term-details mx-2 flex flex-col rounded bg-gray-200 p-1  xl:flex xl:flex-row'
               >
                 {/**Lines: Refs & Tags*/}
                 <div
@@ -76,32 +75,32 @@ const PublicTerm = ({ term }: {term: GlossaryContextType}) => {
                   {/**ID*/}
                   <div
                     key='undefined'
-                    className=' mr-1 flex flex-row rounded bg-gray-100 xl:w-auto xl:grow'
+                    className='w-full sm:w-fit sm:mr-1 flex flex-row rounded bg-gray-100 sm:w-auto'
                   >
                     <label
                       key='undefined'
-                      className='mb-1 ml-1 mt-1 rounded-l border-2 border-blue-300 bg-slate-400 pl-2 pr-1 text-sm'
+                      className='mb-1 ml-1 mt-1 pl-2 pr-1 rounded-l border-2 border-blue-300 bg-slate-400 text-sm'
                     >
                       ID:
                     </label>
                     <div
                       key='undefined'
-                      className='custom-input-id mr-1 mt-1 inline'
+                      className='custom-input-id w-full sm:w-fit mr-1 mt-1 inline'
                     >
                       <div
                         key={term.id}
                         placeholder='123456789'
-                        className='h-6 w-[74px] rounded-r border border-gray-300 bg-transparent pt-0.5 pl-1 text-left text-sm focus:border-slate-400 focus:outline-none'>{term.id}</div>
+                        className='h-6 grow w-full sm:w-[88px] rounded-r border border-gray-300 bg-transparent pt-0.5 pl-1 text-left text-sm focus:border-slate-400 focus:outline-none'>{term.id}</div>
                     </div>
                   </div>
                   {/**Ref*/}
                   <div
                     key='undefined'
-                    className='mr-1 mt-1 flex w-min flex-row rounded bg-gray-100 xl:mt-0 xl:w-full'
+                    className='sm:mr-1 mt-1 w-full sm:w-min flex flex-row rounded bg-gray-100 xl:mt-0 xl:w-full'
                   >
                     <label
                       key='undefined'
-                      className='mb-1 ml-1 mt-1 basis-14 rounded-l border-2 border-slate-400 bg-violet-100 pl-2 pr-1 text-sm'
+                      className='mb-1 ml-1 mt-1 pl-2 pr-1 basis-[92px] rounded-l border-2 border-slate-400 bg-violet-100 text-sm'
                     >
                       Ref:
                     </label>
@@ -113,15 +112,15 @@ const PublicTerm = ({ term }: {term: GlossaryContextType}) => {
                     </label>
                     <div
                       key='undefined'
-                      className='mr-1 mt-1 inline text-left text-xs w-auto'
+                      className='grow sm:no-grow mr-1 mt-1 inline text-left text-xs w-auto'
                     >
                       <div
                         key={term.ref}
-                        className='h-6 min-w-[18rem] w-auto rounded-r border border-gray-300 bg-transparent pt-1 pl-1 text-left text-xs focus:border-slate-400 focus:outline-none overflow-hidden text-ellipsis'>
+                        className='h-6 min-w-[12rem] w-auto rounded-r border border-gray-300 bg-transparent pt-1 pl-1 text-left text-xs focus:border-slate-400 focus:outline-none overflow-hidden text-ellipsis'>
                         <a
                           href={'https:' + term.ref}
                           target="_blank">
-                          ServiceNow: Product Documentation URL
+                          ServiceNow: Product Doc URL
                         </a>
                       </div>
                     </div>
@@ -129,28 +128,31 @@ const PublicTerm = ({ term }: {term: GlossaryContextType}) => {
                   {/**Category */}
                   <div
                     key='undefined'
-                    className='mr-1 mt-1 flex w-min flex-row rounded bg-gray-100 xl:mt-0 xl:w-fit'
+                    className='xl:mr-1 mt-1 xl:mt-0 w-full sm:w-fit flex flex-row bg-gray-100 rounded'
                   >
                     <label
                       key='undefined'
-                      className='mb-1 ml-1 mt-1 basis-14 rounded-l border-2 border-slate-400 bg-blue-300 pl-2 pr-1 text-sm '
+                      className='mb-1 ml-1 mt-1 pl-2 pr-1 basis-[92px] rounded-l border-2 border-slate-400 bg-blue-300  text-sm '
                     >
                       Category:
                     </label>
                     <div
                       key='undefined'
-                      className='mr-1 mt-1 inline text-left text-xs'
+                      className='grow w-max xl:w-fit mr-1 mt-1 inline text-left text-xs'
                     >
                       <div
                         key={term.product}
                         placeholder='(Product) Category'
-                        className='h-6 w-[10rem] rounded-r border border-gray-300 bg-transparent pt-0.5 pl-1 text-left text-sm focus:border-slate-400 focus:outline-none'>{term.product}</div>
+                        className='h-6 w-full sm:w-[10rem] rounded-r border border-gray-300 bg-transparent pt-0.5 pl-1 text-left text-sm focus:border-slate-400 focus:outline-none'
+                      >
+                        {term.product}
+                      </div>
                     </div>
                   </div>
                   {/**Tags*/}
                   <div
                     key='undefined'
-                    className='mr-1 mt-1 flex w-min flex-row rounded bg-gray-100 xl:mt-0 xl:w-fit'
+                    className='xl:mr-1 mt-1 w-fit flex flex-row rounded bg-gray-100 xl:mt-0 '
                   >
                     <label
                       key='undefined'
@@ -160,12 +162,12 @@ const PublicTerm = ({ term }: {term: GlossaryContextType}) => {
                     </label>
                     <div
                       key='tags'
-                      className='mr-1 flex flex-row content-center items-center'
+                      className='mr-1 flex flex-row flex-wrap sm:flex-nowrap content-center items-center'
                     >
                       {term?.tags?.map((tag) => (
                         <div
                           key='tag'
-                          className='mx-1 h-6 w-auto flex flex-row content-center items-center rounded border-0 bg-slate-200 pr-2 text-sm focus:border-2 focus:border-slate-400'
+                          className='m-1 h-6 w-auto flex flex-row content-center items-center rounded border-0 bg-slate-200 pr-2 text-sm focus:border-2 focus:border-slate-400'
                         >
                           <span className='w-auto pb-0.5 pl-1 text-left truncate'>
                             {tag}
