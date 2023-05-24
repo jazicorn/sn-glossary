@@ -52,7 +52,8 @@ export default function NavigatorSitePublic() {
           
           {/**Mobile: Banner */}
           <div className='lg:hidden my-2 flex flex-row justify-center text-center w-1/3  whitespace-nowrap pt-0.5 font-medium'>
-                SN-Glossary
+            <Link
+                href='/'>SN-Glossary</Link>
           </div>
           <div className='lg:hidden my-2 flex flex-row w-1/3 justify-end whitespace-nowrap pl-1.5 pt-0.5 font-medium text-xs'>
             {/**<!-- Moblie:login/logout --> */}
