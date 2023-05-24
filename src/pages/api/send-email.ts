@@ -19,9 +19,9 @@ export default async function handler(
         subject: "Welcome to NextAPI",
         html: render(WelcomeTemplate()),
       });
-
-      return res.status(200).json({ message: "Email sent successfully" });
       
+      console.log(body.email)
+      return res.status(200).json({ message: "Email sent successfully" });
     } catch(e) {
       res.status(400).send(e);
     }
