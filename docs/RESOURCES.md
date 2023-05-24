@@ -227,3 +227,13 @@ Perfect database for desktop use
 
 #### Documentation
 - [Website](https://www.sqlite.org/index.html)
+
+---
+## Providers
+
+### Email
+- [NodeMailer: NPM](https://nodemailer.com/about/)
+- [React Email: NPM](https://react.email/)
+
+### Articles
+- https://www.kirandev.com/next-js-react-email-sending
