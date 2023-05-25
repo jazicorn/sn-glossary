@@ -154,7 +154,7 @@ export default function CallToAction(this: any) {
                   data-te-ripple-color='light'
                 >
                   <FontAwesomeIcon icon={faEnvelope} />
-                  <span className='pl-2'>Waitlist</span>
+                  <span className='pl-2'>Subscribe</span>
                 </button>
               </div>
             </form>
