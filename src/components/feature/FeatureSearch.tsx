@@ -12,12 +12,10 @@ export default function NavBarFeatureSearch() {
           <div className='flex basis-1/3 flex-col'>
             <div className='w-auto mb-4 lg:mb-2 mx-2 flex flex-col place-content-center place-items-center truncate text-sm '>
                   <button
-                    className='flex flex-col px-1 border-b border-blue-200'
+                    className='flex flex-col place-content-center place-items-center px-1 border-b border-blue-200'
                   >
-                    <FontAwesomeIcon icon={faMagnifyingGlass} size='lg' color={'#334155'} className='mr-1 mb-1'/>
-                    <span>
-                      <span className='mx-1'>Word Search</span>
-                    </span>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} size='lg' color={'#334155'} className='mb-1 place-self-center'/>
+                    <span className='mx-1'>Word Search</span>
                   </button>
                   <p className='text-xs italic text-yellow-500'>*In Progress*</p>
             </div>
