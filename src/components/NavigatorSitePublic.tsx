@@ -12,7 +12,8 @@ import {
   faChalkboard,
   faBook,
   faAnglesUp,
-  faAnglesRight
+  faAnglesRight,
+  faAnglesDown
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faSun
@@ -85,21 +86,19 @@ export default function NavigatorSitePublic() {
               <div className='flex flex-row no-wrap min-w-[66px]'>
                 <button className='flex flex-col mx-1' onClick={moreMenuClick}>
                   {!moreMenu ?
-                    <Link
-                      href='/features'
+                    <button
                       className='hover:text-blue-300 place-self-center h-fit w-auto py-0 px-0.5 text-grey-900 hover:text-grey-300 truncate text-center tracking-tighter'
                     >
-                      <FontAwesomeIcon icon={faAnglesRight} size='sm' className='w-[18px]'/>
+                      <FontAwesomeIcon icon={faAnglesDown} size='sm' className='w-[18px]'/>
                       <span className='px-0.5'>More</span>
-                    </Link> :
+                    </button> :
                     <div className='flex flex-col'>
-                      <Link
-                        href='/features'
-                        className='hover:text-blue-300 place-self-center h-fit w-fit py-0 px-0.5 text-grey-900 hover:text-grey-300 truncate text-center tracking-tighter'
+                      <button
+                        className='hover:text-blue-300 place-self-center h-fit w-auto py-0 px-0.5 text-grey-900 hover:text-grey-300 truncate text-center tracking-tighter'
                       >
                         <FontAwesomeIcon icon={faAnglesUp} size='sm' className='w-[18px]'/>
                         <span className='px-0.5'>More</span>
-                      </Link>
+                      </button>
                       <div className=''><MoreMenu /></div>
                     </div>
                     
