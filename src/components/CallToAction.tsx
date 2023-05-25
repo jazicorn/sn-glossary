@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import { useForm, Resolver } from "react-hook-form";
+import { useForm, Resolver } from 'react-hook-form';
 //tw-elements: Initialization for ES Users
 import { Input, Modal, Ripple, initTE } from 'tw-elements';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEnvelope,
-  faEnvelopeCircleCheck
+  faEnvelopeCircleCheck,
 } from '@fortawesome/free-solid-svg-icons';
 
 type FormValues = {
@@ -27,21 +27,24 @@ const resolver: Resolver<FormValues> = async (values) => {
   };
 };
 
-
 export default function CallToAction(this: any) {
   useEffect(() => {
     initTE({ Input, Modal, Ripple });
   }, []);
   const [emailSuccess, setEmailSuccess] = useState(false);
-  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({ resolver });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>({ resolver });
   const onSubmit = handleSubmit(async (data) => {
-    console.log('Email sent:'+ data);
+    console.log('Email sent:' + data);
     // Send the data to the server in JSON format.
     const JSONdata = JSON.stringify(data.email);
- 
+
     // API endpoint where we send form data.
     const endpoint = '/api/send-email';
- 
+
     // Form the request for sending data to the server.
     const options = {
       // The method is POST because we are sending data.
@@ -53,17 +56,17 @@ export default function CallToAction(this: any) {
       // Body of the request is the JSON data we created above.
       body: JSONdata,
     };
-      // Send the form data to our forms API on Vercel and get a response.
-      const response = await fetch(endpoint, options);
-  
-      // Get the response data from server as JSON.
-      // If server returns the name submitted, that means the form works.
-      const result = await response.json();
-      if (result) {
-        console.log('Email received');
-        setEmailSuccess(true);
-      }
-    });
+    // Send the form data to our forms API on Vercel and get a response.
+    const response = await fetch(endpoint, options);
+
+    // Get the response data from server as JSON.
+    // If server returns the name submitted, that means the form works.
+    const result = await response.json();
+    if (result) {
+      console.log('Email received');
+      setEmailSuccess(true);
+    }
+  });
   return (
     <div>
       {/**************************/}
@@ -89,8 +92,12 @@ export default function CallToAction(this: any) {
                 className='text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200'
                 id='mailListModalLabel'
               >
-                <span className='text-sn-dark text-base font-semibold'>SN-Glossary: </span>
-                <span className='text-sn-light text-base font-light'>Mailing List</span>
+                <span className='text-base font-semibold text-sn-dark'>
+                  SN-Glossary:{' '}
+                </span>
+                <span className='text-base font-light text-sn-light'>
+                  Mailing List
+                </span>
               </h5>
               {/**<!--Close button-->*/}
               <button
@@ -123,10 +130,12 @@ export default function CallToAction(this: any) {
               search
             </div>*/}
             <form onSubmit={onSubmit}>
-              <div className='relative bg-gray-100 mx-3 rounded border-0' data-te-input-wrapper-init>
-                
+              <div
+                className='relative mx-3 rounded border-0 bg-gray-100'
+                data-te-input-wrapper-init
+              >
                 <input
-                  {...register("email")}
+                  {...register('email')}
                   onInput={() => setEmailSuccess(false)}
                   className='peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
                   id='exampleFormControlInput1'
@@ -137,15 +146,20 @@ export default function CallToAction(this: any) {
                   className='pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] italic leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary'
                 >
                   email
-                  </label>
-                
+                </label>
               </div>
-              {errors?.email && <p className='ml-4 mt-2 text-xs text-red-500'> {errors.email.message}</p>}
-              {emailSuccess && <p className='ml-4 mt-2 text-xs text-green-500'>Email Sent</p>}
-           
+              {errors?.email && (
+                <p className='ml-4 mt-2 text-xs text-red-500'>
+                  {' '}
+                  {errors.email.message}
+                </p>
+              )}
+              {emailSuccess && (
+                <p className='ml-4 mt-2 text-xs text-green-500'>Email Sent</p>
+              )}
+
               {/**<!--Modal footer-->*/}
               <div className='flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md p-4 '>
-                
                 <button
                   type='submit'
                   onClick={onSubmit}
@@ -158,21 +172,22 @@ export default function CallToAction(this: any) {
                 </button>
               </div>
             </form>
-          </div> 
+          </div>
         </div>
       </div>
       {/****************** */}
       {/**<!-- nav bar --> */}
       {/****************** */}
-      <nav className='hidden px-4 lg:flex h-10 lg:flex-row justify-center border-b border-t-2 border-blue-300 bg-[#DDFCE5]'>
+      <nav className='hidden h-10 justify-center border-b border-t-2 border-blue-300 bg-[#DDFCE5] px-4 lg:flex lg:flex-row'>
         {/**<!-- call-to-action --> */}
         <div className='hidden flex-row place-content-center place-self-center md:flex md:basis-10/12 '>
           <div className='flex flex-row items-center text-gray-600 hover:text-gray-900'>
-            
             <span className='hidden pr-1 lg:inline'>
               Want to use this product?
             </span>
-            <span className='italic font-semibold text-rose-500'>Pre-Register</span>
+            <span className='font-semibold italic text-rose-500'>
+              Pre-Register
+            </span>
             <span className='ml-1 '>
               <Image
                 src='backhand-index-pointing-right.svg'
@@ -210,7 +225,6 @@ export default function CallToAction(this: any) {
             </button>
           </div>
         </div>
-        
       </nav>
     </div>
   );

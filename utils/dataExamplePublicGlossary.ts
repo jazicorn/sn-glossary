@@ -13,7 +13,14 @@ export const publicGlossary = [
     def: 'The product catalog is a set of information about individual models. Models are specific versions or various configurations of an asset. Asset managers use the product catalog as a centralized repository for model information.',
     ref: 'docs.servicenow.com/bundle/utah-it-asset-management/page/product/product-catalog/concept/c_ProductCatalog.html',
     product: 'Product Catalog',
-    tags: ['Product Catalog', 'Asset Management', 'Procurement', 'Request', 'Contract', 'Vender'],
+    tags: [
+      'Product Catalog',
+      'Asset Management',
+      'Procurement',
+      'Request',
+      'Contract',
+      'Vender',
+    ],
   },
   {
     id: '003',

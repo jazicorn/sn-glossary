@@ -28,9 +28,9 @@ export const PlaidVerifyIdentityEmail = ({
       <Container style={container}>
         <Img
           src={`${baseUrl}/static/plaid-logo.png`}
-          width="212"
-          height="88"
-          alt="Plaid"
+          width='212'
+          height='88'
+          alt='Plaid'
           style={logo}
         />
         <Text style={tertiary}>Verify Your Identity</Text>
@@ -43,7 +43,7 @@ export const PlaidVerifyIdentityEmail = ({
         <Text style={paragraph}>Not expecting this email?</Text>
         <Text style={paragraph}>
           Contact{' '}
-          <Link href="mailto:login@plaid.com" style={link}>
+          <Link href='mailto:login@plaid.com' style={link}>
             login@plaid.com
           </Link>{' '}
           if you did not request this code.

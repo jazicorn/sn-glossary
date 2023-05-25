@@ -20,20 +20,22 @@ const baseUrl = process.env.VERCEL_URL
 export const StripeWelcomeEmail = () => (
   <Html>
     <Head />
-    <Preview>You&#39;re now ready to make live transactions with Stripe!</Preview>
+    <Preview>
+      You&#39;re now ready to make live transactions with Stripe!
+    </Preview>
     <Body style={main}>
       <Container style={container}>
         <Section style={box}>
           <Img
             src={`${baseUrl}/static/stripe-logo.png`}
-            width="49"
-            height="21"
-            alt="Stripe"
+            width='49'
+            height='21'
+            alt='Stripe'
           />
           <Hr style={hr} />
           <Text style={paragraph}>
-            Thanks for submitting your account information. You&#39;re now ready to
-            make live transactions with Stripe!
+            Thanks for submitting your account information. You&#39;re now ready
+            to make live transactions with Stripe!
           </Text>
           <Text style={paragraph}>
             You can view your payments and a variety of other information about
@@ -43,31 +45,31 @@ export const StripeWelcomeEmail = () => (
             pX={10}
             pY={10}
             style={button}
-            href="https://dashboard.stripe.com/login"
+            href='https://dashboard.stripe.com/login'
           >
             View your Stripe Dashboard
           </Button>
           <Hr style={hr} />
           <Text style={paragraph}>
             If you haven&#39;t finished your integration, you might find our{' '}
-            <Link style={anchor} href="https://stripe.com/docs">
+            <Link style={anchor} href='https://stripe.com/docs'>
               docs
             </Link>{' '}
             handy.
           </Text>
           <Text style={paragraph}>
-            Once you&#39;re ready to start accepting payments, you&#39;ll just need to
-            use your live{' '}
+            Once you&#39;re ready to start accepting payments, you&#39;ll just
+            need to use your live{' '}
             <Link
               style={anchor}
-              href="https://dashboard.stripe.com/login?redirect=%2Fapikeys"
+              href='https://dashboard.stripe.com/login?redirect=%2Fapikeys'
             >
               API keys
             </Link>{' '}
             instead of your test API keys. Your account can simultaneously be
             used for both test and live requests, so you can continue testing
             while accepting live payments. Check out our{' '}
-            <Link style={anchor} href="https://stripe.com/docs/dashboard">
+            <Link style={anchor} href='https://stripe.com/docs/dashboard'>
               tutorial about account basics
             </Link>
             .
@@ -76,16 +78,16 @@ export const StripeWelcomeEmail = () => (
             Finally, we&#39;ve put together a{' '}
             <Link
               style={anchor}
-              href="https://stripe.com/docs/checklist/website"
+              href='https://stripe.com/docs/checklist/website'
             >
               quick checklist
             </Link>{' '}
             to ensure your website conforms to card network standards.
           </Text>
           <Text style={paragraph}>
-            We&#39;ll be here to help you with any step along the way. You can find
-            answers to most questions and get in touch with us on our{' '}
-            <Link style={anchor} href="https://support.stripe.com/">
+            We&#39;ll be here to help you with any step along the way. You can
+            find answers to most questions and get in touch with us on our{' '}
+            <Link style={anchor} href='https://support.stripe.com/'>
               support site
             </Link>
             .

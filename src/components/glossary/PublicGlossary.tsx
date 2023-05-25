@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { GlossaryContext } from '../../context/contextGlossary';
-import Term from './PublicTerm'
-import Search from './PublicSearch'
+import Term from './PublicTerm';
+import Search from './PublicSearch';
 
 export default function Glossary() {
   const publicGlossary = useContext(GlossaryContext);
@@ -26,7 +26,7 @@ export default function Glossary() {
         {/******************* */}
         {/****Search Bar***** */}
         {/******************* */}
-        <Search/>
+        <Search />
       </div>
       <hr
         key='undefined'
@@ -38,7 +38,7 @@ export default function Glossary() {
         {/**Display All Terms */}
         {/******************* */}
         {publicGlossary?.map((term) => (
-          <div key='term' >
+          <div key='term'>
             <Term {...{ term }} />
           </div>
         ))}

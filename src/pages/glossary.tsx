@@ -1,7 +1,9 @@
 import { Inter } from 'next/font/google';
 // import React, { Dispatch, ReactNode, SetStateAction, createContext, useContext, useState } from "react"
 import dynamic from 'next/dynamic';
-const NavBar = dynamic(import('../components/NavigatorSitePublic'), { ssr: false });
+const NavBar = dynamic(import('../components/NavigatorSitePublic'), {
+  ssr: false,
+});
 import PublicGlossary from '@/components/glossary/PublicGlossary';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -10,7 +12,7 @@ const inter = Inter({ subsets: ['latin'] });
 export default function Glossary() {
   return (
     <div
-      className={`flex h-screen min-h-screen w-fit flex-col bg-slate-100 grow ${inter.className} bg-no-repeat`}
+      className={`flex h-screen min-h-screen w-fit grow flex-col bg-slate-100 ${inter.className} bg-no-repeat`}
     >
       {/**Navbar component */}
       <NavBar />
