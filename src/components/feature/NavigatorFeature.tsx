@@ -37,13 +37,12 @@ export default function NavigatorFeature() {
           <div className='custom-feature-bar-tabs mr-1 row-span-1 col-start-2 col-end-2 lg:col-start-2 lg:col-end-4'>
             <Link
               href='/glossary'
-              target='_blank'
-              className='text-base truncate ml-1 border-b border-transparent'>
-              <FontAwesomeIcon icon={faStar} size='sm' color={'#F5BE49'} className='mr-1'/>
-              Public Glossary
-              <FontAwesomeIcon icon={faArrowUpRightFromSquare} size='2xs' color={'#293e40'} className='px-1'/>
+              className='text-base truncate ml-1 border-b border-transparent hover:text-gray-400'>
+              <FontAwesomeIcon icon={faStar} size='sm' color={'#F5BE49'} className=''/>
+              <span className='ml-1'>Public Glossary</span>
+              <p className='text-sm text-sn-light'>Try It Out</p>
             </Link>
-            <p className='text-sm text-sn-light'>Try It Out</p>
+            
           </div>
           {/**Divider */}
           <div className='w-full row-span-2 col-span-4'>
@@ -60,7 +59,7 @@ export default function NavigatorFeature() {
             </span>
               More Features
             <span className='ml-2'>
-              {showMoreFeatures && window.innerWidth > 1280 ? (
+              {showMoreFeatures ? (
                 <FontAwesomeIcon
                   icon={faChevronUp}
                   size='sm'
