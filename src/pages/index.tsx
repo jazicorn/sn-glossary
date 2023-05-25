@@ -13,7 +13,7 @@ export default function Home() {
     invoke('greet', { name: 'World' }).then(console.log).catch(console.error);
   }, []);
   return (
-    <div className={`h-screen min-h-full flex flex-col justify-between ${inter.className}`}>
+    <div className={`relative z-0 h-screen min-h-full flex flex-col justify-between ${inter.className}`}>
       {/**Navbar component */}
       <NavBar />
       {/**Banner Message */}

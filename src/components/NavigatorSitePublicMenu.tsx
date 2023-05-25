@@ -12,13 +12,9 @@ import {
 
 export default function NavigatorSitePublicMenu() {
     return (
-        <div className="border-b-2 border-gray-400">
-
-   
-        <div className="py-4 my-4 mx-24 flex flex-col place-items-center text-slate-700 text-center border rounded-lg">
-            
-            <h1 className="text-xl w-full border-b border-slate-300 pb-2"> Navigation</h1>
-           
+        <div className="">
+        <div className="py-4 my-4 mx-8 flex flex-col place-items-center text-slate-700 text-center border rounded-lg bg-gray-100">
+            <h1 className="text-xl w-full border-b border-slate-300 pb-2 px-10"> Navigation</h1>
             <div className="divide-y-2 ">
                  <ul>
                     <ol className='flex flex-row p-2 justify-center'>

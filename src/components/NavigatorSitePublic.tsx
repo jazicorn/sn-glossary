@@ -39,12 +39,11 @@ export default function NavigatorSitePublic() {
     setAccountMenu(!accountMenu)
   }
   return (
-    <div className=''>
-        <div className='z-0 flex flex-row h-10 border-b border-slate-200'>
+    <div className='z-10 relative'>
+      <div className='z-20 relative flex flex-row h-10 border-b border-slate-200'>
         {/**<!-- nav bar --> */}
-        <nav className='flex flex-row w-full justify-between px-4 h-[42px]'>
-          
-          <div className='w-1/3 flex flex-row justify-start place-items-center min-h-[34px] min-w-[34px] divide-x divide-x-{12px} divide-deep-blue'>
+        <nav className='z-3 relative flex flex-row w-full justify-between px-4 h-[42px]'>
+          <div className='z-4 relative w-1/3 flex flex-row justify-start place-items-center min-h-[34px] min-w-[34px] divide-x divide-x-{12px} divide-deep-blue'>
             <div className='pr-2'>
               <button
                 onClick={() => menuClick()}
@@ -241,8 +240,10 @@ export default function NavigatorSitePublic() {
         </nav>
       </div>
       {/**DropDown Menu */}
-      <div className='xl:hidden'>
+      <div className='xl:hidden absolute z-1000 bg-white sm:bg-transparent overflow-visible flex flex-col items-center sm:items-start  w-screen border-b-2 sm:border-0'>
         {Menu && <NavigatorSitePublicMenu />}
+      </div>
+      <div className='xl:hidden absolute z-1000 bg-white sm:bg-transparent overflow-visible flex flex-col items-center sm:items-end  w-screen border-b-2 sm:border-0'>
         {accountMenu && <AccountMenu/>}
       </div>
     </div>
