@@ -20,19 +20,7 @@ const nextConfig = {
         ],
         destination: '/',
         permanent: false,
-      },
-      {
-        source: '/features',
-        has: [
-          {
-            type: 'header',
-            key: 'host',
-            value: 'sn-glossary.com',
-          },
-        ],
-        destination: '/',
-        permanent: false,
-      },
+      }
     ]
   },
 };
