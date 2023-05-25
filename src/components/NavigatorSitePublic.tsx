@@ -18,6 +18,7 @@ import {
   faSun
 } from '@fortawesome/free-regular-svg-icons';
 import NavigatorSitePublicMenu from './NavigatorSitePublicMenu';
+import AccountMenu from './AccountMenu';
 
 //tw-elements: Initialization for ES Users
 import { Input, Modal, Ripple, initTE } from 'tw-elements';
@@ -26,9 +27,16 @@ export default function NavigatorSitePublic() {
   useEffect(() => {
     initTE({ Input, Modal, Ripple });
   }, []);
-  const [useMenu, setUseMenu] = useState(false);
+  const [Menu, setMenu] = useState(false);
+  const [accountMenu, setAccountMenu] = useState(false);
+  
   function menuClick() {
-    setUseMenu(!useMenu);
+    setAccountMenu(false);
+    setMenu(!Menu);
+  }
+  function accountMenuClick() {
+    setMenu(false)
+    setAccountMenu(!accountMenu)
   }
   return (
     <div className=''>
@@ -40,22 +48,22 @@ export default function NavigatorSitePublic() {
             <div className='pr-2'>
               <button
                 onClick={() => menuClick()}
-                className='lg:hidden items-center pl-2 py-5 text-deep-blue hover:text-slate-500'
+                className='xl:hidden items-center pl-2 py-5 text-deep-blue hover:text-slate-500'
               >
-                {!useMenu ? <FontAwesomeIcon icon={faBars} color='' size='xl' /> : <FontAwesomeIcon icon={faBars} color='' size='xl' rotation={90} />}
+                {!Menu ? <FontAwesomeIcon icon={faBars} color='' size='xl' /> : <FontAwesomeIcon icon={faBars} color='' size='xl' rotation={90} />}
               </button>
               {/**<!-- logo -->*/}
               <Link
                 href='/'
-                className='hidden lg:flex items-center pl-2 py-5 text-deep-blue hover:text-blue-300'
+                className='hidden xl:flex items-center pl-2 py-5 text-deep-blue hover:text-blue-300'
               >
-                <FontAwesomeIcon icon={faBookOpen} color='' size='lg' />
-                <div className='hidden lg:flex lg:visible whitespace-nowrap pl-1.5 pt-0.5 font-medium'>
+                <FontAwesomeIcon icon={faBookOpen} color='' size='xl' />
+                <div className='hidden xl:flex xl:visible whitespace-nowrap pl-1.5 pt-0.5 font-medium'>
                   SN-Glossary
                 </div>
               </Link>
             </div>
-            <div className='hidden lg:flex flex-row pr-2'>
+            <div className='hidden xl:flex flex-row pr-2'>
               {/**<!-- Features--> */}
               <div className='flex flex-row no-wrap hover:text-blue-300 text-blue-500'>
                 <button className='flex flex-row mx-1'>
@@ -93,7 +101,7 @@ export default function NavigatorSitePublic() {
                 </button>
               </div>
             </div>
-            <div className='hidden lg:flex flex-row pr-2  hover:text-blue-300'>
+            <div className='hidden xl:flex flex-row pr-2  hover:text-blue-300'>
               {/**<!-- Dashboard--> */}
               <div className='flex flex-row no-wrap'>
                 <button className='flex flex-row mx-1'>
@@ -110,9 +118,10 @@ export default function NavigatorSitePublic() {
             </div>
           </div>
           {/**Mobile: Home Link */}
-          <div className='lg:hidden my-2 flex flex-row justify-center text-center w-1/3  whitespace-nowrap pt-0.5 font-medium'>
+          <div className='xl:hidden my-2 flex flex-row justify-center text-center w-1/3  whitespace-nowrap pt-0.5 font-medium'>
             <Link
-              href='/'>SN-Glossary
+              href='/'>
+              SN-Glossary
             </Link>
           </div>
           <div className='xl:hidden my-2 flex flex-row w-1/3 justify-end whitespace-nowrap pl-1.5 pt-0.5 font-medium text-xs'>
@@ -122,7 +131,7 @@ export default function NavigatorSitePublic() {
                 href=''
                 className='place-self-center h-fit p-0 mx-1 text-grey-900 hover:text-grey-300 text-center'
               >
-                <FontAwesomeIcon icon={faCircleUser} color='#334155' size='2xl' />
+                <FontAwesomeIcon icon={faCircleUser} color='#334155' size='2xl' className='hover:text-gray-500' onClick={() => accountMenuClick()}/>
               </Link>
           </div>
           </div>
@@ -145,7 +154,7 @@ export default function NavigatorSitePublic() {
             </div>
             {/**<!-- SN-GLossary External Links --> */}
             <div className=' flex flex-row'>
-              <div className=' flex flex-row px-2'>
+              <div className=' flex flex-row '>
                 {/**<!-- FAQ--> */}
                 <div className='flex flex-row no-wrap'>
                   <button className='flex flex-row mx-1'>
@@ -206,7 +215,7 @@ export default function NavigatorSitePublic() {
                 >
                   <FontAwesomeIcon
                     icon={faSun}
-                    size='lg'
+                    size='xl'
                   />
                 </button>
                 </div>
@@ -214,16 +223,16 @@ export default function NavigatorSitePublic() {
               </div>
             </div>
             {/**<!-- login/logout --> */}
-            <div className=' flex flex-row px-2'>
+            <div className='flex flex-row px-2'>
               <Link
                 href=''
-                className='place-self-center h-fit w-20 p-0 mx-1 text-grey-900 hover:text-grey-300 text-center border rounded-md border-blue-300 hover:border-blue-400 transition duration-300'
+                className='place-self-center h-fit w-16 p-0 mx-1 text-sm text-grey-900 hover:text-grey-300 text-center border rounded-md border-blue-300 hover:border-blue-400 transition duration-300'
               >
                 Signup
               </Link>
               <Link
                 href=''
-                className='place-self-center h-fit w-20 p-0 ml-1 text-grey-900 hover:text-grey-300 text-center border rounded-md border-blue-300 hover:border-blue-400 transition duration-300'
+                className='place-self-center h-fit w-16 p-0 ml-1 text-sm text-grey-900 hover:text-grey-300 text-center border rounded-md border-blue-300 hover:border-blue-400 transition duration-300'
               >
                 Login
               </Link>
@@ -232,8 +241,9 @@ export default function NavigatorSitePublic() {
         </nav>
       </div>
       {/**DropDown Menu */}
-      <div className='lg:hidden'>
-        {useMenu && <NavigatorSitePublicMenu/>}
+      <div className='xl:hidden'>
+        {Menu && <NavigatorSitePublicMenu />}
+        {accountMenu && <AccountMenu/>}
       </div>
     </div>
   );
