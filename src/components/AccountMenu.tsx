@@ -9,7 +9,8 @@ import {
 
 export default function AccountMenu() {
     return (
-        <div className="ng-blue-100 py-4 my-4 mx-24 flex flex-col place-items-center text-slate-700 text-center border rounded-lg">
+        <div className="border-b-2 border-gray-400">
+            <div className="ng-blue-100 py-4 my-4 mx-24 flex flex-col place-items-center text-slate-700 text-center border rounded-lg">
             <h1 className="text-xl text-blue-500 w-full border-b border-slate-300 pb-2">Account Menu</h1>
             <div className="divide-y-2 ">
                  <ul>
@@ -63,6 +64,7 @@ export default function AccountMenu() {
                         ...
                     </ol>
                 </ul>
+            </div>
             </div>
         </div>
     )
