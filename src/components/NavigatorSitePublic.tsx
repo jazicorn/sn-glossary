@@ -9,16 +9,17 @@ import {
   faBookOpen,
   faBars,
   faCircleUser,
-  faMapLocationDot,
-  faHandshakeAngle,
-  faStar,
-  faChalkboard
+  faChalkboard,
+  faBook,
+  faAnglesUp,
+  faAnglesRight
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faSun
 } from '@fortawesome/free-regular-svg-icons';
 import NavigatorSitePublicMenu from './NavigatorSitePublicMenu';
 import AccountMenu from './AccountMenu';
+import MoreMenu from './MoreMenu';
 
 //tw-elements: Initialization for ES Users
 import { Input, Modal, Ripple, initTE } from 'tw-elements';
@@ -29,7 +30,11 @@ export default function NavigatorSitePublic() {
   }, []);
   const [Menu, setMenu] = useState(false);
   const [accountMenu, setAccountMenu] = useState(false);
-  
+  const [moreMenu, setMoreMenu] = useState(false);
+
+  function moreMenuClick() {
+    setMoreMenu(!moreMenu)
+  }
   function menuClick() {
     setAccountMenu(false);
     setMenu(!Menu);
@@ -62,46 +67,49 @@ export default function NavigatorSitePublic() {
                 </div>
               </Link>
             </div>
-            <div className='hidden xl:flex flex-row pr-2'>
+            {/**Site Links */}
+            <div className='hidden xl:flex flex-row '>
+              {/**<!-- Glossary--> */}
+              <div className='flex flex-row no-wrap'>
+                <button className='flex flex-row mx-1 text-blue-500'>
+                  <Link
+                    href='/glossary'
+                    className='place-self-center flex flex-row h-fit w-auto py-0 px-0.5 text-grey-900 hover:text-grey-300 truncate text-center tracking-tighter'
+                  >
+                    <FontAwesomeIcon icon={faBook} size='sm' className='place-self-center'/>
+                    <span className='pl-1 tracking-tighter'>Public Glossary</span>
+                  </Link>
+                </button>
+              </div>
               {/**<!-- Features--> */}
-              <div className='flex flex-row no-wrap hover:text-blue-300 text-blue-500'>
-                <button className='flex flex-row mx-1'>
-                  <Link
-                    href='/features'
-                    className='place-self-center h-fit w-auto py-0 px-0.5 text-grey-900 hover:text-grey-300 truncate text-center tracking-tighter'
-                  >
-                    <FontAwesomeIcon icon={faStar} size='sm'/>
-                    <span className='px-0.5'>Features</span>
-                  </Link>
-                </button>
-              </div>
-              {/**<!-- Docs--> */}
-              <div className='flex flex-row no-wrap hover:text-blue-300'>
-                <button className='flex flex-row mx-1'>
-                  <Link
-                    href=''
-                    className='place-self-center h-fit w-auto py-0 px-0.5 text-grey-900 hover:text-grey-300 truncate text-center'
-                  >
-                    <FontAwesomeIcon icon={faMapLocationDot} size='sm'/>
-                    <span className='px-0.5'>Roadmap</span>
-                  </Link>
-                </button>
-              </div>
-              {/**<!-- Helpful Links --> */}
-              <div className='flex flex-row no-wrap hover:text-blue-300'>
-                <button className='flex flex-row mx-1'>
-                  <Link
-                    href=''
-                    className='place-self-center h-fit w-auto py-0 px-0.5 text-grey-900 hover:text-grey-300 truncate text-center tracking-tighter'
-                  >
-                    <FontAwesomeIcon icon={faHandshakeAngle} size='sm'/>
-                    <span className='px-0.5'>Helpful Links</span>
-                  </Link>
+              <div className='flex flex-row no-wrap min-w-[66px]'>
+                <button className='flex flex-col mx-1' onClick={moreMenuClick}>
+                  {!moreMenu ?
+                    <Link
+                      href='/features'
+                      className='hover:text-blue-300 place-self-center h-fit w-auto py-0 px-0.5 text-grey-900 hover:text-grey-300 truncate text-center tracking-tighter'
+                    >
+                      <FontAwesomeIcon icon={faAnglesRight} size='sm' className='w-[18px]'/>
+                      <span className='px-0.5'>More</span>
+                    </Link> :
+                    <div className='flex flex-col'>
+                      <Link
+                        href='/features'
+                        className='hover:text-blue-300 place-self-center h-fit w-fit py-0 px-0.5 text-grey-900 hover:text-grey-300 truncate text-center tracking-tighter'
+                      >
+                        <FontAwesomeIcon icon={faAnglesUp} size='sm' className='w-[18px]'/>
+                        <span className='px-0.5'>More</span>
+                      </Link>
+                      <div className=''><MoreMenu /></div>
+                    </div>
+                    
+                  }
                 </button>
               </div>
             </div>
             <div className='hidden xl:flex flex-row pr-2  hover:text-blue-300'>
-              {/**<!-- Dashboard--> */}
+              
+               {/**<!-- Dashboard--> */}
               <div className='flex flex-row no-wrap'>
                 <button className='flex flex-row mx-1'>
                   <Link
@@ -114,6 +122,7 @@ export default function NavigatorSitePublic() {
                   </Link>
                 </button>
               </div>
+              
             </div>
           </div>
           {/**Mobile: Home Link */}

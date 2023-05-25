@@ -7,7 +7,8 @@ import {
   faMapLocationDot,
   faHandshakeAngle,
   faStar,
-  faChalkboard
+  faChalkboard,
+  faBook
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function NavigatorSitePublicMenu() {
@@ -16,17 +17,31 @@ export default function NavigatorSitePublicMenu() {
         <div className="py-4 my-4 mx-8 flex flex-col place-items-center text-slate-700 text-center border rounded-lg bg-gray-100">
             <h1 className="text-xl w-full border-b border-slate-300 pb-2 px-10"> Navigation</h1>
             <div className="divide-y-2 ">
-                 <ul>
+                <ul>
+                   <ol className='flex flex-row p-2 justify-center'>
+                         {/**<!-- Glossary--> */}
+                        <div className='flex flex-row no-wrap'>
+                            <button className='flex flex-row mx-1 text-blue-500'>
+                            <Link
+                                href='/glossary'
+                                className='place-self-center flex flex-row h-fit w-auto py-0 px-0.5 text-grey-900 hover:text-grey-300 truncate text-center tracking-tighter'
+                            >
+                                <FontAwesomeIcon icon={faBook} size='sm' className='place-self-center'/>
+                                <span className='pl-1 tracking-tighter'>Public Glossary</span>
+                            </Link>
+                            </button>
+                        </div>
+                    </ol>
                     <ol className='flex flex-row p-2 justify-center'>
                         <button className='flex flex-row mx-1'>
-                  <Link
-                    href='/features'
-                    className='place-self-center h-fit w-auto py-0 px-0.5 text-grey-900 hover:text-grey-300 truncate text-center tracking-tighter'
-                  >
-                    <FontAwesomeIcon icon={faStar} size='sm'/>
-                    <span className='px-0.5'>Features</span>
-                  </Link>
-                </button>
+                            <Link
+                                href='/features'
+                                className='place-self-center h-fit w-auto py-0 px-0.5 text-grey-900 hover:text-grey-300 truncate text-center tracking-tighter'
+                            >
+                                <FontAwesomeIcon icon={faStar} size='sm'/>
+                                <span className='px-0.5'>Features</span>
+                            </Link>
+                        </button>
                     </ol>
                     <ol className='flex flex-row p-2 justify-center'>
                         <button className='flex flex-row mx-1'>
@@ -120,6 +135,11 @@ export default function NavigatorSitePublicMenu() {
                             </Link>
                             <FontAwesomeIcon icon={faArrowUpRightFromSquare} color='' size='2xs' />
                         </button>
+                    </ol>
+                </ul>
+                <ul>
+                    <ol className='flex flex-row p-2 justify-center'>
+                         ...
                     </ol>
                 </ul>
             </div>
