@@ -13,9 +13,6 @@ import {
   faRectangleList,
   faImages
 } from '@fortawesome/free-solid-svg-icons';
-import {
-  faStar
-} from '@fortawesome/free-regular-svg-icons';
 
 {/* <hr className='my-2 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-50 dark:opacity-100' /> */}
 
@@ -29,7 +26,7 @@ export default function NavigatorFeature() {
     <div className='custom-background-2 flex basis-full flex-col'>
       <div className='pb-2 lg:m-full grid h-fit flex-initial grow-0 '>
         {/**Title */}
-        <h1 className='m-2 place-self-center border-b-2 px-2 text-xl font-semibold text-deep-blue lg:m-1 lg:text-2xl'>
+        <h1 className='m-2 place-self-center border-b-2 px-2 text-xl font-semibold text-slate-700 lg:m-1 lg:text-3xl'>
           Features
         </h1>
         {/**Tabs */}
@@ -37,9 +34,8 @@ export default function NavigatorFeature() {
           <div className='custom-feature-bar-tabs mr-1 row-span-1 col-start-2 col-end-2 lg:col-start-2 lg:col-end-4'>
             <Link
               href='/glossary'
-              className='text-base truncate ml-1 border-b border-transparent hover:text-gray-400'>
-              <FontAwesomeIcon icon={faStar} size='sm' color={'#F5BE49'} className=''/>
-              <span className='ml-1'>Public Glossary</span>
+              className='truncate ml-1 border-b border-transparent hover:text-gray-400'>
+              <span className='ml-1 text-lg hover:italic'>Public Glossary</span>
               <p className='text-sm text-sn-light'>Try It Out</p>
             </Link>
             
