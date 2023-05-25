@@ -12,9 +12,18 @@ export default function AccountMenu() {
         <div className="">
             <div className="ng-blue-100 py-4 my-4 mx-8 flex flex-col place-items-center text-slate-700 text-center border rounded-lg bg-gray-100">
                 <h1 className="text-xl text-blue-500 w-full border-b border-slate-300 pb-2">Account Menu</h1>
-                <div className="divide-y-2 ">
+                 
+                <div className="divide-y mx-4">
+                    <ul className="text-xl">
+                        <ol className='flex flex-row px-2 py-1 justify-center text-blue-300 hover:text-gray-500' >
+                            <Link href=''>Login</Link>
+                        </ol>
+                        <ol className='flex flex-row px-2 pb-1 justify-center text-blue-300 hover:text-gray-500' >
+                            <Link href=''>Logout</Link>
+                        </ol>
+                    </ul>
                     <ul>
-                        <ol className='flex flex-row p-2 justify-center'>
+                        <ol className='flex flex-row p-2 justify-center hover:text-blue-300'>
                             <button className='flex flex-row mx-1'>
                                 <Link
                                     href=''
@@ -25,7 +34,7 @@ export default function AccountMenu() {
                                 </Link>
                             </button>
                         </ol>
-                        <ol className='flex flex-row p-2 justify-center'>
+                        <ol className='flex flex-row p-2 justify-center hover:text-blue-300'>
                             <button className='flex flex-row mx-1'>
                                 <Link
                                     href=''
@@ -36,7 +45,7 @@ export default function AccountMenu() {
                                 </Link>
                             </button>
                         </ol>
-                        <ol className='flex flex-row p-2 justify-center'>
+                        <ol className='flex flex-row p-2 justify-center hover:text-blue-300'>
                             <button className='flex flex-row mx-1'>
                                 <Link
                                     href=''
@@ -47,7 +56,7 @@ export default function AccountMenu() {
                                 </Link>
                             </button>
                         </ol>
-                        <ol className='flex flex-row p-2 justify-center'>
+                        <ol className='flex flex-row p-2 justify-center hover:text-blue-300'>
                             <button className='flex flex-row mx-1'>
                                 <Link
                                     href=''
