@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ['latin'] });
 export default function Glossary() {
   return (
     <div
-      className={`flex h-screen min-h-screen w-fit grow flex-col bg-slate-100 ${inter.className} bg-no-repeat`}
+      className={`flex h-screen min-h-screen w-full grow flex-col bg-slate-100 ${inter.className} bg-no-repeat`}
     >
       {/**Navbar component */}
       <NavBar />
