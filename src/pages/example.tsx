@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google';
 import Menu from '@/components/dashboard/menu/ListMenu';
 import Terms from '@/components/dashboard/terms/ListTerms';
 import dynamic from 'next/dynamic';
+import Footer from '@/components/Footer';
 const NavBar = dynamic(import('../components/NavigatorSitePublic'), {
   ssr: false,
 });
@@ -25,6 +26,7 @@ export default function Example() {
           <Terms />
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }
