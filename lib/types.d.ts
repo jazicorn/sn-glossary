@@ -3,9 +3,10 @@ export interface GlossaryContextType {
   id: string;
   name: string;
   def: string;
-  ref: string | null;
-  product: string | null;
-  tags: string[] | null;
+  ver?: string;
+  ref?: string;
+  product?: string;
+  tags?: string[];
 }
 
 // list interface
