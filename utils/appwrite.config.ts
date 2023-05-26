@@ -11,6 +11,6 @@ export const client = new Appwrite()
     .setEndpoint(Server.endpoint)
     .setProject(Server.project);
 
-const database = new Databases(client);
+const databases = new Databases(client);
 
-export const appwrite = { database };
+export const appwrite = { databases };
