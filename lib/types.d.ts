@@ -11,7 +11,7 @@ export interface GlossaryContextType {
   id: string;
   name: string;
   def: string;
-  ver?: snRef;
+  ver?: string;
   ref?: string;
   product?: string;
   tags?: string[];
