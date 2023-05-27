@@ -1,6 +1,7 @@
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
+import { GlossaryProvider } from '@/context/contextGlossary';
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -10,5 +11,9 @@ export default function App({ Component, pageProps }: AppProps) {
     };
     use();
   }, []);
-  return <Component {...pageProps} />;
+  return (
+    <GlossaryProvider>
+      <Component {...pageProps} />
+    </GlossaryProvider>
+  );
 }
