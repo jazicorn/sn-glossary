@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import publicGlossary from '../../utils/dataExamplePublicGlossary';
+import publicGlossary from '../../utils/dataExPublicGlossary';
 import { GlossaryContextType } from '../../lib/types';
 
 //https://refine.dev/blog/usecontext-and-react-context/
