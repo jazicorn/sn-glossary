@@ -21,7 +21,7 @@ export interface GlossaryContextType {
 export interface ListType {
   id: number;
   name: string;
-  terms: GlossaryContextType[];
+  items?: GlossaryContextType[];
 }
 
 // user object interface
