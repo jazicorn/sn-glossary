@@ -1,13 +1,15 @@
 import TermNew from './ListTermsNew';
 import TermsAll from './ListTermsAll';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 //#TODO add verion of servienow word found | ex. Rome, San Diego, Tokyo, Utah | un-editable droptown list
 
 export default function ListOfTerms() {
   return (
     <div className='mx-5 mb-5 mt-1 h-fit w-auto rounded-xl border border-slate-400 bg-slate-700 pb-1 xl:my-5 xl:ml-2 xl:mr-5 xl:h-auto xl:grow'>
-      <h2 className='custom-list-term-nav m-2 rounded border-4 border-slate-100 bg-blue-100 text-xl'>
-        Example
+      <h2 className='custom-list-term-nav m-2 rounded border-4 border-slate-100 bg-blue-100 text-xl text-deep-blue'>
+        <FontAwesomeIcon icon={faStar} /><span className='px-2'>Favorites</span>
       </h2>
       {/***************** */}
       {/**Create New Term */}
