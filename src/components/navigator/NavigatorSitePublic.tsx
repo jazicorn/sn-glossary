@@ -9,8 +9,7 @@ import {
   faCircleUser,
   faChalkboard,
   faBook,
-  faAnglesUp,
-  faAnglesDown,
+  faGifts,
 } from '@fortawesome/free-solid-svg-icons';
 import { faSun } from '@fortawesome/free-regular-svg-icons';
 import NavigatorSitePublicMenu from './NavigatorSitePublicMenu';
@@ -46,21 +45,24 @@ export default function NavigatorSitePublic() {
         <nav className='z-3 relative flex h-[42px] w-full flex-row justify-between px-4'>
           <div className='z-4 divide-x-{12px} relative flex min-h-[34px] w-1/3 min-w-[34px] flex-row place-items-center justify-start divide-x divide-deep-blue'>
             <div className='pr-2'>
-              <button
+              
+                {!Menu ? (
+                  <button
                 onClick={() => menuClick()}
                 className='items-center py-5 pl-2 text-deep-blue hover:text-slate-500 xl:hidden'
-              >
-                {!Menu ? (
-                  <FontAwesomeIcon icon={faBars} color='' size='xl' />
+              ><FontAwesomeIcon icon={faBars} color='' size='xl' /></button>
                 ) : (
-                  <FontAwesomeIcon
+                  <button
+                onClick={() => menuClick()}
+                className='items-center py-5 pl-2 text-deep-blue hover:text-slate-500 xl:hidden'
+              ><FontAwesomeIcon
                     icon={faBars}
                     color=''
                     size='xl'
                     rotation={90}
-                  />
+                  /></button>
                 )}
-              </button>
+              
               {/**<!-- logo -->*/}
               <Link
                 href='/'
@@ -94,32 +96,37 @@ export default function NavigatorSitePublic() {
               </div>
               {/**<!-- Features--> */}
               <div className='no-wrap flex min-w-[66px] flex-row'>
-                <button className='mx-1 flex flex-col' onClick={moreMenuClick}>
+                
                   {!moreMenu ? (
-                    <button className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center tracking-tighter hover:text-blue-300'>
+                    <button onClick={moreMenuClick} className='mx-1 flex flex-row text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center hover:text-blue-300'>
                       <FontAwesomeIcon
-                        icon={faAnglesDown}
+                        icon={faGifts}
                         size='sm'
-                        className='w-[18px]'
+                        className='w-[18px] pt-1'
                       />
                       <span className='px-0.5'>More</span>
                     </button>
                   ) : (
                     <div className='flex flex-col'>
-                      <button className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center tracking-tighter hover:text-blue-300'>
-                        <FontAwesomeIcon
-                          icon={faAnglesUp}
+                    
+                      <button onClick={moreMenuClick} className='text-blue-300 mx-1 flex flex-col text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center hover:text-blue-300'>
+                        <span className='flex flex-row'>
+                          <FontAwesomeIcon
+                          icon={faGifts}
                           size='sm'
-                          className='w-[18px]'
+                          className='w-[18px] pt-1 '
                         />
                         <span className='px-0.5'>More</span>
+                        </span>
+                        
                       </button>
                       <div className=''>
                         <MoreMenu />
                       </div>
-                    </div>
+                  </div>
+                    
                   )}
-                </button>
+                
               </div>
             </div>
             <div className='hidden flex-row pr-2 hover:text-blue-300  xl:flex'>
@@ -127,7 +134,8 @@ export default function NavigatorSitePublic() {
               <div className='no-wrap flex flex-row'>
                 <button className='mx-1 flex flex-row'>
                   <Link
-                    href=''
+                    href='dashboard'
+                    target='_blank'
                     className='text-grey-900 hover:text-grey-300 flex h-fit w-auto flex-row place-self-center truncate px-0.5 py-0 text-center tracking-tighter'
                   >
                     <FontAwesomeIcon
@@ -172,11 +180,11 @@ export default function NavigatorSitePublic() {
             {/**<!-- ServiceNow External Link --> */}
             <div className='flex flex-row pr-2'>
               <div className='no-wrap flex flex-row'>
-                <button className='mx-1 flex flex-row'>
+                <button className='mx-1 flex flex-row hover:text-blue-300'>
                   <a
                     href='https://docs.servicenow.com/'
                     target='_blank'
-                    className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center text-sn-light'
+                    className='text-grey-900 hover:text-blue-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center text-sn-light'
                   >
                     ServiceNow
                   </a>
@@ -191,44 +199,12 @@ export default function NavigatorSitePublic() {
             {/**<!-- SN-GLossary External Links --> */}
             <div className=' flex flex-row'>
               <div className=' flex flex-row '>
-                {/**<!-- FAQ--> */}
-                <div className='no-wrap flex flex-row'>
-                  <button className='mx-1 flex flex-row'>
-                    <Link
-                      href=''
-                      className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center tracking-tighter'
-                    >
-                      F.A.Q
-                    </Link>
-                    <FontAwesomeIcon
-                      icon={faArrowUpRightFromSquare}
-                      color=''
-                      size='2xs'
-                    />
-                  </button>
-                </div>
-                {/**<!-- Docs--> */}
-                <div className='no-wrap flex flex-row'>
-                  <button className='mx-1 flex flex-row'>
-                    <Link
-                      href=''
-                      className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center'
-                    >
-                      Docs
-                    </Link>
-                    <FontAwesomeIcon
-                      icon={faArrowUpRightFromSquare}
-                      color=''
-                      size='2xs'
-                    />
-                  </button>
-                </div>
                 {/**<!-- Support --> */}
-                <div>
-                  <button className='mx-1 flex flex-row'>
+                <div className='no-wrap flex flex-row'>
+                  <button className='mx-1 flex flex-row hover:text-blue-300'>
                     <Link
                       href=''
-                      className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center'
+                      className='text-grey-900 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center'
                     >
                       Support
                     </Link>
@@ -239,8 +215,24 @@ export default function NavigatorSitePublic() {
                     />
                   </button>
                 </div>
+                {/**<!-- Developer--> */}
+                <div className='no-wrap flex flex-row'>
+                  <button className='mx-1 flex flex-row hover:text-blue-300'>
+                    <Link
+                      href=''
+                      className='text-grey-900 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center'
+                    >
+                      Developer
+                    </Link>
+                    <FontAwesomeIcon
+                      icon={faArrowUpRightFromSquare}
+                      color=''
+                      size='2xs'
+                    />
+                  </button>
+                </div>
                 {/**<!-- Github --> */}
-                <div className=' flex flex-row pl-1 pr-2'>
+                <div className=' flex flex-row pl-1 pr-2 hover:text-blue-300'>
                   <a
                     href='https://github.com/jazicorn/sn-glossary'
                     target='_blank'
@@ -265,13 +257,13 @@ export default function NavigatorSitePublic() {
             <div className='flex flex-row px-2'>
               <Link
                 href=''
-                className='text-grey-900 hover:text-grey-300 mx-1 h-fit w-16 place-self-center rounded-md border border-blue-300 p-0 text-center text-sm transition duration-300 hover:border-blue-400'
+                className='text-grey-900 hover:text-blue-300 hover:bg-deep-blue mx-1 h-fit w-16 place-self-center rounded-md border border-blue-300 p-0 text-center text-sm transition duration-300 hover:border-blue-400'
               >
                 Signup
               </Link>
               <Link
                 href=''
-                className='text-grey-900 hover:text-grey-300 ml-1 h-fit w-16 place-self-center rounded-md border border-blue-300 p-0 text-center text-sm transition duration-300 hover:border-blue-400'
+                className='text-grey-900 hover:text-blue-300 hover:bg-deep-blue ml-1 h-fit w-16 place-self-center rounded-md border border-blue-300 p-0 text-center text-sm transition duration-300 hover:border-blue-400'
               >
                 Login
               </Link>

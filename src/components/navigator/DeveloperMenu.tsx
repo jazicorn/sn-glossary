@@ -4,8 +4,6 @@ import {
   faMapLocationDot,
   faHandshakeAngle,
   faStar,
-  faLightbulb,
-  faFileLines
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function MoreMenu() {
@@ -20,8 +18,8 @@ export default function MoreMenu() {
               href='/features'
               className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center tracking-tighter'
             >
-              <FontAwesomeIcon icon={faStar} size='sm' className='w-4' />
-              <span className='px-0.5'>Features</span>
+              <FontAwesomeIcon icon={faStar} size='sm' />
+              <span className='px-0.5'></span>
             </Link>
           </button>
         </div>
@@ -32,32 +30,8 @@ export default function MoreMenu() {
               href=''
               className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center'
             >
-              <FontAwesomeIcon icon={faMapLocationDot} size='sm' className='w-4'/>
+              <FontAwesomeIcon icon={faMapLocationDot} size='sm' />
               <span className='px-0.5'>Roadmap</span>
-            </Link>
-          </button>
-        </div>
-        {/**<!-- Documentation --> */}
-        <div className='no-wrap flex flex-row hover:text-blue-300'>
-          <button className='flex flex-row'>
-            <Link
-              href=''
-              className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center tracking-tighter'
-            >
-              <FontAwesomeIcon icon={faFileLines} size='sm' className='w-4'/>
-              <span className='px-0.5'>Documentation</span>
-            </Link>
-          </button>
-        </div>
-        {/**<!-- F.A.Q --> */}
-        <div className='no-wrap flex flex-row hover:text-blue-300'>
-          <button className='flex flex-row'>
-            <Link
-              href=''
-              className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center tracking-tighter'
-            >
-              <FontAwesomeIcon icon={faLightbulb} size='sm' className='w-4'/>
-              <span className='px-0.5'>F.A.Q</span>
             </Link>
           </button>
         </div>
@@ -68,7 +42,7 @@ export default function MoreMenu() {
               href=''
               className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center tracking-tighter'
             >
-              <FontAwesomeIcon icon={faHandshakeAngle} size='sm' className='w-4'/>
+              <FontAwesomeIcon icon={faHandshakeAngle} size='sm' />
               <span className='px-0.5'>Helpful Links</span>
             </Link>
           </button>
