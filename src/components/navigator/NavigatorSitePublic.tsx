@@ -11,6 +11,7 @@ import {
   faBook,
   faAnglesUp,
   faAnglesDown,
+  faGifts,
 } from '@fortawesome/free-solid-svg-icons';
 import { faSun } from '@fortawesome/free-regular-svg-icons';
 import NavigatorSitePublicMenu from './NavigatorSitePublicMenu';
@@ -99,9 +100,9 @@ export default function NavigatorSitePublic() {
               <div className='no-wrap flex min-w-[66px] flex-row'>
                 
                   {!moreMenu ? (
-                    <button onClick={moreMenuClick} className='mx-1 flex flex-row text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center tracking-tighter hover:text-blue-300'>
+                    <button onClick={moreMenuClick} className='mx-1 flex flex-row text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center hover:text-blue-300'>
                       <FontAwesomeIcon
-                        icon={faAnglesDown}
+                        icon={faGifts}
                         size='sm'
                         className='w-[18px] pt-1'
                       />
@@ -110,12 +111,12 @@ export default function NavigatorSitePublic() {
                   ) : (
                     <div className='flex flex-col'>
                     
-                      <button onClick={moreMenuClick} className='mx-1 flex flex-col text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center tracking-tighter hover:text-blue-300'>
+                      <button onClick={moreMenuClick} className='text-blue-300 mx-1 flex flex-col text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center hover:text-blue-300'>
                         <span className='flex flex-row'>
                           <FontAwesomeIcon
-                          icon={faAnglesUp}
+                          icon={faGifts}
                           size='sm'
-                          className='w-[18px] pt-1'
+                          className='w-[18px] pt-1 '
                         />
                         <span className='px-0.5'>More</span>
                         </span>
@@ -199,38 +200,6 @@ export default function NavigatorSitePublic() {
             {/**<!-- SN-GLossary External Links --> */}
             <div className=' flex flex-row'>
               <div className=' flex flex-row '>
-                {/**<!-- FAQ--> */}
-                <div className='no-wrap flex flex-row'>
-                  <button className='mx-1 flex flex-row'>
-                    <Link
-                      href=''
-                      className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center tracking-tighter'
-                    >
-                      F.A.Q
-                    </Link>
-                    <FontAwesomeIcon
-                      icon={faArrowUpRightFromSquare}
-                      color=''
-                      size='2xs'
-                    />
-                  </button>
-                </div>
-                {/**<!-- Docs--> */}
-                <div className='no-wrap flex flex-row'>
-                  <button className='mx-1 flex flex-row'>
-                    <Link
-                      href=''
-                      className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center'
-                    >
-                      Docs
-                    </Link>
-                    <FontAwesomeIcon
-                      icon={faArrowUpRightFromSquare}
-                      color=''
-                      size='2xs'
-                    />
-                  </button>
-                </div>
                 {/**<!-- Support --> */}
                 <div>
                   <button className='mx-1 flex flex-row'>
@@ -239,6 +208,22 @@ export default function NavigatorSitePublic() {
                       className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center'
                     >
                       Support
+                    </Link>
+                    <FontAwesomeIcon
+                      icon={faArrowUpRightFromSquare}
+                      color=''
+                      size='2xs'
+                    />
+                  </button>
+                </div>
+                {/**<!-- Developer--> */}
+                <div className='no-wrap flex flex-row'>
+                  <button className='mx-1 flex flex-row'>
+                    <Link
+                      href=''
+                      className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center'
+                    >
+                      Developer
                     </Link>
                     <FontAwesomeIcon
                       icon={faArrowUpRightFromSquare}
