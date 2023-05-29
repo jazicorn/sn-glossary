@@ -52,7 +52,7 @@ export default function NavigatorSitePublic() {
                   <button
                 onClick={() => menuClick()}
                 className='items-center py-5 pl-2 text-deep-blue hover:text-slate-500 xl:hidden'
-              ><FontAwesomeIcon icon={faBars} color='' size='xl' />/</button>
+              ><FontAwesomeIcon icon={faBars} color='' size='xl' /></button>
                 ) : (
                   <button
                 onClick={() => menuClick()}
