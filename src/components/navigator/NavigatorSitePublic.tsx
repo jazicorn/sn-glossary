@@ -46,21 +46,24 @@ export default function NavigatorSitePublic() {
         <nav className='z-3 relative flex h-[42px] w-full flex-row justify-between px-4'>
           <div className='z-4 divide-x-{12px} relative flex min-h-[34px] w-1/3 min-w-[34px] flex-row place-items-center justify-start divide-x divide-deep-blue'>
             <div className='pr-2'>
-              <button
+              
+                {!Menu ? (
+                  <button
                 onClick={() => menuClick()}
                 className='items-center py-5 pl-2 text-deep-blue hover:text-slate-500 xl:hidden'
-              >
-                {!Menu ? (
-                  <FontAwesomeIcon icon={faBars} color='' size='xl' />
+              ><FontAwesomeIcon icon={faBars} color='' size='xl' />/</button>
                 ) : (
-                  <FontAwesomeIcon
+                  <button
+                onClick={() => menuClick()}
+                className='items-center py-5 pl-2 text-deep-blue hover:text-slate-500 xl:hidden'
+              ><FontAwesomeIcon
                     icon={faBars}
                     color=''
                     size='xl'
                     rotation={90}
-                  />
+                  /></button>
                 )}
-              </button>
+              
               {/**<!-- logo -->*/}
               <Link
                 href='/'
@@ -94,32 +97,37 @@ export default function NavigatorSitePublic() {
               </div>
               {/**<!-- Features--> */}
               <div className='no-wrap flex min-w-[66px] flex-row'>
-                <button className='mx-1 flex flex-col' onClick={moreMenuClick}>
+                
                   {!moreMenu ? (
-                    <button className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center tracking-tighter hover:text-blue-300'>
+                    <button onClick={moreMenuClick} className='mx-1 flex flex-row text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center tracking-tighter hover:text-blue-300'>
                       <FontAwesomeIcon
                         icon={faAnglesDown}
                         size='sm'
-                        className='w-[18px]'
+                        className='w-[18px] pt-1'
                       />
                       <span className='px-0.5'>More</span>
                     </button>
                   ) : (
                     <div className='flex flex-col'>
-                      <button className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center tracking-tighter hover:text-blue-300'>
-                        <FontAwesomeIcon
+                    
+                      <button onClick={moreMenuClick} className='mx-1 flex flex-col text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center tracking-tighter hover:text-blue-300'>
+                        <span className='flex flex-row'>
+                          <FontAwesomeIcon
                           icon={faAnglesUp}
                           size='sm'
-                          className='w-[18px]'
+                          className='w-[18px] pt-1'
                         />
                         <span className='px-0.5'>More</span>
+                        </span>
+                        
                       </button>
                       <div className=''>
                         <MoreMenu />
                       </div>
-                    </div>
+                  </div>
+                    
                   )}
-                </button>
+                
               </div>
             </div>
             <div className='hidden flex-row pr-2 hover:text-blue-300  xl:flex'>
