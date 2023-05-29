@@ -9,8 +9,6 @@ import {
   faCircleUser,
   faChalkboard,
   faBook,
-  faAnglesUp,
-  faAnglesDown,
   faGifts,
 } from '@fortawesome/free-solid-svg-icons';
 import { faSun } from '@fortawesome/free-regular-svg-icons';
@@ -136,7 +134,8 @@ export default function NavigatorSitePublic() {
               <div className='no-wrap flex flex-row'>
                 <button className='mx-1 flex flex-row'>
                   <Link
-                    href=''
+                    href='dashboard'
+                    target='_blank'
                     className='text-grey-900 hover:text-grey-300 flex h-fit w-auto flex-row place-self-center truncate px-0.5 py-0 text-center tracking-tighter'
                   >
                     <FontAwesomeIcon
@@ -181,11 +180,11 @@ export default function NavigatorSitePublic() {
             {/**<!-- ServiceNow External Link --> */}
             <div className='flex flex-row pr-2'>
               <div className='no-wrap flex flex-row'>
-                <button className='mx-1 flex flex-row'>
+                <button className='mx-1 flex flex-row hover:text-blue-300'>
                   <a
                     href='https://docs.servicenow.com/'
                     target='_blank'
-                    className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center text-sn-light'
+                    className='text-grey-900 hover:text-blue-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center text-sn-light'
                   >
                     ServiceNow
                   </a>
@@ -201,11 +200,11 @@ export default function NavigatorSitePublic() {
             <div className=' flex flex-row'>
               <div className=' flex flex-row '>
                 {/**<!-- Support --> */}
-                <div>
-                  <button className='mx-1 flex flex-row'>
+                <div className='no-wrap flex flex-row'>
+                  <button className='mx-1 flex flex-row hover:text-blue-300'>
                     <Link
                       href=''
-                      className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center'
+                      className='text-grey-900 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center'
                     >
                       Support
                     </Link>
@@ -218,10 +217,10 @@ export default function NavigatorSitePublic() {
                 </div>
                 {/**<!-- Developer--> */}
                 <div className='no-wrap flex flex-row'>
-                  <button className='mx-1 flex flex-row'>
+                  <button className='mx-1 flex flex-row hover:text-blue-300'>
                     <Link
                       href=''
-                      className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center'
+                      className='text-grey-900 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center'
                     >
                       Developer
                     </Link>
@@ -233,7 +232,7 @@ export default function NavigatorSitePublic() {
                   </button>
                 </div>
                 {/**<!-- Github --> */}
-                <div className=' flex flex-row pl-1 pr-2'>
+                <div className=' flex flex-row pl-1 pr-2 hover:text-blue-300'>
                   <a
                     href='https://github.com/jazicorn/sn-glossary'
                     target='_blank'
@@ -258,13 +257,13 @@ export default function NavigatorSitePublic() {
             <div className='flex flex-row px-2'>
               <Link
                 href=''
-                className='text-grey-900 hover:text-grey-300 mx-1 h-fit w-16 place-self-center rounded-md border border-blue-300 p-0 text-center text-sm transition duration-300 hover:border-blue-400'
+                className='text-grey-900 hover:text-blue-300 hover:bg-deep-blue mx-1 h-fit w-16 place-self-center rounded-md border border-blue-300 p-0 text-center text-sm transition duration-300 hover:border-blue-400'
               >
                 Signup
               </Link>
               <Link
                 href=''
-                className='text-grey-900 hover:text-grey-300 ml-1 h-fit w-16 place-self-center rounded-md border border-blue-300 p-0 text-center text-sm transition duration-300 hover:border-blue-400'
+                className='text-grey-900 hover:text-blue-300 hover:bg-deep-blue ml-1 h-fit w-16 place-self-center rounded-md border border-blue-300 p-0 text-center text-sm transition duration-300 hover:border-blue-400'
               >
                 Login
               </Link>
