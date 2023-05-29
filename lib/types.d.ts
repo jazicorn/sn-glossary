@@ -9,6 +9,7 @@ export const enum snRef {
 // array of glossary entries interface
 export interface GlossaryContextType {
   id: string;
+  favorite: boolean;
   name: string;
   def: string;
   ver?: string;
