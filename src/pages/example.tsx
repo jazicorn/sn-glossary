@@ -3,7 +3,7 @@ import Menu from '@/components/dashboard/menu/ListMenu';
 import Terms from '@/components/dashboard/terms/ListTerms';
 import dynamic from 'next/dynamic';
 import Footer from '@/components/Footer';
-const NavBar = dynamic(import('../components/NavigatorSitePublic'), {
+const NavBar = dynamic(import('../components/navigator/NavigatorSitePublic'), {
   ssr: false,
 });
 

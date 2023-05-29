@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-const NavBar = dynamic(import('../components/NavigatorSitePublic'), {
+const NavBar = dynamic(import('../components/navigator/NavigatorSitePublic'), {
   ssr: false,
 });
 

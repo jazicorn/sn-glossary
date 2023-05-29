@@ -4,7 +4,7 @@ import { invoke } from '@tauri-apps/api/tauri';
 import { useEffect } from 'react';
 import Footer from '../components/Footer';
 import LandingPage from '@/components/LandingPage';
-const NavBar = dynamic(import('../components/NavigatorSitePublic'), {
+const NavBar = dynamic(import('../components/navigator/NavigatorSitePublic'), {
   ssr: false,
 });
 
