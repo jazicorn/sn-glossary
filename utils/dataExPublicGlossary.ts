@@ -1,16 +1,18 @@
-export const publicGlossary = [
+const publicGlossary = [
   {
-    id: '001',
+    id: 'ss639QH-s7',
     name: 'Asset Management',
     def: 'The ServiceNow® Asset Management application integrates the physical, technological, contractual, and financial aspects of information technology assets.',
+    ver: 'Utah',
     ref: 'docs.servicenow.com/bundle/utah-it-service-management/page/product/asset-management/concept/c_AssetManagement.html',
-    product: 'ITSM',
+    product: 'IT Service Management [ITSM]',
     tags: ['Asset Management', 'ITSM', 'ITAM'],
   },
   {
-    id: '002',
+    id: 'vvPmUwhXEz',
     name: 'Product Catalog',
     def: 'The product catalog is a set of information about individual models. Models are specific versions or various configurations of an asset. Asset managers use the product catalog as a centralized repository for model information.',
+    ver: 'Utah',
     ref: 'docs.servicenow.com/bundle/utah-it-asset-management/page/product/product-catalog/concept/c_ProductCatalog.html',
     product: 'Product Catalog',
     tags: [
@@ -23,11 +25,14 @@ export const publicGlossary = [
     ],
   },
   {
-    id: '003',
+    id: 'NQWH-lojbF',
     name: 'Models',
     def: 'Models are specific versions or various configurations of an asset. Models are used for managing and tracking assets through various ServiceNow platform asset applications, including Product Catalog, Asset Management, and Procurement.',
+    ver: 'Utah',
     ref: 'docs.servicenow.com/bundle/utah-it-asset-management/page/product/product-catalog/concept/c_Models.html',
     product: 'Product Catalog',
-    tags: ['Product Catalog', 'Asset Management', 'Procurement'],
+    tags: ['Models','Product Catalog', 'Asset Management', 'Procurement'],
   },
 ];
+
+export default publicGlossary;

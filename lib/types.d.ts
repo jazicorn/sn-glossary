@@ -1,18 +1,28 @@
+// enum for ServiceNow ver
+export const enum snRef {
+  Utah,
+  Tokyo,
+  SanDiego,
+  Rome
+}
+
 // array of glossary entries interface
 export interface GlossaryContextType {
   id: string;
+  favorite: boolean;
   name: string;
   def: string;
-  ref: string | null;
-  product: string | null;
-  tags: string[] | null;
+  ver?: string;
+  ref?: string;
+  product?: string;
+  tags?: string[];
 }
 
 // list interface
 export interface ListType {
   id: number;
   name: string;
-  terms: GlossaryContextType[];
+  items?: GlossaryContextType[];
 }
 
 // user object interface

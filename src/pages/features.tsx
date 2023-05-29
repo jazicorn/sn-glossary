@@ -2,7 +2,7 @@ import { Inter } from 'next/font/google';
 // import React, { Dispatch, ReactNode, SetStateAction, createContext, useContext, useState } from "react"
 import dynamic from 'next/dynamic';
 import Footer from '../components/Footer';
-const NavBar = dynamic(import('../components/NavigatorSitePublic'), {
+const NavBar = dynamic(import('../components/navigator/NavigatorSitePublic'), {
   ssr: false,
 });
 const CallToAction = dynamic(import('../components/CallToAction'), {

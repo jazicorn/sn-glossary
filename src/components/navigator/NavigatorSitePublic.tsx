@@ -10,7 +10,6 @@ import {
   faChalkboard,
   faBook,
   faAnglesUp,
-  faAnglesRight,
   faAnglesDown,
 } from '@fortawesome/free-solid-svg-icons';
 import { faSun } from '@fortawesome/free-regular-svg-icons';

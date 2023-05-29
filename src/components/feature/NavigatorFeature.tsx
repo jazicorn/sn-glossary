@@ -77,7 +77,7 @@ export default function NavigatorFeature() {
             {showMoreFeatures && (
               <div className='flex w-auto flex-col place-content-center place-items-center lg:flex-row lg:pt-2'>
                 <div className='mx-2 mb-4 w-auto truncate text-sm lg:mb-2 '>
-                  <button className='flex flex-col px-1'>
+                  <button className='flex flex-col place-items-center truncate px-1'>
                     <FontAwesomeIcon
                       icon={faRectangleList}
                       size='lg'
@@ -97,7 +97,7 @@ export default function NavigatorFeature() {
                   <p className='text-xs italic text-rose-400'>*Coming Soon*</p>
                 </div>
                 <div className='mx-2 mb-4 w-auto truncate text-sm lg:mb-2'>
-                  <button className='flex flex-col px-1'>
+                  <button className='flex flex-col place-items-center truncate px-1 '>
                     <FontAwesomeIcon
                       icon={faImages}
                       size='lg'
@@ -117,12 +117,12 @@ export default function NavigatorFeature() {
                   <p className='text-xs italic text-rose-400'>*Coming Soon*</p>
                 </div>
                 <div className='mx-2 mb-4 w-auto truncate text-sm lg:mb-2'>
-                  <button className='flex flex-col truncate px-1'>
+                  <button className='flex flex-col place-items-center truncate px-1'>
                     <FontAwesomeIcon
                       icon={faDesktop}
                       size='lg'
                       color={'#334155'}
-                      className='mb-1 mr-1'
+                      className='mb-1 mr-1 content-self-center'
                     />
                     <span className=''>
                       <span className='mx-1'>Desktop Support</span>

@@ -3,6 +3,7 @@ import Menu from '@/components/dashboard/menu/ListMenu';
 import Terms from '@/components/dashboard/terms/ListTerms';
 import dynamic from 'next/dynamic';
 import Footer from '@/components/Footer';
+import { DashboardProvider } from '@/context/contextDashboard';
 const NavBar = dynamic(import('../components/navigator/NavigatorSitePublic'), {
   ssr: false,
 });
@@ -16,16 +17,19 @@ export default function Example() {
       className={`flex h-screen min-h-screen w-screen flex-col bg-slate-100 xl:grow ${inter.className} bg-no-repeat `}
     >
       {/**<!-- navbar -->*/}
-      <NavBar/>
-      {/**<!-- content goes here --> */}
-      <div className='flex grow flex-row bg-white bg-gradient-to-r from-gray-100 to-blue-100 text-center'>
-        <div className='flex grow flex-col rounded-xl xl:flex xl:flex-row'>
-          {/**List Menu */}
-          <Menu />
-          {/**Terms */}
-          <Terms />
+      <NavBar />
+      <DashboardProvider>
+        {/**<!-- content goes here --> */}
+        <div className='flex grow flex-row bg-white bg-gradient-to-r from-gray-100 to-blue-100 text-center'>
+          <div className='flex grow flex-col rounded-xl xl:flex xl:flex-row'>
+            {/**List Menu */}
+            <Menu />
+            {/**Terms */}
+            <Terms />
+          </div>
         </div>
-      </div>
+      </DashboardProvider>
+      
       <Footer/>
     </div>
   );
