@@ -1,5 +1,5 @@
-import TermNew from './ListTermsNew';
-import TermsAll from './ListTermsAll';
+import TermNew from './terms/TermNew';
+import TermsAll from './terms/Term';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
