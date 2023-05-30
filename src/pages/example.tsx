@@ -1,5 +1,5 @@
 import { Inter } from 'next/font/google';
-import Menu from '@/components/dashboard/menu/ListMenu';
+import Menu from '@/components/dashboard/ListMenu';
 import Terms from '@/components/dashboard/terms/ListTerms';
 import dynamic from 'next/dynamic';
 import Footer from '@/components/Footer';
