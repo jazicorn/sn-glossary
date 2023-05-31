@@ -74,7 +74,7 @@ export default function ListMenu() {
               </div>
               <hr className='my-2 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-50 dark:opacity-100' />
               <div className='mx-2 my-1 rounded border-4 bg-violet-100'>
-                <button className='text-l hover:italic text-deep-blue inline-block h-full w-full from-violet-100 to-blue-200 hover:bg-gradient-to-r '>
+                <button onClick={() => setMenuItem('Favorites')} className='text-l hover:italic text-deep-blue inline-block h-full w-full from-violet-100 to-blue-200 hover:bg-gradient-to-r '>
                   <FontAwesomeIcon icon={faStar} /><span className='px-2'>Favorites</span>
                 </button>
               </div>
@@ -125,14 +125,14 @@ export default function ListMenu() {
                   
                   <hr className='my-2 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-50 dark:opacity-100' />
                   <div className='mx-2 my-1 rounded border-4 bg-violet-100'>
-                    <button className='text-l hover:italic text-deep-blue inline-block h-full w-full from-violet-100 to-blue-200 hover:bg-gradient-to-r '>
+                    <button onClick={() => setMenuItem('Favorites')} className='text-l hover:italic text-deep-blue inline-block h-full w-full from-violet-100 to-blue-200 hover:bg-gradient-to-r '>
                       <FontAwesomeIcon icon={faStar} /><span className='px-2'>Favorites</span>
                     </button>
                   </div>
                   <ul className='text-l flex flex-col'>
                     {menu?.map((list: string) => (
                       <li  key='key' className='mx-2 my-1 rounded border-4 bg-gray-100'>
-                        <button key={list} onClick={(e) => setMenuItem} className='inline-block h-full w-full from-violet-100 to-blue-200 text-slate-500 hover:bg-gradient-to-r hover:italic hover:text-slate-700 '>
+                        <button key={list} onClick={() => setMenuItem(list)} className='inline-block h-full w-full from-violet-100 to-blue-200 text-slate-500 hover:bg-gradient-to-r hover:italic hover:text-slate-700 '>
                           {list}
                         </button>
                       </li>
