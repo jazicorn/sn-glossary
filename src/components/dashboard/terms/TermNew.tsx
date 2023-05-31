@@ -1,8 +1,24 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+//import { useForm } from 'react-hook-form';
+import { useDashboard } from '@/context/contextDashboard';
+import { nanoid } from 'nanoid'
+// nanoid(10) //=> "IRFa-VaY2b"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronCircleUp, faCircleChevronDown, faXmark } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCircleChevronDown,
+  faChevronCircleUp,
+  faXmark,
+  faStar,
+  faSquareXmark
+} from '@fortawesome/free-solid-svg-icons';
+import {faSquareCheck, faStar as faStarOutline} from '@fortawesome/free-regular-svg-icons'
 
-export default function ListTermsNew() {
+//react inline styling | to change border on edit
+//https://www.pluralsight.com/guides/inline-styling-with-react
+
+const TermNew: React.FC = () => {
+  const { state } = useDashboard();
+  const getListName = state.getMenuItem;
   const [showMore, setShowMore] = useState(false);
   function handleMoreClick() {
     setShowMore(!showMore);
@@ -33,10 +49,80 @@ export default function ListTermsNew() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function handleSubmit(e: any) {
     e.preventDefault();
-
     setNewTerm(newTerm);
   }
-  const term_id = '123456789';
+
+  {/**<!-- Edit Text-> */ }
+  const [editName, setEditName] = useState('');
+  const [editDef, setEditDef] = useState('');
+  const [editProduct, setEditProduct] = useState('');
+  const [editRef, setEditRef] = useState('');
+  const [editVer, setEditVer] = useState('Utah');
+  // Make default fav true if Favorite List
+  function isListFav(termName:string) {
+    if (termName === 'Favorites') {
+      return true
+    }
+    return false
+  };
+  const defaultFav = isListFav(getListName);
+  const [editFav, setEditFav] = useState(defaultFav);
+  
+  const handleEditName = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+    setEditName(e.target.value)
+  }
+  const handleEditDef = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+    setEditDef(e.target.value)
+  }
+  const handleEditProduct = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+    setEditProduct(e.target.value)
+  }
+  const handleEditRef = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+    setEditRef(e.target.value)
+  }
+  const handleEditVer = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+    setEditVer(e.target.value)
+  }
+  const handleEditFav = () => {
+    if (defaultFav) {
+      return
+    }
+    setEditFav(!editFav);
+  }
+
+  // generate new nano id & collision check for id
+  const nano = nanoid(10);
+  const collisionCheck = (nanoID: string) => {
+    let check = false;
+    const lists = state.lists
+    lists.forEach((list) => list?.items?.forEach((item) => {
+      if (item.id === nanoID) {
+        check = true;
+      }
+    }))
+    return check
+  }
+  const newTermId = (nanoID: string) => {
+    if (collisionCheck(nanoID)) {
+      const newNano = nanoid(10);
+      newTermId(newNano);
+    } else {
+      return nanoID;
+    }
+  }
+  
+  const newTermObj = {
+    id: newTermId(nano),
+    public: false,
+    favorite: editFav,
+    name: editName,
+    def: editDef,
+    version: editVer,
+    product: editProduct,
+    ref: editRef,
+    tags: tags
+  }
+
   return (
     <div>
       {/***************** */}
@@ -55,17 +141,25 @@ export default function ListTermsNew() {
             <div
               key='undefined'
               className='content-left flex grow flex-row rounded-l border border-r-0 border-gray-300 text-sm leading-tight tracking-tighter'
-            >
-              <input
-                key='name'
-                maxLength={25}
-                type='text'
-                name='term'
-                placeholder='Term'
-                className='w-[90px] p-0.5 rounded-l border-2 border-transparent border-r-slate-200 bg-slate-100  text-sm text-center focus:border focus:border-blue-100 focus:outline-none'
-              />
+              >
+                {/**Favorite */}
+                <button key='favoriteButton' onClick={handleEditFav} className='w-fit px-2 border-r border-gray-300 flex flex-col justify-center'>
+                  {editFav ? <FontAwesomeIcon icon={faStar} size='lg' className=''/> : <FontAwesomeIcon icon={faStarOutline} size='lg'/>}
+                </button>
+                <input
+                  value={editName}
+                  onChange={handleEditName}
+                  key='name'
+                  maxLength={25}
+                  type='text'
+                  name='term'
+                  placeholder='Term'
+                  className='w-[90px] p-0.5 rounded-l border-2 border-transparent border-r-slate-200 bg-green-100  text-sm text-center focus:border focus:border-blue-100 focus:outline-none'
+                />
               
                 <input
+                  value={editDef}
+                  onChange={handleEditDef}
                   key='def'
                   maxLength={300}
                   type='text'
@@ -127,8 +221,9 @@ export default function ListTermsNew() {
             <div className='custom-term-details mx-2 flex flex-col rounded bg-gray-200 p-1'>
               {/**Lines: Details*/}
               <div className='mt-1 flex flex-col items-baseline rounded px-1 xl:m-0 xl:flex xl:flex-row'>
+                
                 {/**ID*/}
-                <div className='w-full xl:w-fit mr-1 flex flex-row rounded bg-gray-100 xl:w-auto xl:grow'>
+                <div className='w-full xl:w-fit mr-1 flex flex-row rounded bg-gray-100 xl:w-auto'>
                   <label className='flex-none w-[90px] mb-1 ml-1 mt-1 pl-2 pr-1 rounded-l border-2 border-blue-300 bg-slate-200 text-sm text-right'>
                     ID:
                   </label>
@@ -136,33 +231,77 @@ export default function ListTermsNew() {
                     <div
                       key='id'
                       placeholder='123456789'
-                      className='h-6 w-full xl:w-[90px] justify-center pt-[3px] rounded-r border border-gray-300 bg-transparent p-0 pl-1 text-left text-xs focus:border-slate-400 focus:outline-none'>{ term_id}</div>
+                      className='h-6 w-full xl:w-[90px] justify-center pt-[3px] rounded-r border border-gray-300 bg-transparent p-0 pl-1 text-left text-xs focus:border-slate-400 focus:outline-none'>{newTermObj.id}</div>
                     
                   </div>
                 </div>
-                {/**Category */}
+                {/**Public */}
                 <div className='mr-1 mt-1 w-full xl:w-fit flex flex-row rounded bg-gray-100 xl:mt-0'>
                   <label className='flex-none mb-1 ml-1 mt-1 pl-2 pr-1 w-[90px] rounded-l border-2 border-slate-300 bg-slate-100 text-sm text-right'>
-                    Product:
+                    Public:
                   </label>
                   <div className='mr-1 mt-1 w-full xl:w-fit inline text-left text-xs'>
                     {/**For wrapping text have to use textarea */}
+                    <div className='h-6 w-[30px] pl-1.5 pt-0.5 justify-items-center rounded-r border-l-0 border border-gray-300 bg-transparent focus:border-slate-400 focus:outline-none'><FontAwesomeIcon icon={faSquareXmark} size='xl'/></div>
+                  </div>
+                </div>
+                {/**Favorite */}
+                <div className='mr-1 mt-1 w-full xl:w-fit flex flex-row rounded bg-gray-100 xl:mt-0'>
+                  <label className='flex-none mb-1 ml-1 mt-1 pl-2 pr-1 w-[90px] rounded-l border-2 border-slate-300 bg-slate-100 text-sm text-right'>
+                    Favorite:
+                  </label>
+                  <div className='mr-1 mt-1 w-full xl:w-fit inline text-left text-xs'>
+                    {/**For wrapping text have to use textarea */}
+                    <div className='h-6 w-[30px] pl-1 pt-0.5 justify-items-center rounded-r border-l-0 border border-gray-300 bg-transparent focus:border-slate-400 focus:outline-none'>{editFav ? <FontAwesomeIcon icon={faSquareCheck} size='xl' className=''/> : <FontAwesomeIcon icon={faSquareXmark} size='xl'/>}</div>
+                  </div>
+                </div>
+                {/** Version*/}
+                <div className='mr-1 mt-1 w-full xl:w-fit flex flex-row rounded bg-gray-100 xl:mt-0'>
+                  <label className='flex-none mb-1 ml-1 mt-1 pl-2 pr-1 w-[90px] rounded-l border-2 border-slate-300 bg-violet-100 text-sm text-right'>
+                    Version:
+                  </label>
+                  <div className='w-full mr-1 mt-1 inline text-left text-xs'>
+                    {/**For wrapping text have to use textarea */}
                     <input
+                      value={editVer}
+                      onChange={handleEditVer}
+                      type='text'
+                      maxLength={30}
+                      name='product'
+                      className='h-6 w-full pl-1 xl:w-[70px] text-left text-xs truncate rounded-r border-l-0 border border-gray-300 bg-transparent  focus:border-slate-400 focus:outline-none'
+                    />
+                  </div>
+                </div>
+                {/**Category */}
+                <div className='mt-1 w-full flex flex-row rounded bg-gray-100 xl:mt-0'>
+                  <label className='flex-none mb-1 ml-1 mt-1 pl-2 pr-1 w-[90px] rounded-l border-2 border-slate-300 bg-violet-100 text-sm text-right'>
+                    Product:
+                  </label>
+                  <div className='mr-1 mt-1 w-full inline text-left text-xs'>
+                    {/**For wrapping text have to use textarea */}
+                    <input
+                      value={editProduct}
+                      onChange={handleEditProduct}
                       type='text'
                       maxLength={30}
                       name='product'
                       placeholder='Product'
-                      className='h-6 w-full pl-1 xl:w-fit rounded-r border-l-0 border border-gray-300 bg-transparent text-left text-xs focus:border-slate-400 focus:outline-none'
+                      className='h-6 w-full pl-1 rounded-r border-l-0 border border-gray-300 bg-transparent text-left text-xs focus:border-slate-400 focus:outline-none'
                     />
                   </div>
                 </div>
+              </div>
+              {/**Ref Row */}
+              <div className='mt-1 flex flex-col items-baseline rounded px-1 xl:flex xl:flex-row'>
                 {/**Ref*/}
-                <div className='mr-1 xl:m-0 mt-1 w-full flex flex-row rounded bg-gray-100 xl:mt-0 grow'>
+                <div className='mr-1 xl:m-0 w-full flex flex-row rounded bg-gray-100 grow'>
                   <label className='flex-none mb-1 ml-1 mt-1 pl-2 pr-1 w-[90px] rounded-l border-2 border-slate-300 bg-violet-100 text-sm text-right'>
                     Ref:
                   </label>
                   <div className='mr-1 mt-1 w-full inline text-left text-xs'>
                     <input
+                      value={editRef}
+                      onChange={handleEditRef}
                       type='text'
                       maxLength={200}
                       name='ref'
@@ -218,3 +357,5 @@ export default function ListTermsNew() {
     </div>
   );
 }
+
+export default TermNew;

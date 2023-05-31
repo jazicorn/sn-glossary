@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import { faChevronCircleUp, faCircleChevronDown, faClipboardList, faRectangleList, faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDashboard } from '@/context/contextDashboard';
+// import { v4 as uuidv4 } from 'uuid';
+// uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
+// uuid.validate(); //	Test a string to see if it is a valid UUID
 
 export default function ListMenu() {
   const [isView, setView] = useState(false);
@@ -54,8 +57,16 @@ export default function ListMenu() {
             {/**Full Menu */}
             <div className=''>
               <hr className='my-2 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-50 dark:opacity-100' />
+              {/**Show Public Lists*/}
+              <div className='text-l mx-2 mb-2 mb-1 flex flex-col justify-center rounded border-4 border-blue-200 bg-violet-100 bg-gradient-to-r from-slate-100 to-violet-100 italic text-sn-light'>
+                <button
+                  className='text-bold inline-block h-full w-full grow hover:italic hover:bg-gray-300'
+                >
+                  <FontAwesomeIcon icon={faStar} /><span className='px-2'>Public Glossary </span>
+                </button>
+              </div>
+              {/**Creates New List: Untitled*/}
               <div className='text-l mx-2 mb-1 flex flex-col justify-center rounded border-4 border-blue-200 bg-violet-100 bg-gradient-to-r from-slate-100 to-violet-100 italic text-blue-500 '>
-                {/**Creates New List: Untitled*/}
                 <button
                   onClick={() => createMenuItem() }
                   className='text-bold inline-block h-full w-full grow hover:italic hover:bg-gray-300'
@@ -98,13 +109,22 @@ export default function ListMenu() {
             <div className=''>
               {showMore && (
                 <div className=''>
+                  {/**Show Public Lists*/}
+                  <div className='text-l mx-2 mb-2 mb-1 flex flex-col justify-center rounded border-4 border-blue-200 bg-violet-100 bg-gradient-to-r from-slate-100 to-violet-100 italic text-sn-light'>
+                    <button
+                      className='text-bold inline-block h-full w-full grow hover:italic hover:bg-gray-300'
+                    >
+                      <FontAwesomeIcon icon={faStar} /><span className='px-2'>Public Glossary </span>
+                    </button>
+                  </div>
                   <div className='mx-2 my-1 rounded border-4 border-blue-200 bg-gradient-to-r from-slate-100 to-violet-100 '>
                     <button onClick={() => { createMenuItem() }}
                       className='text-l mr-2 w-full py-1 text-blue-500 hover:bg-emerald-100 hover:italic'
                     >
-                      Create List
+                      <FontAwesomeIcon icon={faRectangleList} /><span className='px-2'>Create List</span>
                     </button>
                   </div>
+                  
                   <hr className='my-2 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-50 dark:opacity-100' />
                   <div className='mx-2 my-1 rounded border-4 bg-violet-100'>
                     <button className='text-l hover:italic text-deep-blue inline-block h-full w-full from-violet-100 to-blue-200 hover:bg-gradient-to-r '>

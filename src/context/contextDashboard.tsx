@@ -3,6 +3,10 @@ import React, { createContext, useContext, useReducer  } from "react";
 import dataLists from '../../utils/dataExPublicLists'
 import { ListType } from '../../lib/types'
 
+import { v4 as uuidv4 } from 'uuid';
+
+const getUUID = uuidv4();
+
 const myData:ListType[] = dataLists;
 // PublicList Array contains Object list | Array[ Object{ id: number, name: string, items: Array[ Objects{} ] } ]
 // returns string[]
@@ -40,6 +44,8 @@ type ListData = {
   addMenuItem: boolean;
   deleteMenuItem: string;
   favoriteList: ListType | undefined;
+  publicFavorites?: string[];
+  getFavorite?: string;
   addFavorite: string;
   removeFavorite: string;
   currentList: ListType | undefined;
@@ -57,6 +63,8 @@ type ListAction =
   | {
     type: "FAVORITES";
     favoriteList?: ListType;
+    publicFavorites?: string[];
+    getFavorite?: string;
     addFavorite?: string;
     removeFavorite?: string;
     }
@@ -74,7 +82,6 @@ const ListReducer = (
   switch (action.type) {
     case 'MENU':
       if (action.addMenuItem) {
-        const length = state.lists.length + 1;
         const menu = state.menu;
         let total = 1;
         for (const item of menu) {
@@ -84,7 +91,7 @@ const ListReducer = (
         }
         const newItem = 'Untitled' + total.toString();
         menu.unshift(newItem);
-        state.lists.push({ id: length, name: newItem, items: [] })
+        state.lists.push({ id: getUUID, name: newItem, items: [] })
         total = 0;
         return { ...state, menu: menu};
       } else if (action.deleteMenuItem) {
@@ -114,6 +121,8 @@ const defaultValues: ListData = {
   addMenuItem: false,
   deleteMenuItem: '',
   favoriteList: favorites,
+  publicFavorites: [],
+  getFavorite: '',
   addFavorite: '',
   removeFavorite: '',
   currentList: favorites,
@@ -134,7 +143,6 @@ export const DashboardContext = createContext<{
 
 export const DashboardProvider: React.FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(ListReducer, defaultValues);
-  
 
   return (
     <DashboardContext.Provider value={{state, dispatch}}>

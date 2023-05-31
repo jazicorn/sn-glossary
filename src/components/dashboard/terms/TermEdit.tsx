@@ -1,17 +1,27 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+//import { useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleChevronDown,
   faChevronCircleUp,
   faXmark,
+  faStar,
+  faSquareXmark
 } from '@fortawesome/free-solid-svg-icons';
+import {faSquareCheck, faSquare, faStar as faStarOutline} from '@fortawesome/free-regular-svg-icons'
+import { GlossaryContextType } from '../../../../lib/types';
 
-export default function ListTermsAll() {
+type Props = {
+  index: number,
+  term: GlossaryContextType
+}
+
+const TermEdit: React.FC<Props> = ({ index, term }) => {
   const [showMore, setShowMore] = useState(false);
   function handleMoreClick() {
     setShowMore(!showMore);
   }
-  const [inputTags, setInputTags] = useState('');
+  const [editTags, setEditTags] = useState(term.tags);
   const [tags, setTags] = useState([]);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const addTags = (e: any) => {
@@ -23,13 +33,16 @@ export default function ListTermsAll() {
     }
   };
   const removeTags = (index: number) => {
-    setTags([...tags.filter((tag) => tags.indexOf(tag) !== index)]);
+    if (edit) {
+      setTags([...tags.filter((tag) => tags.indexOf(tag) !== index)]);
+    }
+    return
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onChangeTags = (e: any) => {
     const { value } = e.target;
-    setInputTags(value);
+    setEditTags(value);
   };
 
   const [newTerm, setNewTerm] = useState({});
@@ -40,12 +53,56 @@ export default function ListTermsAll() {
 
     setNewTerm(newTerm);
   }
-  const term_index = 1;
-  const term_id = 123456789;
+
+  const [edit, setEdit] = useState(true);
+
+  function handleEdit() {
+    setEdit(!edit);
+  }
+  const term_id = term.id;
+
+  {/**<!-- Edit Text-> */ }
+  const [editName, setEditName] = useState(term.name);
+  const [editDef, setEditDef] = useState(term.def);
+  const [editProduct, setEditProduct] = useState(term.product);
+  const [editRef, setEditRef] = useState(term.ref);
+  const [editVer, setEditVer] = useState(term.ver);
+  const [editFav, setEditFav] = useState(term.favorite);
+  
+  const handleEditName = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+    setEditName(e.target.value)
+  }
+  const handleEditDef = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+    setEditDef(e.target.value)
+  }
+  const handleEditProduct = (e: { target: { value: React.SetStateAction<string | undefined>; }; }) => {
+    setEditProduct(e.target.value)
+  }
+  const handleEditRef = (e: { target: { value: React.SetStateAction<string | undefined>; }; }) => {
+    setEditRef(e.target.value)
+  }
+  const handleEditVer = (e: { target: { value: React.SetStateAction<string | undefined>; }; }) => {
+    setEditVer(e.target.value)
+  }
+  const handleEditFav = () => {
+    setEditFav(!editFav);
+  }
+
+  // const termObj = {
+  //   public: false,
+  //   favorite: editFav,
+  //   name: editName,
+  //   def: editDef,
+  //   version: editVer,
+  //   product: editProduct,
+  //   ref: editRef,
+  //   tags: tags
+  // }
+
   return (
     <div>
       {/***************** */}
-      {/**Create New Term */}
+      {/*****Edit Term*** */}
       {/***************** */}
       <div className='flex flex-col'>
         <form onSubmit={handleSubmit}>
@@ -59,22 +116,30 @@ export default function ListTermsAll() {
             >
               <div
                 key='undefined'
-                className='content-left grow flex flex-row rounded-l border border-r-0 border-gray-300 text-sm leading-tight tracking-tighter'
+                className='content-left grow flex flex-col sm:flex-row rounded-l border border-r-0 border-gray-300 text-sm leading-tight tracking-tighter'
               >
-                <div key='term-index' className='w-fit px-2 border-r border-gray-300 flex flex-col justify-center'>{ term_index }</div>
+                <button key='favoriteButton' onClick={handleEditFav} className='w-fit px-2 border-r border-gray-300 flex flex-col justify-center'>
+                  {editFav ? <FontAwesomeIcon icon={faStar} size='lg' className=''/> : <FontAwesomeIcon icon={faStarOutline} size='lg'/>}
+                </button>
+                <div key='term-index' className='w-fit px-2 border-r border-gray-300 flex flex-col justify-center'>{index}</div>
                 <input
+                  disabled={edit}
+                  id='name'
                   key='name'
                   maxLength={25}
                   type='text'
                   name='term'
                   placeholder='Term'
-                  className='w-[90px] p-0.5 rounded-l border-2 border-transparent border-r-slate-200 bg-slate-100  text-sm text-center focus:border focus:border-blue-100 focus:outline-none'
+                  value={editName}
+                  onChange={handleEditName}
+                  className='p-0.5 rounded-l border-2 border-transparent border-r-slate-200 bg-slate-100 text-sm text-center focus:border focus:border-blue-100 focus:outline-none'
                 />
-              
-                <input
+                <textarea
+                  disabled={edit}
+                  value={editDef}
+                  onChange={handleEditDef}
                   key='def'
                   maxLength={300}
-                  type='text'
                   name='def'
                   placeholder='Definition'
                   className='w-full self-center bg-gray-100 px-1 py-1 text-sm text-left focus:border-0 active:border-0 border-0 rounded'
@@ -106,7 +171,8 @@ export default function ListTermsAll() {
             {!showMore ? 
               <div className='h-[54px] py-1 mr-1 flex flex-row place-self-center rounded px-1'>
               <button
-                type='submit'
+                  type='submit'
+                  onClick={() => handleEdit()}
                 className='w-[72px] h-[25px] my-0.5 ml-1 items-baseline place-self-center rounded border-2 border-slate-400 bg-blue-100 px-2 text-sm font-medium uppercase'
               >
                 Edit
@@ -114,7 +180,8 @@ export default function ListTermsAll() {
             </div>
             : <div className='h-[54px] mr-1 flex flex-col place-self-center rounded px-1'>
               <button
-                type='submit'
+                  type='submit'
+                  onClick={() => handleEdit()}
                 className='w-[72px] my-0.5 ml-1 items-baseline rounded border-2 border-slate-400 bg-blue-100 px-2 text-sm font-medium uppercase'
               >
                 Edit
@@ -135,7 +202,7 @@ export default function ListTermsAll() {
               {/**Lines: Details*/}
               <div className='mt-1 flex flex-col items-baseline rounded px-1 xl:m-0 xl:flex xl:flex-row'>
                 {/**ID*/}
-                <div className='w-full xl:w-fit mr-1 flex flex-row rounded bg-gray-100 xl:w-auto xl:grow'>
+                <div className='w-full xl:w-fit mr-1 flex flex-row rounded bg-gray-100'>
                   <label className='flex-none w-[90px] mb-1 ml-1 mt-1 pl-2 pr-1 rounded-l border-2 border-blue-300 bg-slate-200 text-sm text-right'>
                     ID:
                   </label>
@@ -147,37 +214,85 @@ export default function ListTermsAll() {
                     
                   </div>
                 </div>
-                {/**Category */}
+                {/**Public */}
                 <div className='mr-1 mt-1 w-full xl:w-fit flex flex-row rounded bg-gray-100 xl:mt-0'>
                   <label className='flex-none mb-1 ml-1 mt-1 pl-2 pr-1 w-[90px] rounded-l border-2 border-slate-300 bg-slate-100 text-sm text-right'>
-                    Product:
+                    Public:
                   </label>
                   <div className='mr-1 mt-1 w-full xl:w-fit inline text-left text-xs'>
                     {/**For wrapping text have to use textarea */}
+                    <div className='h-6 w-[30px] pl-1.5 pt-0.5 justify-items-center rounded-r border-l-0 border border-gray-300 bg-transparent focus:border-slate-400 focus:outline-none'>{term.public ? <FontAwesomeIcon icon={faSquareCheck} size='xl' className=''/> : <FontAwesomeIcon icon={faSquare} size='xl'/>}</div>
+                  </div>
+                </div>
+                 {/**Favorite */}
+                <div className='mr-1 mt-1 w-full xl:w-fit flex flex-row rounded bg-gray-100 xl:mt-0'>
+                  <label className='flex-none mb-1 ml-1 mt-1 pl-2 pr-1 w-[90px] rounded-l border-2 border-slate-300 bg-slate-100 text-sm text-right'>
+                    Favorite:
+                  </label>
+                  <div className='mr-1 mt-1 w-full xl:w-fit inline text-left text-xs'>
+                    {/**For wrapping text have to use textarea */}
+                    <div className='h-6 w-[30px] pl-1 pt-0.5 justify-items-center rounded-r border-l-0 border border-gray-300 bg-transparent focus:border-slate-400 focus:outline-none'>{editFav ? <FontAwesomeIcon icon={faSquareCheck} size='xl' className=''/> : <FontAwesomeIcon icon={faSquareXmark} size='xl'/>}</div>
+                  </div>
+                </div>
+                {/** Version*/}
+                <div className='mr-1 mt-1 w-full xl:w-fit flex flex-row rounded bg-gray-100 xl:mt-0'>
+                  <label className='flex-none mb-1 ml-1 mt-1 pl-2 pr-1 w-[90px] rounded-l border-2 border-slate-300 bg-violet-100 text-sm text-right'>
+                    Version:
+                  </label>
+                  <div className='w-full mr-1 mt-1 inline text-left text-xs'>
+                    {/**For wrapping text have to use textarea */}
                     <input
+                      disabled={edit}
+                      value={editVer}
+                      onChange={handleEditVer}
                       type='text'
                       maxLength={30}
                       name='product'
                       placeholder='Product'
-                      className='h-6 w-full pl-1 xl:w-fit rounded-r border-l-0 border border-gray-300 bg-transparent text-left text-xs focus:border-slate-400 focus:outline-none'
+                      className='h-6 w-full pl-1 xl:w-[70px] text-left text-xs truncate rounded-r border-l-0 border border-gray-300 bg-transparent  focus:border-slate-400 focus:outline-none'
                     />
                   </div>
                 </div>
-                {/**Ref*/}
-                <div className='mr-1 xl:m-0 mt-1 w-full flex flex-row rounded bg-gray-100 xl:mt-0 grow'>
+                {/**Category */}
+                <div className='mt-1 w-full flex flex-row rounded bg-gray-100 xl:mt-0'>
                   <label className='flex-none mb-1 ml-1 mt-1 pl-2 pr-1 w-[90px] rounded-l border-2 border-slate-300 bg-violet-100 text-sm text-right'>
-                    Ref:
+                    Product:
                   </label>
-                  <div className='mr-1 mt-1 w-full inline text-left text-xs'>
+                  <div className='w-full mr-1 mt-1 inline text-left text-xs'>
+                    {/**For wrapping text have to use textarea */}
                     <input
+                      disabled={edit}
+                      value={editProduct}
+                      onChange={handleEditProduct}
                       type='text'
-                      maxLength={200}
-                      name='ref'
-                      placeholder='https://docs.servicenow.com/'
-                      className='pl-1 h-6 min-w-[225px] w-full rounded-r border-l-0 border border-gray-300 bg-transparent text-left text-xs focus:border-slate-400 focus:outline-none'
+                      maxLength={30}
+                      name='product'
+                      placeholder='Product'
+                      className='h-6 w-full pl-1 text-left text-xs truncate rounded-r border-l-0 border border-gray-300 bg-transparent  focus:border-slate-400 focus:outline-none'
                     />
                   </div>
                 </div>
+                
+              </div>
+              {/**Ref*/}
+              <div className='w-full px-1 pt-1'>
+                  <div className='mr-1 xl:m-0 w-full flex flex-row rounded bg-gray-100 xl:mt-0 grow'>
+                    <label className='flex-none mb-1 ml-1 mt-1 pl-2 pr-1 w-[90px] rounded-l border-2 border-slate-300 bg-violet-100 text-sm text-right'>
+                      Ref:
+                    </label>
+                    <div className='mr-1 mt-1 w-full inline text-left text-xs'>
+                      <input
+                        disabled={edit}
+                        value={editRef}
+                        onChange={handleEditRef}
+                        type='text'
+                        maxLength={200}
+                        name='ref'
+                        placeholder='https://docs.servicenow.com/'
+                        className='pl-1 h-6 min-w-[225px] w-full rounded-r border-l-0 border border-gray-300 bg-transparent text-left text-xs focus:border-slate-400 focus:outline-none'
+                      />
+                    </div>
+                  </div>  
               </div>
               {/**Lines:Tags*/}
               <div className='w-full px-1 pb-1'>
@@ -187,11 +302,12 @@ export default function ListTermsAll() {
                     Tags:
                   </label>
                   <input
+                    disabled={edit}
+                    value={editTags}
                     maxLength={25}
                     type='text'
                     name='tag'
                     placeholder="tag, tag, tag"
-                    value={inputTags}
                     onKeyUp={(e) => addTags(e)}
                     onChange={onChangeTags}
                     className='mt-1 h-6 max-h-6 w-min grow items-baseline text-left text-xs bg-transparent border-0 focus:border-0 active:border-0 '
@@ -225,3 +341,5 @@ export default function ListTermsAll() {
     </div>
   );
 }
+
+export default TermEdit;
