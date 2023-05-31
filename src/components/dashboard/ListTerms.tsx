@@ -24,14 +24,14 @@ export default function ListOfTerms() {
       {/***************** */}
       {/**Create New Term */}
       {/***************** */}
-      <TermNew key="termNew" />
+      <TermNew />
       <hr className='my-2 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-50 dark:opacity-100' />
       {/******************* */}
       {/**Display All Terms */}
       {/******************* */}
       {getList?.items?.map((term) => (
         dataIndex += 1,
-        <Term key="term" index={dataIndex} term={term} />
+        <Term key={term.id} index={dataIndex}  term={term} />
       ))
       }
     </div>

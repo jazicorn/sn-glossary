@@ -96,8 +96,9 @@ const ListReducer = (
         return { ...state, menu: menu};
       } else if (action.deleteMenuItem) {
         //const deleteItem = state.deleteMenuItem;
-      
         return { ...state, menu: state.menu};
+      } else if (action.getMenuItem) {
+        return {...state, getMenuItem: action.getMenuItem}
       }
       return { ...state, menu: dataMenu };
     case 'LISTS':

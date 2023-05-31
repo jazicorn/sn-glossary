@@ -41,10 +41,8 @@ export default function ListMenu() {
     }
   }
 
-  function setMenuItem(e: { preventDefault: () => void; currentTarget: { value: string; }; }) {
-    e.preventDefault();
-    const currentMenu = e.currentTarget.value
-    dispatch({ type: "MENU", getMenuItem: currentMenu })
+  const setMenuItem = (prop: string) =>{
+    dispatch({ type: "MENU", getMenuItem: prop})
   }
   return (
     <div className='mx-5 mb-1 mt-5 h-fit w-auto rounded-xl border border-slate-400 bg-slate-700 pb-1 xl:my-5 xl:ml-5 xl:mr-2 xl:h-auto xl:shrink-0 xl:basis-60'>
@@ -84,7 +82,7 @@ export default function ListMenu() {
             <ul className='text-l flex flex-col'>
             {menu?.map((list: string) => (
               <li key={list} className='mx-2 my-1 rounded border-4 bg-slate-100'>
-                <button key={ list } onClick={setMenuItem} className='px-2 hover:italic inline-block h-full w-full from-violet-100 to-blue-200 hover:bg-gradient-to-r '>
+                <button key={ list } onClick={() => setMenuItem(list)} className='px-2 hover:italic inline-block h-full w-full from-violet-100 to-blue-200 hover:bg-gradient-to-r '>
                  {list}
                 </button>
               </li>
@@ -133,8 +131,8 @@ export default function ListMenu() {
                   </div>
                   <ul className='text-l flex flex-col'>
                     {menu?.map((list: string) => (
-                      <li  key={list} className='mx-2 my-1 rounded border-4 bg-gray-100'>
-                        <button key={ list } onClick={setMenuItem} className='inline-block h-full w-full from-violet-100 to-blue-200 text-slate-500 hover:bg-gradient-to-r hover:italic hover:text-slate-700 '>
+                      <li  key='key' className='mx-2 my-1 rounded border-4 bg-gray-100'>
+                        <button key={list} onClick={(e) => setMenuItem} className='inline-block h-full w-full from-violet-100 to-blue-200 text-slate-500 hover:bg-gradient-to-r hover:italic hover:text-slate-700 '>
                           {list}
                         </button>
                       </li>
