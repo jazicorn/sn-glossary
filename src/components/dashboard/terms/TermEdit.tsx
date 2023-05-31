@@ -21,8 +21,8 @@ const TermEdit: React.FC<Props> = ({ index, term }) => {
   function handleMoreClick() {
     setShowMore(!showMore);
   }
-  const [editTags, setEditTags] = useState(term.tags);
-  const [tags, setTags] = useState([]);
+  
+  const [tags, setTags] = useState(term.tags);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const addTags = (e: any) => {
     if (e.key === 'Enter' && e.target.value !== '') {
@@ -33,16 +33,10 @@ const TermEdit: React.FC<Props> = ({ index, term }) => {
     }
   };
   const removeTags = (index: number) => {
-    if (edit) {
+    if (!edit && tags != undefined) {
       setTags([...tags.filter((tag) => tags.indexOf(tag) !== index)]);
     }
     return
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onChangeTags = (e: any) => {
-    const { value } = e.target;
-    setEditTags(value);
   };
 
   const [newTerm, setNewTerm] = useState({});
@@ -110,89 +104,96 @@ const TermEdit: React.FC<Props> = ({ index, term }) => {
           <div className='mx-2 my-1 flex flex-row justify-between rounded bg-gray-200 p-1'>
             {/**#TODO Change to flex-col and move create button to end term line */}
             {/**Line: Term Definition */} {/**row 1 */}
-            <div
-              key='undefined'
-              className='mb-1 ml-1 mt-1 flex grow flex-row justify-between rounded bg-gray-100 p-1 '
-            >
-              <div
-                key='undefined'
-                className='content-left grow flex flex-col sm:flex-row rounded-l border border-r-0 border-gray-300 text-sm leading-tight tracking-tighter'
-              >
+            <div className='mb-1 ml-1 mt-1 flex grow flex-col justify-between rounded bg-gray-100 p-1 '>
+              <div className='flex flex-row text-xs'>{ !edit ? <div className='text-blue-500'>Mode: Edit</div> : <div>Mode: Display</div> }</div>
+              <div className='content-left grow flex flex-col sm:flex-row rounded border border-r border-gray-300 text-sm leading-tight tracking-tighter'>
                 <button key='favoriteButton' onClick={handleEditFav} className='w-fit px-2 border-r border-gray-300 flex flex-col justify-center'>
                   {editFav ? <FontAwesomeIcon icon={faStar} size='lg' className=''/> : <FontAwesomeIcon icon={faStarOutline} size='lg'/>}
                 </button>
                 <div key='term-index' className='w-fit px-2 border-r border-gray-300 flex flex-col justify-center'>{index}</div>
-                <input
-                  disabled={edit}
-                  id='name'
-                  key='name'
-                  maxLength={25}
-                  type='text'
-                  name='term'
-                  placeholder='Term'
-                  value={editName}
-                  onChange={handleEditName}
-                  className='p-0.5 rounded-l border-2 border-transparent border-r-slate-200 bg-slate-100 text-sm text-center focus:border focus:border-blue-100 focus:outline-none'
-                />
-                <textarea
-                  disabled={edit}
-                  value={editDef}
-                  onChange={handleEditDef}
-                  key='def'
-                  maxLength={300}
-                  name='def'
-                  placeholder='Definition'
-                  className='w-full self-center bg-gray-100 px-1 py-1 text-sm text-left focus:border-0 active:border-0 border-0 rounded'
-                />
+                  <input
+                    disabled={edit}
+                    id='name'
+                    key='name'
+                    maxLength={25}
+                    type='text'
+                    name='term'
+                    placeholder='Term'
+                    value={editName}
+                    onChange={handleEditName}
+                    className='p-0.5 rounded-l border-2 border-transparent border-r-slate-200 bg-slate-100 text-sm text-center focus:border focus:border-blue-100 focus:outline-none'
+                  />
+                  <textarea
+                    disabled={edit}
+                    value={editDef}
+                    onChange={handleEditDef}
+                    key='def'
+                    maxLength={300}
+                    name='def'
+                    placeholder='Definition'
+                    className='w-full self-center bg-gray-100 px-1 py-1 text-sm text-left focus:border-0 active:border-0 border-0 rounded'
+                  />
+                  <button
+                  key='showMore'
+                  className=' px-2 '
+                  onClick={() => handleMoreClick()}>
+                    {showMore ? (
+                      <FontAwesomeIcon
+                        icon={faChevronCircleUp}
+                        size='lg'
+                        color={'#334155'}
+                      />
+                    ) : (
+                      <FontAwesomeIcon
+                        icon={faCircleChevronDown}
+                        size='lg'
+                        color={'#334155'}
+                      />
+                    )}
+                </button>
               </div>
             
               {/** Expand/Collpase*/}
-              <button
-                key='showMore'
-                className='rounded-r border border-l-0 border-gray-300 px-2 '
-                onClick={() => handleMoreClick()}
-              >
-                {showMore ? (
-                  <FontAwesomeIcon
-                    icon={faChevronCircleUp}
-                    size='lg'
-                    color={'#334155'}
-                  />
-                ) : (
-                  <FontAwesomeIcon
-                    icon={faCircleChevronDown}
-                    size='lg'
-                    color={'#334155'}
-                  />
-                )}
-              </button>
+              
             </div>
             {/**Delete/Edit Term */} {/**row-2 */}
             {!showMore ? 
               <div className='h-[54px] py-1 mr-1 flex flex-row place-self-center rounded px-1'>
-              <button
-                  type='submit'
-                  onClick={() => handleEdit()}
-                className='w-[72px] h-[25px] my-0.5 ml-1 items-baseline place-self-center rounded border-2 border-slate-400 bg-blue-100 px-2 text-sm font-medium uppercase'
-              >
-                Edit
-              </button>
-            </div>
-            : <div className='h-[54px] mr-1 flex flex-col place-self-center rounded px-1'>
-              <button
-                  type='submit'
-                  onClick={() => handleEdit()}
-                className='w-[72px] my-0.5 ml-1 items-baseline rounded border-2 border-slate-400 bg-blue-100 px-2 text-sm font-medium uppercase'
-              >
-                Edit
-                </button>
-                <button
-                className='w-[72px] my-0.5 ml-1 items-baseline rounded border-2 border-slate-400 bg-red-100 px-2 text-sm font-medium uppercase'
-              >
-                Delete
-              </button>
-            </div>}
-            
+                {!edit ?
+                  <button
+                    type='submit'
+                    onClick={() => handleEdit()}
+                    className='w-[72px] h-[25px] my-0.5 ml-1 items-baseline place-self-center rounded border-2 border-blue-500 bg-blue-100 px-2 text-sm font-medium uppercase'
+                  >
+                    Edit
+                  </button> : <button
+                      type='submit'
+                      onClick={() => handleEdit()}
+                    className='w-[72px] h-[25px] my-0.5 ml-1 items-baseline place-self-center rounded border-2 border-slate-400 bg-blue-100 px-2 text-sm font-medium uppercase'
+                  >
+                    Edit
+                  </button>
+                }
+              </div>
+              :
+              <div className='h-[54px] py-1 mr-1 flex flex-row place-self-center rounded px-1'>
+                {!edit ?
+                  <button
+                    type='submit'
+                    onClick={() => handleEdit()}
+                    className='w-[72px] h-[25px] my-0.5 ml-1 items-baseline place-self-center rounded border-2 border-blue-500 bg-blue-100 px-2 text-sm font-medium uppercase'
+                  >
+                    Edit
+                  </button> : <button
+                      type='submit'
+                      onClick={() => handleEdit()}
+                    className='w-[72px] h-[25px] my-0.5 ml-1 items-baseline place-self-center rounded border-2 border-slate-400 bg-blue-100 px-2 text-sm font-medium uppercase'
+                  >
+                    Edit
+                  </button>
+                }
+              </div>
+            }
           </div>
           {/** */}
           {/** Term Details */}
@@ -221,7 +222,9 @@ const TermEdit: React.FC<Props> = ({ index, term }) => {
                   </label>
                   <div className='mr-1 mt-1 w-full xl:w-fit inline text-left text-xs'>
                     {/**For wrapping text have to use textarea */}
-                    <div className='h-6 w-[30px] pl-1.5 pt-0.5 justify-items-center rounded-r border-l-0 border border-gray-300 bg-transparent focus:border-slate-400 focus:outline-none'>{term.public ? <FontAwesomeIcon icon={faSquareCheck} size='xl' className=''/> : <FontAwesomeIcon icon={faSquare} size='xl'/>}</div>
+                    <div className='h-6 w-full xl:w-[30px] pl-1.5 pt-0.5 justify-items-center rounded-r border-l-0 border border-gray-300 bg-transparent focus:border-slate-400 focus:outline-none'>
+                      {term.public ? <FontAwesomeIcon icon={faSquareCheck} size='xl' className='' /> : <FontAwesomeIcon icon={faSquare} size='xl' />}
+                    </div>
                   </div>
                 </div>
                  {/**Favorite */}
@@ -231,7 +234,9 @@ const TermEdit: React.FC<Props> = ({ index, term }) => {
                   </label>
                   <div className='mr-1 mt-1 w-full xl:w-fit inline text-left text-xs'>
                     {/**For wrapping text have to use textarea */}
-                    <div className='h-6 w-[30px] pl-1 pt-0.5 justify-items-center rounded-r border-l-0 border border-gray-300 bg-transparent focus:border-slate-400 focus:outline-none'>{editFav ? <FontAwesomeIcon icon={faSquareCheck} size='xl' className=''/> : <FontAwesomeIcon icon={faSquareXmark} size='xl'/>}</div>
+                    <div className='h-6 w-full xl:w-[30px] pl-1.5 pt-0.5 justify-items-center rounded-r border-l-0 border border-gray-300 bg-transparent focus:border-slate-400 focus:outline-none'>
+                      {editFav ? <FontAwesomeIcon icon={faSquareCheck} size='xl' className='' /> : <FontAwesomeIcon icon={faSquareXmark} size='xl' />}
+                    </div>
                   </div>
                 </div>
                 {/** Version*/}
@@ -303,18 +308,16 @@ const TermEdit: React.FC<Props> = ({ index, term }) => {
                   </label>
                   <input
                     disabled={edit}
-                    value={editTags}
-                    maxLength={25}
+                    maxLength={100}
                     type='text'
                     name='tag'
-                    placeholder="tag, tag, tag"
+                    placeholder="Type..."
                     onKeyUp={(e) => addTags(e)}
-                    onChange={onChangeTags}
-                    className='mt-1 h-6 max-h-6 w-min grow items-baseline text-left text-xs bg-transparent border-0 focus:border-0 active:border-0 '
+                    className='mt-1 h-6 max-h-6 w-[250px] items-baseline text-left text-xs bg-transparent border-0 focus:border-0 active:border-0 '
                   />
                   {/**Input-tags */}
-                  <div className='mr-1 p-1 flex flex-row flex-wrap content-center items-center text-xs'>
-                    {tags.map((tag, index) => (
+                  <div className='mr-1 px-1 flex flex-row flex-wrap content-center items-center text-xs'>
+                    {tags?.map((tag, index) => (
                       <div
                         key='tag'
                         className='mr-1 mb-1 h-6 w-fit pr-2 text-sm flex flex-row content-center items-center rounded border-0 bg-slate-200 focus:border-2 focus:border-slate-400'
