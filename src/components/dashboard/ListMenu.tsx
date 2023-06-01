@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { faChevronCircleUp, faCircleChevronDown, faClipboardList, faRectangleList, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faChevronCircleDown, faChevronCircleUp, faClipboardList, faDatabase, faRectangleList, faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDashboard } from '@/context/contextDashboard';
 // import { v4 as uuidv4 } from 'uuid';
@@ -50,19 +50,18 @@ export default function ListMenu() {
         <h2 className='m-2 pr-4 rounded border-4 border-slate-100 bg-blue-100 text-xl text-deep-blue'>
           <span className='mx-2'><FontAwesomeIcon icon={faClipboardList} /></span>Menu
         </h2>
+        
         {isView ?  
           <div>
             {/**Full Menu */}
             <div className=''>
               <hr className='my-2 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-50 dark:opacity-100' />
-              {/**Show Public Lists*/}
-              <div className='text-l mx-2 mb-2 mb-1 flex flex-col justify-center rounded border-4 border-blue-200 bg-violet-100 bg-gradient-to-r from-slate-100 to-violet-100 italic text-sn-light'>
-                <button
-                  className='text-bold inline-block h-full w-full grow hover:italic hover:bg-gray-300'
-                >
-                  <FontAwesomeIcon icon={faStar} /><span className='px-2'>Public Glossary </span>
+              <div className='mx-2 my-1 rounded border-4 bg-violet-100'>
+                <button onClick={() => setMenuItem('Database')} className='text-l hover:italic text-deep-blue inline-block h-full w-full from-violet-100 to-blue-200 hover:bg-gradient-to-r '>
+                  <FontAwesomeIcon icon={faDatabase} /><span className='px-2'>Database</span>
                 </button>
               </div>
+              <hr className='my-2 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-50 dark:opacity-100' />
               {/**Creates New List: Untitled*/}
               <div className='text-l mx-2 mb-1 flex flex-col justify-center rounded border-4 border-blue-200 bg-violet-100 bg-gradient-to-r from-slate-100 to-violet-100 italic text-blue-500 '>
                 <button
@@ -73,6 +72,14 @@ export default function ListMenu() {
                 </button>
               </div>
               <hr className='my-2 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-50 dark:opacity-100' />
+               {/**Show Public Lists Favorites*/}
+              <div className='text-l mx-2 mb-2 mb-1 flex flex-col justify-center rounded border-4 border-blue-200 bg-violet-100 bg-gradient-to-r from-slate-100 to-violet-100 italic text-sn-light'>
+                <button
+                  className='text-bold inline-block h-full w-full grow hover:italic hover:bg-gray-300'
+                >
+                  <FontAwesomeIcon icon={faStar} /><span className='px-2'>Public Glossary</span>
+                </button>
+              </div>
               <div className='mx-2 my-1 rounded border-4 bg-violet-100'>
                 <button onClick={() => setMenuItem('Favorites')} className='text-l hover:italic text-deep-blue inline-block h-full w-full from-violet-100 to-blue-200 hover:bg-gradient-to-r '>
                   <FontAwesomeIcon icon={faStar} /><span className='px-2'>Favorites</span>
@@ -96,23 +103,19 @@ export default function ListMenu() {
             {/**Collapsed Menu */}
             {/** Expand/Collapse*/}
             <div className='mb-1 xl:mb-0'>
-              <button onClick={() => handleMoreClick()}>
-                {showMore ? (
-                  <FontAwesomeIcon icon={faChevronCircleUp} size='lg' inverse />
-                ) : (
-                  <FontAwesomeIcon icon={faCircleChevronDown} size='lg' inverse />
-                )}
-              </button>
+              {!showMore ?
+                <button onClick={() => handleMoreClick()}><FontAwesomeIcon icon={faChevronCircleDown} size='lg' inverse /></button>
+                :
+                <div className='hidden'></div>
+              }
             </div>
             <div className=''>
               {showMore && (
                 <div className=''>
-                  {/**Show Public Lists*/}
-                  <div className='text-l mx-2 mb-2 mb-1 flex flex-col justify-center rounded border-4 border-blue-200 bg-violet-100 bg-gradient-to-r from-slate-100 to-violet-100 italic text-sn-light'>
-                    <button
-                      className='text-bold inline-block h-full w-full grow hover:italic hover:bg-gray-300'
-                    >
-                      <FontAwesomeIcon icon={faStar} /><span className='px-2'>Public Glossary </span>
+                  <hr className='my-2 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-50 dark:opacity-100' />
+                  <div className='mx-2 my-1 rounded border-4 bg-violet-100'>
+                    <button onClick={() => setMenuItem('Database')} className='text-l hover:italic text-deep-blue inline-block h-full w-full from-violet-100 to-blue-200 hover:bg-gradient-to-r '>
+                      <FontAwesomeIcon icon={faDatabase} /><span className='px-2'>Database</span>
                     </button>
                   </div>
                   <div className='mx-2 my-1 rounded border-4 border-blue-200 bg-gradient-to-r from-slate-100 to-violet-100 '>
@@ -122,8 +125,15 @@ export default function ListMenu() {
                       <FontAwesomeIcon icon={faRectangleList} /><span className='px-2'>Create List</span>
                     </button>
                   </div>
-                  
                   <hr className='my-2 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-50 dark:opacity-100' />
+                  {/**Show Public Lists Favorites*/}
+                  <div className='text-l mx-2 mb-2 mb-1 flex flex-col justify-center rounded border-4 border-blue-200 bg-violet-100 bg-gradient-to-r from-slate-100 to-violet-100 italic text-sn-light'>
+                    <button
+                      className='text-bold inline-block h-full w-full grow hover:italic hover:bg-gray-300'
+                    >
+                      <FontAwesomeIcon icon={faStar} /><span className='px-2'>Public Glossary </span>
+                    </button>
+                  </div>
                   <div className='mx-2 my-1 rounded border-4 bg-violet-100'>
                     <button onClick={() => setMenuItem('Favorites')} className='text-l hover:italic text-deep-blue inline-block h-full w-full from-violet-100 to-blue-200 hover:bg-gradient-to-r '>
                       <FontAwesomeIcon icon={faStar} /><span className='px-2'>Favorites</span>
@@ -139,7 +149,12 @@ export default function ListMenu() {
                     ))}
                   </ul>
                 </div>
-                )}
+              )}
+              
+              {showMore ?
+                <button onClick={() => handleMoreClick()}><FontAwesomeIcon icon={faChevronCircleUp} size='lg' inverse /></button>
+                :
+                <div className='hidden'></div>}
             </div>
           </div>
         }
