@@ -6,7 +6,6 @@ import { Input, Modal, Ripple, initTE } from 'tw-elements';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEnvelope,
-  faEnvelopeCircleCheck,
 } from '@fortawesome/free-solid-svg-icons';
 
 type FormValues = {
@@ -27,7 +26,7 @@ const resolver: Resolver<FormValues> = async (values) => {
   };
 };
 
-export default function CallToAction(this: any) {
+export default function CallToAction() {
   useEffect(() => {
     initTE({ Input, Modal, Ripple });
   }, []);

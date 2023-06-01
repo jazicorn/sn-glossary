@@ -6,9 +6,7 @@ import {
   faStar,
   faLightbulb,
   faFileLines,
-  faTicket,
-  faEnvelope,
-  faArrowUpRightFromSquare
+  faEnvelope
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function MoreMenu() {
