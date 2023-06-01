@@ -77,7 +77,7 @@ const publicLists = [
     {
         id: '48134af2-9210-48a5-9904-13f26281553c',
         name: 'Lists3',
-        glossary: [{
+        items: [{
             id: 'NQWH-lojbF',
             public: true,
             favorite: false,
