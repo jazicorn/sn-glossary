@@ -102,7 +102,6 @@ const TermEdit: React.FC<Props> = ({ index, term }) => {
         <form onSubmit={handleSubmit}>
           {/**All Term Information*/}
           <div className='mx-2 my-1 flex flex-row justify-between rounded bg-gray-200 p-1'>
-            {/**#TODO Change to flex-col and move create button to end term line */}
             {/**Line: Term Definition */} {/**row 1 */}
             <div className='mb-1 ml-1 mt-1 flex grow flex-col justify-between rounded bg-gray-100 p-1 '>
               <div className='flex flex-row text-xs'>{ !edit ? <div className='text-blue-500'>Mode: Edit</div> : <div>Mode: Display</div> }</div>
