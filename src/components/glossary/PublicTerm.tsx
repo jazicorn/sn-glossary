@@ -3,10 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleChevronDown,
   faChevronCircleUp,
+  faBug,
 } from '@fortawesome/free-solid-svg-icons';
 import { GlossaryContextType } from '../../../lib/types';
 import { faStar } from '@fortawesome/free-regular-svg-icons';
 import { faStar as faStarSolid } from '@fortawesome/free-solid-svg-icons';
+import Link from 'next/link';
 
 const PublicTerm = ({ term }: { term: GlossaryContextType }) => {
   const [showMore, setShowMore] = useState(false);
@@ -21,9 +23,8 @@ const PublicTerm = ({ term }: { term: GlossaryContextType }) => {
 
   return (
     <div>
-      <div className='mx-2 my-1 flex flex-row justify-between rounded bg-gray-200 p-1'>
-        <div className='mb-1 ml-1 mr-2 mt-1 flex grow flex-row justify-between rounded bg-gray-100 p-1'>
-          
+      <div className='mx-2 my-1 flex flex-col justify-between rounded bg-gray-200 p-1'>
+        <div className='mb-1 ml-1 mr-2 flex grow flex-row justify-between rounded bg-gray-100 p-1'>
           {/**Line: Term Definition */}
           <div className='content-left grow flex flex-col xl:flex-row rounded border border-gray-300 text-sm leading-tight tracking-tighter'>
             {/**Star Favorite*/}
@@ -82,6 +83,14 @@ const PublicTerm = ({ term }: { term: GlossaryContextType }) => {
       {/**More Info */}
       {showMore && (
         <div className='custom-term-details mx-2 flex flex-col rounded bg-gray-200 p-1'>
+          <div className='mx-3 mb-0.5 flex flex-row justify-end text-xs text-red-700'>
+            <button >
+              <Link href='' target='_blank'>
+                <FontAwesomeIcon icon={faBug} size='xs' className='self-center mx-1' />
+                Report
+              </Link>
+            </button>
+          </div>
           {/**Lines: Details*/}
           <div className='mt-1 flex flex-col items-baseline rounded px-1 xl:m-0 xl:flex xl:flex-row'>
             {/**ID*/}
