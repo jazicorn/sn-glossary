@@ -29,7 +29,8 @@ module.exports = {
         'term-edit': '#3b82f6',
         'download-json': '#78350f',
         'download-excel': '#10b981',
-        'download-sql': '#60a5fa'
+        'download-sql': '#60a5fa',
+        'menu-database': '#ca8a04'
       },
     },
   },
