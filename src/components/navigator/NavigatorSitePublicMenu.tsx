@@ -8,6 +8,8 @@ import {
   faStar,
   faChalkboard,
   faBook,
+  faFileLines,
+  faLightbulb,
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function NavigatorSitePublicMenu() {
@@ -59,6 +61,28 @@ export default function NavigatorSitePublicMenu() {
                 >
                   <FontAwesomeIcon icon={faMapLocationDot} size='sm' />
                   <span className='px-0.5'>Roadmap</span>
+                </Link>
+              </button>
+            </ol>
+            
+            <ol className='flex flex-row justify-center p-2'>
+              <button className='mx-1 flex flex-row'>
+                <Link
+                  href=''
+                  className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center tracking-tighter'
+                >
+                  <FontAwesomeIcon icon={faLightbulb} size='sm' className='w-4'/>
+                  F.A.Q
+                </Link>
+              </button>
+            </ol>
+            <ol className='flex flex-row justify-center p-2'>
+              <button className='mx-1 flex flex-row'>
+                <Link
+                  href=''
+                  className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center tracking-tighter'
+                >
+                  <FontAwesomeIcon icon={faFileLines} size='sm' className='w-4'/>Documentation
                 </Link>
               </button>
             </ol>
@@ -118,52 +142,7 @@ export default function NavigatorSitePublicMenu() {
                   href=''
                   className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center tracking-tighter'
                 >
-                  F.A.Q
-                </Link>
-                <FontAwesomeIcon
-                  icon={faArrowUpRightFromSquare}
-                  color=''
-                  size='2xs'
-                />
-              </button>
-            </ol>
-            <ol className='flex flex-row justify-center p-2'>
-              <button className='mx-1 flex flex-row'>
-                <Link
-                  href=''
-                  className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center tracking-tighter'
-                >
-                  Docs
-                </Link>
-                <FontAwesomeIcon
-                  icon={faArrowUpRightFromSquare}
-                  color=''
-                  size='2xs'
-                />
-              </button>
-            </ol>
-            <ol className='flex flex-row justify-center p-2'>
-              <button className='mx-1 flex flex-row'>
-                <Link
-                  href=''
-                  className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center tracking-tighter'
-                >
-                  Support
-                </Link>
-                <FontAwesomeIcon
-                  icon={faArrowUpRightFromSquare}
-                  color=''
-                  size='2xs'
-                />
-              </button>
-            </ol>
-            <ol className='flex flex-row justify-center p-2'>
-              <button className='mx-1 flex flex-row'>
-                <Link
-                  href=''
-                  className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center tracking-tighter'
-                >
-                  Github
+                  Developer
                 </Link>
                 <FontAwesomeIcon
                   icon={faArrowUpRightFromSquare}

@@ -5,7 +5,10 @@ import {
   faHandshakeAngle,
   faStar,
   faLightbulb,
-  faFileLines
+  faFileLines,
+  faTicket,
+  faEnvelope,
+  faArrowUpRightFromSquare
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function MoreMenu() {
@@ -37,18 +40,6 @@ export default function MoreMenu() {
             </Link>
           </button>
         </div>
-        {/**<!-- Documentation --> */}
-        <div className='no-wrap flex flex-row hover:text-blue-300'>
-          <button className='flex flex-row'>
-            <Link
-              href=''
-              className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center tracking-tighter'
-            >
-              <FontAwesomeIcon icon={faFileLines} size='sm' className='w-4'/>
-              <span className='px-0.5'>Documentation</span>
-            </Link>
-          </button>
-        </div>
         {/**<!-- F.A.Q --> */}
         <div className='no-wrap flex flex-row hover:text-blue-300'>
           <button className='flex flex-row'>
@@ -61,6 +52,18 @@ export default function MoreMenu() {
             </Link>
           </button>
         </div>
+        {/**<!-- Documentation --> */}
+        <div className='no-wrap flex flex-row hover:text-blue-300'>
+          <button className='flex flex-row'>
+            <Link
+              href=''
+              className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center tracking-tighter'
+            >
+              <FontAwesomeIcon icon={faFileLines} size='sm' className='w-4'/>
+              <span className='px-0.5'>Documentation</span>
+            </Link>
+          </button>
+        </div>
         {/**<!-- Helpful Links --> */}
         <div className='no-wrap flex flex-row hover:text-blue-300'>
           <button className='flex flex-row'>
@@ -70,6 +73,18 @@ export default function MoreMenu() {
             >
               <FontAwesomeIcon icon={faHandshakeAngle} size='sm' className='w-4'/>
               <span className='px-0.5'>Helpful Links</span>
+            </Link>
+          </button>
+        </div>
+        {/**<!-- Support --> */}
+        <div className='no-wrap flex flex-row hover:text-blue-300'>
+          <button className='flex flex-row'>
+            <Link
+              href=''
+              className='text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center tracking-tighter'
+            >
+              <FontAwesomeIcon icon={faEnvelope} size='sm' className='w-4'/>
+              <span className='px-0.5'>Support</span>
             </Link>
           </button>
         </div>

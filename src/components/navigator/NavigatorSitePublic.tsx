@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import {
   faArrowUpRightFromSquare,
   faBookOpen,
@@ -10,6 +10,7 @@ import {
   faChalkboard,
   faBook,
   faGifts,
+  faMinus,
 } from '@fortawesome/free-solid-svg-icons';
 import { faSun } from '@fortawesome/free-regular-svg-icons';
 import NavigatorSitePublicMenu from './NavigatorSitePublicMenu';
@@ -20,6 +21,7 @@ import MoreMenu from './MoreMenu';
 import { Input, Modal, Ripple, initTE } from 'tw-elements';
 
 export default function NavigatorSitePublic() {
+  const router = useRouter().pathname;
   useEffect(() => {
     initTE({ Input, Modal, Ripple });
   }, []);
@@ -56,10 +58,9 @@ export default function NavigatorSitePublic() {
                 onClick={() => menuClick()}
                 className='items-center py-5 pl-2 text-deep-blue hover:text-slate-500 xl:hidden'
               ><FontAwesomeIcon
-                    icon={faBars}
+                    icon={faMinus}
                     color=''
                     size='xl'
-                    rotation={90}
                   /></button>
                 )}
               
@@ -132,25 +133,44 @@ export default function NavigatorSitePublic() {
             <div className='hidden flex-row pr-2 hover:text-blue-300  xl:flex'>
               {/**<!-- Dashboard--> */}
               <div className='no-wrap flex flex-row'>
-                <button className='mx-1 flex flex-row'>
-                  <Link
-                    href='dashboard'
-                    target='_blank'
-                    className='text-grey-900 hover:text-grey-300 flex h-fit w-auto flex-row place-self-center truncate px-0.5 py-0 text-center tracking-tighter'
-                  >
-                    <FontAwesomeIcon
-                      icon={faChalkboard}
-                      size='sm'
-                      className='place-self-center'
-                    />
-                    <span className='px-1'>Dashboard</span>
-                    <FontAwesomeIcon
-                      icon={faArrowUpRightFromSquare}
-                      color=''
-                      size='2xs'
-                    />
-                  </Link>
-                </button>
+                {router === '/dashboard' ?
+                  <button className='mx-1 flex flex-row'>
+                    <Link
+                      href='dashboard'
+                      className='text-grey-900 hover:text-grey-300 flex h-fit w-auto flex-row place-self-center truncate px-0.5 py-0 text-center tracking-tighter'
+                    >
+                      <FontAwesomeIcon
+                        icon={faChalkboard}
+                        size='sm'
+                        className='place-self-center'
+                      />
+                      <span className='px-1'>Dashboard</span>
+                      <FontAwesomeIcon
+                        icon={faArrowUpRightFromSquare}
+                        color=''
+                        size='2xs'
+                      />
+                    </Link>
+                  </button> : 
+                  <button className='mx-1 flex flex-row'>
+                    <Link
+                      href='dashboard'
+                      target='_blank'
+                      className='text-grey-900 hover:text-grey-300 flex h-fit w-auto flex-row place-self-center truncate px-0.5 py-0 text-center tracking-tighter'
+                    >
+                      <FontAwesomeIcon
+                        icon={faChalkboard}
+                        size='sm'
+                        className='place-self-center'
+                      />
+                      <span className='px-1'>Dashboard</span>
+                      <FontAwesomeIcon
+                        icon={faArrowUpRightFromSquare}
+                        color=''
+                        size='2xs'
+                      />
+                    </Link>
+                  </button> }
               </div>
             </div>
           </div>
@@ -199,25 +219,9 @@ export default function NavigatorSitePublic() {
             {/**<!-- SN-GLossary External Links --> */}
             <div className=' flex flex-row'>
               <div className=' flex flex-row '>
-                {/**<!-- Support --> */}
-                <div className='no-wrap flex flex-row'>
-                  <button className='mx-1 flex flex-row hover:text-blue-300'>
-                    <Link
-                      href=''
-                      className='text-grey-900 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center'
-                    >
-                      Support
-                    </Link>
-                    <FontAwesomeIcon
-                      icon={faArrowUpRightFromSquare}
-                      color=''
-                      size='2xs'
-                    />
-                  </button>
-                </div>
                 {/**<!-- Developer--> */}
                 <div className='no-wrap flex flex-row'>
-                  <button className='mx-1 flex flex-row hover:text-blue-300'>
+                  <button className='mx-2 flex flex-row hover:text-blue-300'>
                     <Link
                       href=''
                       className='text-grey-900 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center'
@@ -231,16 +235,7 @@ export default function NavigatorSitePublic() {
                     />
                   </button>
                 </div>
-                {/**<!-- Github --> */}
-                <div className=' flex flex-row pl-1 pr-2 hover:text-blue-300'>
-                  <a
-                    href='https://github.com/jazicorn/sn-glossary'
-                    target='_blank'
-                    className='text-grey-900 hover:text-grey-300 mx-1 h-fit w-auto place-self-center p-0 text-center'
-                  >
-                    <FontAwesomeIcon icon={faGithub} size='xl' />
-                  </a>
-                </div>
+               
               </div>
             </div>
             {/**<!-- Site Colors: Light/Dark --> */}

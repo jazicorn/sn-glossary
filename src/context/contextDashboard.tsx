@@ -3,6 +3,10 @@ import React, { createContext, useContext, useReducer  } from "react";
 import dataLists from '../../utils/dataExPublicLists'
 import { ListType } from '../../lib/types'
 
+import { v4 as uuidv4 } from 'uuid';
+
+const getUUID = uuidv4();
+
 const myData:ListType[] = dataLists;
 // PublicList Array contains Object list | Array[ Object{ id: number, name: string, items: Array[ Objects{} ] } ]
 // returns string[]
@@ -38,8 +42,10 @@ type ListData = {
   menu: string[];
   getMenuItem: string;
   addMenuItem: boolean;
-  deleteMenuItem: boolean;
+  deleteMenuItem: string;
   favoriteList: ListType | undefined;
+  publicFavorites?: string[];
+  getFavorite?: string;
   addFavorite: string;
   removeFavorite: string;
   currentList: ListType | undefined;
@@ -52,11 +58,13 @@ type ListAction =
     menu?: string[];
     getMenuItem?: string;
     addMenuItem?: boolean;
-    deleteMenuItem?: boolean;
+    deleteMenuItem?: string;
   }
   | {
     type: "FAVORITES";
     favoriteList?: ListType;
+    publicFavorites?: string[];
+    getFavorite?: string;
     addFavorite?: string;
     removeFavorite?: string;
     }
@@ -74,10 +82,23 @@ const ListReducer = (
   switch (action.type) {
     case 'MENU':
       if (action.addMenuItem) {
-        const length = state.lists.length + 1;
-        state.menu.unshift('Untitled')
-        state.lists.push({ id: length, name: 'Untitled', items: [] })
+        const menu = state.menu;
+        let total = 1;
+        for (const item of menu) {
+          if (item.includes('Untitled')) {
+            total += 1;
+          }
+        }
+        const newItem = 'Untitled' + total.toString();
+        menu.unshift(newItem);
+        state.lists.push({ id: getUUID, name: newItem, items: [] })
+        total = 0;
+        return { ...state, menu: menu};
+      } else if (action.deleteMenuItem) {
+        //const deleteItem = state.deleteMenuItem;
         return { ...state, menu: state.menu};
+      } else if (action.getMenuItem) {
+        return {...state, getMenuItem: action.getMenuItem}
       }
       return { ...state, menu: dataMenu };
     case 'LISTS':
@@ -99,8 +120,10 @@ const defaultValues: ListData = {
   menu: dataMenu,
   getMenuItem: 'Favorites',
   addMenuItem: false,
-  deleteMenuItem: false,
+  deleteMenuItem: '',
   favoriteList: favorites,
+  publicFavorites: [],
+  getFavorite: '',
   addFavorite: '',
   removeFavorite: '',
   currentList: favorites,
@@ -121,7 +144,6 @@ export const DashboardContext = createContext<{
 
 export const DashboardProvider: React.FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(ListReducer, defaultValues);
-  
 
   return (
     <DashboardContext.Provider value={{state, dispatch}}>
