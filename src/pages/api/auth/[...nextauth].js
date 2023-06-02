@@ -1,4 +1,12 @@
+import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"
+import { PouchDBAdapter } from "@next-auth/pouchdb-adapter";
+import PouchDB from "pouchdb";
+
+// Setup your PouchDB instance and database
+PouchDB.plugin(import("pouchdb-adapter-leveldb")).plugin(import("pouchdb-find")); // Don't forget the `pouchdb-find` plugin
+
+const pouchdb = new PouchDB("auth_db", { adapter: "leveldb" });
 
 export const authOptions = {
     providers: [
@@ -37,7 +45,8 @@ export const authOptions = {
                 return null
             }
         })
-    ]
+    ],
+    adapter: PouchDBAdapter(pouchdb),
 }
 
 export default NextAuth(authOptions)
