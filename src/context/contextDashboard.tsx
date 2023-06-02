@@ -1,13 +1,40 @@
 import React, { createContext, useContext, useReducer  } from "react";
-//import dataEntries from '../../utils/dataExamplePublicGlossary'
+import dataEntries from '../../utils/dataExPublicGlossary'
 import dataLists from '../../utils/dataExPublicLists'
-import { ListType } from '../../lib/types'
+import { ListType, GlossaryContextType } from '../../lib/types'
+import PouchDB from 'pouchdb'
 
 import { v4 as uuidv4 } from 'uuid';
-
 const getUUID = uuidv4();
 
+// error 412 | id missing for puts
+const publicData:GlossaryContextType[] = dataEntries
+/**<!-- Seed Public Glossary Database-> */
+const dbPublic = new PouchDB('GlossaryPublic');
+const seedDBPublic = async (data: GlossaryContextType[]) => {
+  try {
+    const date = new Date().toISOString()
+    //console.log(data)
+    await dbPublic.put({ _id: date, data: data });
+  } catch (err) {
+    console.log(err);
+  }
+}
+seedDBPublic(publicData);
+
 const myData:ListType[] = dataLists;
+/**<!-- Seed Private Glossary Database-> */
+const dbPrivate = new PouchDB('GlossaryPrivate');
+const seedDBPrivate = async (data: ListType[]) => {
+  try {
+    const date = new Date().toISOString()
+    await dbPrivate.put({ _id: date, data: data });
+  } catch (err) {
+    console.log(err);
+  }
+}
+seedDBPrivate(myData );
+
 // PublicList Array contains Object list | Array[ Object{ id: number, name: string, items: Array[ Objects{} ] } ]
 // returns string[]
 export const defaultDataMenu = (prop:ListType[]) => {

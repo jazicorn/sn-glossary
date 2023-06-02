@@ -8,6 +8,8 @@ export const enum snRef {
 
 // array of glossary entries interface
 export interface GlossaryContextType {
+  _id?: string,
+  rev?: string,
   id: string;
   public: boolean;
   favorite: boolean;
@@ -21,6 +23,8 @@ export interface GlossaryContextType {
 
 // list interface
 export interface ListType {
+  _id?: string,
+  rev?: string,
   index?: number
   id: string;
   name: string;
@@ -29,8 +33,11 @@ export interface ListType {
 
 // user object interface
 export interface UserContextType {
+  _id?: string,
+  rev?: string,
   id: string;
-  name: string;
+  name?: string;
   email: string;
-  lists: ListType[];
+  password: string;
+  lists?: ListType[];
 }
