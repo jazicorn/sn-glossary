@@ -7,7 +7,7 @@ import PouchDB from "pouchdb";
 // Setup your PouchDB instance and database
 PouchDB.plugin(dynamic(() => import("pouchdb-adapter-leveldb"), { ssr: false })).plugin(dynamic(() => import("pouchdb-find"), { ssr: false })); // Don't forget the `pouchdb-find` plugin
 
-const pouchdb = new PouchDB('GlossaryAuth');
+const pouchdb = new PouchDB('glossaryAuth');
 
 export const authOptions = {
     providers: [
