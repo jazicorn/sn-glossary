@@ -30,9 +30,9 @@ export default function Footer() {
         <div className='relative max-h-full w-full max-w-2xl'>
           <div className='relative rounded-lg bg-white shadow dark:bg-gray-700'>
             <div className='flex items-start justify-between rounded-t border-b p-4 dark:border-gray-600'>
-              <h3 className='text-xl font-semibold text-gray-900 dark:text-white'>
+              <h1 className='text-xl font-semibold text-gray-900 dark:text-white'>
                 Terms of Service
-              </h3>
+              </h1>
               <button
                 type='button'
                 className='ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white'
@@ -56,15 +56,15 @@ export default function Footer() {
             </div>
 
             <div className='custom-disclaimer space-y-6 p-6 text-sm'>
-              <h2 className='text-sm'>Last updated: 05/23/23</h2>
-              <h1 className=''>Interpretation</h1>
+              <p className='text-sm'>Last updated: 05/23/23</p>
+              <h2 className=''>Interpretation</h2>
               <p className='leading-relaxed text-gray-500 dark:text-gray-400'>
                 The words of which the initial letter is capitalized have
                 meanings defined under the following conditions. The following
                 definitions shall have the same meaning regardless of whether
                 they appear in singular or in plural.
               </p>
-              <h1 className=''>Definitions</h1>
+              <h2 className=''>Definitions</h2>
               <div className='leading-relaxed text-gray-500 dark:text-gray-400'>
                 For the purposes of this Disclaimer:
                 <ul className='list-inside list-disc'>
@@ -85,7 +85,7 @@ export default function Footer() {
                   </li>
                 </ul>
               </div>
-              <h1 className=''>Disclaimer</h1>
+              <h2 className=''>Disclaimer</h2>
               <p className='leading-relaxed text-gray-500 dark:text-gray-400'>
                 The information contained on the Service is for general
                 information purposes only. The Company assumes no responsibility
@@ -101,9 +101,9 @@ export default function Footer() {
                 Disclaimer Generator. The Company does not warrant that the
                 Service is free of viruses or other harmful components.
               </p>
-              <h1 className='text-base text-sn-light'>
+              <h2 className='text-base text-sn-light'>
                 External Links Disclaimer
-              </h1>
+              </h2>
               <p className='leading-relaxed text-gray-500 dark:text-gray-400'>
                 The Service may contain links to external websites that are not
                 provided or maintained by or in any way affiliated with the
@@ -111,7 +111,7 @@ export default function Footer() {
                 accuracy, relevance, timeliness, or completeness of any
                 information on these external websites.
               </p>
-              <h1 className=''>Fair Use Disclaimer</h1>
+              <h2 className=''>Fair Use Disclaimer</h2>
               <p className='leading-relaxed text-gray-500 dark:text-gray-400'>
                 The Company may use copyrighted material which has not always
                 been specifically authorized by the copyright owner. The Company
@@ -123,7 +123,7 @@ export default function Footer() {
                 material from the Service for your own purposes that go beyond
                 fair use, You must obtain permission from the copyright owner.
               </p>
-              <h1 className=''>&quot;Use at Your Own Risk&quot; Disclaimer</h1>
+              <h2 className=''>&quot;Use at Your Own Risk&quot; Disclaimer</h2>
               <p className='leading-relaxed text-gray-500 dark:text-gray-400'>
                 All information in the Service is provided &quot;as is&quot;,
                 with no guarantee of completeness, accuracy, timeliness or of
@@ -136,7 +136,7 @@ export default function Footer() {
                 consequential, special or similar damages, even if advised of
                 the possibility of such damages.
               </p>
-              <h1 className=''>Contact Us</h1>
+              <h2 className=''>Contact Us</h2>
               <div className='leading-relaxed text-gray-700 dark:text-gray-800'>
                 If you have any questions about this Disclaimer, You can contact
                 Us:
