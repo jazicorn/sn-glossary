@@ -2,9 +2,9 @@ import React from 'react';
 // import { GlossaryContext } from '../../context/contextGlossary';
 import Term from './PublicTerm';
 import Search from './PublicSearch';
-import { dbPublic } from '@/context/contextGlossary';
 import { useCallback, useEffect, useState } from 'react'
 import { GlossaryContextType } from '../../../lib/types';
+import { getPublicDocs } from '../../../utils/dbPouchPublic';
 
 export default function PublicGlossary() {
   //const publicGlossary = useContext(GlossaryContext);
@@ -12,23 +12,9 @@ export default function PublicGlossary() {
 
   // declare the async data fetching function
   const fetchData = useCallback(async () => {
-    const docs = await dbPublic.allDocs({ include_docs: true });
-    //console.log(docs);
-    const docsJSON = JSON.stringify(docs.rows);
-    //console.log(docsJSON);
-    if (docsJSON != undefined) {
-      const parsed = JSON.parse(docsJSON);
-      //console.log(parsed);
-      // let counter = 0
-      const result:GlossaryContextType[] = [];
-      //console.log(parsed[0].doc);
-      parsed.forEach((element: { doc: GlossaryContextType; }) => {
-       //console.log(element.doc)
-       result.push(element.doc)
-      });
-      if (result != undefined) {
-        setData(result);
-      }
+    const docs = await getPublicDocs();
+    if (docs != undefined) {
+      setData(docs);
     }
   }, [])
 

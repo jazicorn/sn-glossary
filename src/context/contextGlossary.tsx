@@ -1,31 +1,7 @@
 import React, { createContext } from "react";
-import PouchDB from 'pouchdb'
+//import PouchDB from 'pouchdb'
 import publicGlossary from '../../utils/dataExPublicGlossary';
 import { GlossaryContextType } from '../../lib/types';
-
-const publicData:GlossaryContextType[] = publicGlossary
-/**Create Public GLossary Database */
-export const dbPublic = new PouchDB('glossaryPublic');
-/**<!-- Seed Public Glossary Database-> */
-const seedDBPublic = async (data: GlossaryContextType[]) => {
-  data.forEach((item) => { item._id = item.id });
-  try {
-    //console.log(data)
-    await dbPublic.bulkDocs(data);
-  } catch (err) {
-    console.log(err);
-  }
-}
-seedDBPublic(publicData);
-
-export const getPublicDoc = async (id: string) => { 
-  try {
-    const result = await dbPublic.get<Document>(id)
-    return JSON.stringify(result);
-  } catch (err) {
-    console.log(err)
-  }
-}
 
 //https://refine.dev/blog/usecontext-and-react-context/
 
