@@ -81,18 +81,29 @@ const ListReducer = (
   switch (action.type) {
     case 'MENU':
       if (action.addMenuItem) {
+        const lists = state.lists;
         const menu = state.menu;
-        let total = 1;
-        for (const item of menu) {
-          if (item.includes('Untitled')) {
-            total += 1;
+        const untitled = menu.includes('Untitled');
+        if (lists.length > 10) {
+          return { ...state, menu: menu }
+        } else if (!untitled) {
+          const newItem = 'Untitled'
+          menu.unshift(newItem);
+          lists.push({ id: getUUID, name: newItem, items: [] });
+          return { ...state, menu: menu, lists: lists } ;
+        } else {
+          let total = 0;
+          for (const item of menu) {
+            if (item.includes('Untitled')) {
+              total += 1;
+            }
           }
+          const newItem = 'Untitled' + total.toString();
+          menu.unshift(newItem);
+          state.lists.push({ id: getUUID, name: newItem, items: [] })
+          total = 0;
+          return { ...state, menu: menu }
         }
-        const newItem = 'Untitled' + total.toString();
-        menu.unshift(newItem);
-        state.lists.push({ id: getUUID, name: newItem, items: [] })
-        total = 0;
-        return { ...state, menu: menu};
       } else if (action.deleteMenuItem) {
         //const deleteItem = state.deleteMenuItem;
         return { ...state, menu: state.menu};
