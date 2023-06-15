@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState, useMemo, useEffect } from 'react';
 //import { useForm } from 'react-hook-form';
 import { useDashboard } from '@/context/contextDashboard';
 import { nanoid } from 'nanoid'
@@ -24,18 +24,18 @@ const TermNew: React.FC = () => {
     setShowMore(!showMore);
   }
   const [inputTags, setInputTags] = useState('');
-  const [tags, setTags] = useState([]);
+  const [editTags, setEditTags] = useState([]);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const addTags = (e: any) => {
     if (e.key === 'Enter' && e.target.value !== '') {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore
-      setTags([...tags, e.target.value]);
+      setEditTags([...editTags, e.target.value]);
       e.target.value = '';
     }
   };
   const removeTags = (index: number) => {
-    setTags([...tags.filter((tag) => tags.indexOf(tag) !== index)]);
+    setEditTags([...editTags.filter((tag) => editTags.indexOf(tag) !== index)]);
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -50,44 +50,6 @@ const TermNew: React.FC = () => {
   function handleSubmit(e: any) {
     e.preventDefault();
     setNewTerm(newTerm);
-  }
-
-  {/**<!-- Edit Text-> */ }
-  const [editName, setEditName] = useState('');
-  const [editDef, setEditDef] = useState('');
-  const [editProduct, setEditProduct] = useState('');
-  const [editRef, setEditRef] = useState('');
-  const [editVer, setEditVer] = useState('Utah');
-  // Make default fav true if Favorite List
-  function isListFav(termName:string) {
-    if (termName === 'Favorites') {
-      return true
-    }
-    return false
-  };
-  const defaultFav = isListFav(getListName);
-  const [editFav, setEditFav] = useState(defaultFav);
-  
-  const handleEditName = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-    setEditName(e.target.value)
-  }
-  const handleEditDef = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-    setEditDef(e.target.value)
-  }
-  const handleEditProduct = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-    setEditProduct(e.target.value)
-  }
-  const handleEditRef = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-    setEditRef(e.target.value)
-  }
-  const handleEditVer = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-    setEditVer(e.target.value)
-  }
-  const handleEditFav = () => {
-    if (defaultFav) {
-      return
-    }
-    setEditFav(!editFav);
   }
 
   // generate new nano id & collision check for id
@@ -110,19 +72,68 @@ const TermNew: React.FC = () => {
       return nanoID;
     }
   }
-  
-  const newTermObj = {
-    id: newTermId(nano),
-    public: false,
-    favorite: editFav,
-    name: editName,
-    def: editDef,
-    version: editVer,
-    product: editProduct,
-    ref: editRef,
-    tags: tags
-  }
+  const termID = newTermId(nano);
+  // Make default fav true if Favorite List
+  function isListFav(termName:string) {
+    if (termName === 'Favorites') {
+      return true
+    }
+    return false
+  };
+  const defaultFav = isListFav(getListName);
 
+  {/**<!-- State: Edits-> */ }
+  const [editFav, setEditFav] = useState(defaultFav);
+  const [editId, setEditId] = useState(termID);
+  const [editName, setEditName] = useState('');
+  const [editDef, setEditDef] = useState('');
+  const [editProduct, setEditProduct] = useState('');
+  const [editRef, setEditRef] = useState('');
+  const [editVer, setEditVer] = useState('Utah');
+  const [data, setData] = useState({});
+   {/**<!-- State: Handle Edits-> */ }
+  const handleEditName = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+    setEditName(e.target.value)
+  }
+  const handleEditDef = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+    setEditDef(e.target.value)
+  }
+  const handleEditProduct = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+    setEditProduct(e.target.value)
+  }
+  const handleEditRef = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+    setEditRef(e.target.value)
+  }
+  const handleEditVer = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+    setEditVer(e.target.value)
+  }
+  const handleEditFav = () => {
+    if (defaultFav) {
+      return
+    }
+    setEditFav(!editFav);
+  }
+  
+  const fetchData = useCallback(async () => {
+    const newTermObj = {
+          id: editId,
+          public: false,
+          favorite: editFav,
+          name: editName,
+          def: editDef,
+          version: editVer,
+          product: editProduct,
+          ref: editRef,
+          tags: editTags
+        };
+
+    setData(newTermObj);
+  }, [editDef, editFav, editId, editName, editProduct, editRef, editVer, editTags])
+
+  useEffect(() => {
+    fetchData()
+      .catch(console.error);
+  }, [fetchData]);
   return (
     <div>
       {/***************** */}
@@ -231,8 +242,8 @@ const TermNew: React.FC = () => {
                     <div
                       key='id'
                       placeholder='123456789'
-                      className='h-6 w-full xl:w-[90px] justify-center pt-[3px] rounded-r border border-gray-300 bg-transparent p-0 pl-1 text-left text-xs focus:border-slate-400 focus:outline-none'>{newTermObj.id}</div>
-                    
+                      className='h-6 w-full xl:w-[90px] justify-center pt-[3px] rounded-r border border-gray-300 bg-transparent p-0 pl-1 text-left text-xs focus:border-slate-400 focus:outline-none'>{editId}
+                    </div>
                   </div>
                 </div>
                 {/**Public */}
@@ -330,15 +341,14 @@ const TermNew: React.FC = () => {
                   />
                   {/**Input-tags */}
                   <div className='mr-1 p-1 flex flex-row flex-wrap content-center items-center text-xs'>
-                    {tags.map((tag, index) => (
-                      <div
-                        key='tag'
-                        className='mr-1 mb-1 h-6 w-fit pr-2 text-sm flex flex-row content-center items-center rounded border-0 bg-slate-200 focus:border-2 focus:border-slate-400'
-                      >
-                        <span className='w-fit pb-0.5 pl-1 text-right'>
-                          {tag}
-                        </span>
-                        <span className='w-fit pl-3 text-center'>
+                    {editTags.map((tag, index) => ( 
+                      <div key={tag} className='mx-1 flex flex-row content-center items-center rounded border  bg-slate-200 focus:border-2 border-slate-400'>
+                        <input
+                          name='editTag'
+                          value={tag}
+                          className='mr-1 px-1 h-6 w-auto pr-2 text-sm flex flex-row content-center items-center rounded-l'
+                        />
+                        <span className='mr-1 px-1 text-center'>
                           <FontAwesomeIcon
                             icon={faXmark}
                             size='sm'
