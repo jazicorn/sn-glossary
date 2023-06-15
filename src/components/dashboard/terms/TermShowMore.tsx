@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-//import { useForm } from 'react-hook-form';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faXmark,
   faSquareXmark
 } from '@fortawesome/free-solid-svg-icons';
 import {faSquareCheck, faSquare } from '@fortawesome/free-regular-svg-icons'
@@ -15,40 +13,6 @@ type Props = {
 }
 
 const ShowMore: React.FC<Props> = ({ term, edit, editFav }) => {
-    const [tags, setTags] = useState(term.tags);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const addTags = (e: any) => {
-        if (e.key === 'Enter' && e.target.value !== '') {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //@ts-ignore
-        setTags([...tags, e.target.value]);
-        e.target.value = '';
-        }
-    };
-    const removeTags = (index: number) => {
-        if (!edit && tags != undefined) {
-        setTags([...tags.filter((tag) => tags.indexOf(tag) !== index)]);
-        }
-        return
-    };
-
-    const term_id = term.id;
-
-    {/**<!-- Edit Text-> */ }
-    const [editProduct, setEditProduct] = useState(term.product);
-    const [editRef, setEditRef] = useState(term.ref);
-    const [editVer, setEditVer] = useState(term.ver);
-    
-    const handleEditProduct = (e: { target: { value: React.SetStateAction<string | undefined>; }; }) => {
-        setEditProduct(e.target.value)
-    }
-    const handleEditRef = (e: { target: { value: React.SetStateAction<string | undefined>; }; }) => {
-        setEditRef(e.target.value)
-    }
-    const handleEditVer = (e: { target: { value: React.SetStateAction<string | undefined>; }; }) => {
-        setEditVer(e.target.value)
-    }
-
     return (
         <div className='custom-term-details mx-2 flex flex-col rounded bg-gray-200 p-1'>
             {/**Lines: Details*/}
@@ -60,7 +24,7 @@ const ShowMore: React.FC<Props> = ({ term, edit, editFav }) => {
                 </label>
                 <div className='w-full xl:w-[90px] flex flex-row mb-1 mr-1 mt-1 inline text-left text-xs'>
                     <div key='id' placeholder='123456789' className='h-6 w-full xl:w-[90px] justify-center pt-[3px] rounded-r border border-gray-300 bg-transparent p-0 pl-1 text-left text-xs focus:border-slate-400 focus:outline-none'>
-                        {term_id}
+                        {term.id}
                     </div>
                 </div>
             </div>
@@ -95,8 +59,7 @@ const ShowMore: React.FC<Props> = ({ term, edit, editFav }) => {
                 {/**For wrapping text have to use textarea */}
                 <input
                     disabled={edit}
-                    value={editVer}
-                    onChange={handleEditVer}
+                    value={term.ver}
                     type='text'
                     maxLength={30}
                     name='product'
@@ -114,8 +77,7 @@ const ShowMore: React.FC<Props> = ({ term, edit, editFav }) => {
                 {/**For wrapping text have to use textarea */}
                 <input
                     disabled={edit}
-                    value={editProduct}
-                    onChange={handleEditProduct}
+                    value={term.product}
                     type='text'
                     maxLength={30}
                     name='product'
@@ -135,8 +97,7 @@ const ShowMore: React.FC<Props> = ({ term, edit, editFav }) => {
                 <div className='mr-1 mt-1 w-full inline text-left text-xs'>
                     <input
                         disabled={edit}
-                        value={editRef}
-                        onChange={handleEditRef}
+                        value={term.ref}
                         type='text'
                         maxLength={200}
                         name='ref'
@@ -149,35 +110,18 @@ const ShowMore: React.FC<Props> = ({ term, edit, editFav }) => {
             {/**Lines:Tags*/}
             <div className='w-full px-1 pb-1'>
             {/**Tags*/}
-            <div className='mt-1 w-full flex flex-row flex-wrap rounded bg-gray-100 rounded-r border border-transparent focus:border-slate-400 focus:outline-none'>
-                <label className='flex-none max-h-6 w-[90px] mb-1 ml-1 mt-1 pr-1 rounded-l border-2 border-slate-300 bg-slate-100 text-sm text-right '>
+            <div className='mt-1 pb-1 w-full flex flex-row flex-wrap rounded bg-gray-100 rounded-r border border-transparent focus:border-slate-400 focus:outline-none'>
+                <label className='flex-none max-h-6 w-[90px] ml-1 mt-1 pr-1 rounded-l border-2 border-slate-300 bg-slate-100 text-sm text-right '>
                     Tags:
                 </label>
-                <input
-                    disabled={edit}
-                    maxLength={100}
-                    type='text'
-                    name='tag'
-                    placeholder="Type..."
-                    onKeyUp={(e) => addTags(e)}
-                    className='mt-1 h-6 max-h-6 w-[250px] items-baseline text-left text-xs bg-transparent border-0 focus:border-0 active:border-0 '
-                    />
                 {/**Input-tags */}
                 <div className='mr-1 px-1 flex flex-row flex-wrap content-center items-center text-xs'>
-                {tags?.map((tag, index) => (
-                    <div
-                    key='tag'
-                    className='mr-1 mb-1 h-6 w-fit pr-2 text-sm flex flex-row content-center items-center rounded border-0 bg-slate-200 focus:border-2 focus:border-slate-400'
+                {term.tags?.map((tag) => (
+                    <div key='tag'
+                    className='mr-1 h-6 mt-1 w-fit pr-2 text-sm flex flex-row content-center items-center rounded border-0 bg-slate-200 focus:border-2 focus:border-slate-400'
                     >
                     <span className='w-fit pb-0.5 pl-1 text-right'>
                         {tag}
-                    </span>
-                    <span className='w-fit pl-3 text-center'>
-                        <FontAwesomeIcon
-                        icon={faXmark}
-                        size='sm'
-                        onClick={() => removeTags(index)}
-                        />
                     </span>
                     </div>
                 ))}
