@@ -1,8 +1,7 @@
-import React, { useCallback, useState, useMemo, useEffect } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 //import { useForm } from 'react-hook-form';
 import { useDashboard } from '@/context/contextDashboard';
 import { nanoid } from 'nanoid'
-// nanoid(10) //=> "IRFa-VaY2b"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleChevronDown,
@@ -19,12 +18,11 @@ import {faSquareCheck, faStar as faStarOutline} from '@fortawesome/free-regular-
 const TermNew: React.FC = () => {
   const { state } = useDashboard();
   const getListName = state.getMenuItem;
-  const [showMore, setShowMore] = useState(false);
+  
   function handleMoreClick() {
     setShowMore(!showMore);
   }
-  const [inputTags, setInputTags] = useState('');
-  const [editTags, setEditTags] = useState([]);
+  
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const addTags = (e: any) => {
     if (e.key === 'Enter' && e.target.value !== '') {
@@ -43,8 +41,6 @@ const TermNew: React.FC = () => {
     const { value } = e.target;
     setInputTags(value);
   };
-
-  const [newTerm, setNewTerm] = useState({});
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function handleSubmit(e: any) {
@@ -81,16 +77,22 @@ const TermNew: React.FC = () => {
     return false
   };
   const defaultFav = isListFav(getListName);
-
+  const [showMore, setShowMore] = useState(false);
+  const [newTerm, setNewTerm] = useState({});
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [data, setData] = useState({});
   {/**<!-- State: Edits-> */ }
+  const [inputTags, setInputTags] = useState('');
+  const [editTags, setEditTags] = useState([]);
   const [editFav, setEditFav] = useState(defaultFav);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [editId, setEditId] = useState(termID);
   const [editName, setEditName] = useState('');
   const [editDef, setEditDef] = useState('');
   const [editProduct, setEditProduct] = useState('');
   const [editRef, setEditRef] = useState('');
   const [editVer, setEditVer] = useState('Utah');
-  const [data, setData] = useState({});
+  
    {/**<!-- State: Handle Edits-> */ }
   const handleEditName = (e: { target: { value: React.SetStateAction<string>; }; }) => {
     setEditName(e.target.value)
