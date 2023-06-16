@@ -8,8 +8,7 @@ const getUUID = uuidv4();
 const myData: ListType[] = dataLists
 
 console.log(myData)
-// PublicList Array contains Object list | Array[ Object{ id: number, name: string, items: Array[ Objects{} ] } ]
-// returns string[]
+// PublicList Array 
 export const defaultDataMenu = (prop:ListType[]) => {
   const menu: MenuItem[] = [];
   prop.forEach((entry:ListType) => {
@@ -52,6 +51,19 @@ export const dataReducerList = (prop: ListType[], name: string) => {
 
 // favorite list
 const favorites = dataReducerList(myData, 'Favorites')
+
+export const findList = (lists: ListType[], prop: string) => {
+  return lists.find((element) => {
+    return prop === element.id || prop === element.name
+  })
+}
+
+export const deleteItem = (lists: ListType[] | MenuItem[], prop: string) => {
+  //console.log(prop);
+  const results = lists.filter((list) => { return list.name !== prop && list.id !== prop });
+  //console.log(results);
+  return results
+}
 
 //lists of term definitions
 type ListData = {
@@ -125,8 +137,14 @@ const ListReducer = (
           return { ...state, menu: menu }
         }
       } else if (action.deleteMenuItem) {
-        //const deleteItem = state.deleteMenuItem;
-        return { ...state, menu: state.menu};
+        const lists = state.lists;
+        //console.log(lists)
+        const menu = state.menu;
+        const item = state.getMenuItem;
+        const filteredLists = deleteItem(lists, item);
+        const filteredMenu = deleteItem(menu, item);
+        //console.log(filteredLists)
+        return { ...state, menu: filteredMenu, getMenuItem: 'Favorites', lists: filteredLists };
       } else if (action.getMenuItem) {
         return {...state, getMenuItem: action.getMenuItem}
       }
