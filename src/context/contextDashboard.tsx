@@ -1,25 +1,36 @@
-import React, { createContext, useContext, useReducer  } from "react";
+import React, { createContext, useContext, useReducer } from "react";
 import dataLists from '../../utils/dataExPublicLists'
-import { ListType } from '../../lib/types'
-
+import { ListType, MenuItem } from '../../lib/types'
+//import { getPlaygroundDocs } from "../../utils/db.PouchPlayground";
 import { v4 as uuidv4 } from 'uuid';
 const getUUID = uuidv4();
 
-const myData:ListType[] = dataLists;
+const myData: ListType[] = dataLists
 
+console.log(myData)
 // PublicList Array contains Object list | Array[ Object{ id: number, name: string, items: Array[ Objects{} ] } ]
 // returns string[]
 export const defaultDataMenu = (prop:ListType[]) => {
-  const menu: string[] = []
+  const menu: MenuItem[] = [];
   prop.forEach((entry:ListType) => {
-    const item: string = entry.name;
-    menu.push(item);
+    menu.push({  id: entry.id, name: entry.name });
   })
   return menu
 };
 
 // array of menu items
 const dataMenu = defaultDataMenu(myData)
+
+// lists of menu names
+export const dataMenuItems= (prop: MenuItem[]) => {
+  const names: string[] = [];
+  const ids: string[] = [];
+  prop.forEach((item) => {
+    names.push(item.name);
+    ids.push(item.id);
+  })
+  return [ids, names] as const
+}
 
 // true if name found in list, false if not
 // returns bool
@@ -38,7 +49,7 @@ const favorites = dataReducerList(myData, 'Favorites')
 
 //lists of term definitions
 type ListData = {
-  menu: string[];
+  menu: MenuItem[];
   getMenuItem: string;
   addMenuItem: boolean;
   deleteMenuItem: string;
@@ -54,7 +65,7 @@ type ListData = {
 type ListAction =
   | {
     type: "MENU";
-    menu?: string[];
+    menu?: MenuItem[];
     getMenuItem?: string;
     addMenuItem?: boolean;
     deleteMenuItem?: string;
@@ -83,24 +94,27 @@ const ListReducer = (
       if (action.addMenuItem) {
         const lists = state.lists;
         const menu = state.menu;
-        const untitled = menu.includes('Untitled');
+        const [names] = dataMenuItems(menu);
+        const untitled = names.includes('Untitled');
         if (lists.length > 10) {
           return { ...state, menu: menu }
         } else if (!untitled) {
-          const newItem = 'Untitled'
-          menu.unshift(newItem);
-          lists.push({ id: getUUID, name: newItem, items: [] });
+          const newID = getUUID;
+          const newName = 'Untitled'
+          menu.unshift({ id: newID, name: newName });
+          lists.push({ id: newID, name: newName, items: [] });
           return { ...state, menu: menu, lists: lists } ;
         } else {
           let total = 0;
-          for (const item of menu) {
+          for (const item of names) {
             if (item.includes('Untitled')) {
               total += 1;
             }
           }
-          const newItem = 'Untitled' + total.toString();
-          menu.unshift(newItem);
-          state.lists.push({ id: getUUID, name: newItem, items: [] })
+          const newID = getUUID;
+          const newName = 'Untitled' + total.toString();
+          menu.unshift({ id: newID, name: newName });
+          state.lists.push({ id: newID, name: newName, items: [] })
           total = 0;
           return { ...state, menu: menu }
         }

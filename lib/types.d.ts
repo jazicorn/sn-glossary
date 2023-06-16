@@ -31,6 +31,17 @@ export interface ListType {
   items?: GlossaryContextType[];
 }
 
+// menu interface
+export interface Menu {
+  items: MenuItem[]
+}
+
+// menu items interface
+export interface MenuItem {
+  id: string,
+  name: string
+}
+
 // user object interface
 export interface UserContextType {
   _id?: string,
