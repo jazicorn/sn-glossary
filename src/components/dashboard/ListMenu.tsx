@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
 import { faChevronCircleDown, faChevronCircleUp, faClipboardList, faDatabase, faRectangleList, faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useDashboard } from '@/context/contextDashboard';
-// import { v4 as uuidv4 } from 'uuid';
-// uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
-// uuid.validate(); //	Test a string to see if it is a valid UUID
+import { dataMenuItems, useDashboard } from '@/context/contextDashboard';
 
 export default function ListMenu() {
+  const { state, dispatch } = useDashboard();
   const [isView, setView] = useState(false);
   useEffect(() => {
     if (window.innerWidth > 1280) {
@@ -30,13 +28,14 @@ export default function ListMenu() {
   function handleMoreClick() {
     setShowMore(!showMore);
   }
-  const { state, dispatch } = useDashboard();
 
-  const menu = state.menu.filter((item) => item != 'Favorites');
+  // Create list menu names
+  const names = dataMenuItems(state.menu, 'names') as string[] | undefined;
+  const menu: string[] | undefined = Array.isArray(names) ? [...names].filter((item) => item != 'Favorites') : undefined;
   
   function createMenuItem() {
-    const menuTotal = state.menu.length >= 10;
-    if (!menuTotal) {
+    const menuTotal = state.menu.length <= 10;
+    if (menuTotal) {
       dispatch({ type: "MENU", addMenuItem: true })
     }
   }
@@ -88,7 +87,7 @@ export default function ListMenu() {
               </div>
             <div>
             <ul className='text-l flex flex-col'>
-            {menu?.map((list: string) => (
+            {menu?.map((list) => (
               <li key={list} className='mx-2 my-1 rounded border-4 bg-slate-100'>
                 <button key={ list } onClick={() => setMenuItem(list)} className='px-2 hover:italic inline-block h-full w-full from-violet-100 to-blue-200 hover:bg-gradient-to-r '>
                  {list}
@@ -141,7 +140,7 @@ export default function ListMenu() {
                     </button>
                   </div>
                   <ul className='text-l flex flex-col'>
-                    {menu?.map((list: string) => (
+                    {menu?.map((list) => (
                       <li  key='key' className='mx-2 my-1 rounded border-4 bg-gray-100'>
                         <button key={list} onClick={() => setMenuItem(list)} className='inline-block h-full w-full from-violet-100 to-blue-200 text-slate-500 hover:bg-gradient-to-r hover:italic hover:text-slate-700 '>
                           {list}
