@@ -22,14 +22,20 @@ export const defaultDataMenu = (prop:ListType[]) => {
 const dataMenu = defaultDataMenu(myData)
 
 // lists of menu names
-export const dataMenuItems= (prop: MenuItem[]) => {
+export const dataMenuItems= (prop: MenuItem[], option?: string) => {
   const names: string[] = [];
   const ids: string[] = [];
-  prop.forEach((item) => {
+  prop.forEach((item: MenuItem) => {
     names.push(item.name);
     ids.push(item.id);
   })
-  return [ids, names] as const
+  if (option === 'ids') {
+    return ids
+  } else if (option === 'names') {
+    return names
+  } else {
+    return [ids, names] 
+  }
 }
 
 // true if name found in list, false if not
@@ -94,7 +100,7 @@ const ListReducer = (
       if (action.addMenuItem) {
         const lists = state.lists;
         const menu = state.menu;
-        const [names] = dataMenuItems(menu);
+        const [names] = dataMenuItems(menu, "names");
         const untitled = names.includes('Untitled');
         if (lists.length > 10) {
           return { ...state, menu: menu }
