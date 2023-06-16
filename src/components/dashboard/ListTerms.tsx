@@ -9,12 +9,12 @@ import TermSearch from './terms/TermSearch';
 export default function ListOfTerms() {
   const { state, dispatch } = useDashboard();
   const menuItem = state.getMenuItem
-  const menuFavorites = menuItem === "Favorites" || menuItem === "Public Glossary";
+  const menuProtected = menuItem === "Favorites" || menuItem === "Public Glossary" || menuItem === "Database";
   const data = state.lists;
   let dataIndex = 0;
   const getList = data.find(element => element.name === menuItem);
   function deleteList() {
-    if (!menuFavorites) {
+    if (!menuProtected) {
       dispatch({ type: "MENU", deleteMenuItem: state.getMenuItem })
       
     }
@@ -25,7 +25,7 @@ export default function ListOfTerms() {
     <div className='mx-5 mb-5 mt-1 h-fit w-auto rounded-xl border border-slate-400 bg-slate-700 pb-1 xl:my-5 xl:ml-2 xl:mr-5 xl:h-auto xl:grow'>
       <div className='custom-list-term-nav m-2 rounded border-4 border-slate-100 bg-blue-100 text-xl text-deep-blue justify-between flex h-[42px]'>
         {
-          menuFavorites ?
+          menuProtected ?
             <div className='w-full justify-between flex flex-row'>
               <div className='' />
               <h2>
