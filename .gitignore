@@ -4,6 +4,7 @@
 # ignore pouchdb files
 /glossaryAuth
 /glossaryPublic
+/glossaryPlayground
 
 #react preview app
 /.react-email
