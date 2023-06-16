@@ -7,7 +7,7 @@ const getUUID = uuidv4();
 
 const myData: ListType[] = dataLists
 
-console.log(myData)
+//console.log(myData)
 // PublicList Array 
 export const defaultDataMenu = (prop:ListType[]) => {
   const menu: MenuItem[] = [];
@@ -112,7 +112,7 @@ const ListReducer = (
       if (action.addMenuItem) {
         const lists = state.lists;
         const menu = state.menu;
-        const [names] = dataMenuItems(menu, "names");
+        const names = dataMenuItems(menu, "names") as string[];
         const untitled = names.includes('Untitled');
         if (lists.length > 10) {
           return { ...state, menu: menu }
