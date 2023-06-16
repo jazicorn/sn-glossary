@@ -4,7 +4,7 @@ import Term from './PublicTerm';
 import Search from './PublicSearch';
 import { useCallback, useEffect, useState } from 'react'
 import { GlossaryContextType } from '../../../lib/types';
-import { getPublicDocs } from '../../../utils/dbPouchPublic';
+import { getPublicDocs } from '../../../utils/db.pouch.Public';
 
 export default function PublicGlossary() {
   //const publicGlossary = useContext(GlossaryContext);

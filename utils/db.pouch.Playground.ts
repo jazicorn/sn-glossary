@@ -1,4 +1,4 @@
-import PouchDB from 'pouchdb';
+import PouchDB from 'pouchdb-browser';
 import publicLists from './dataExPublicLists';
 import { ListType } from '../lib/types';
 

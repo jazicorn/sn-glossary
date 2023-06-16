@@ -1,5 +1,5 @@
 //import React, { createContext } from "react";
-import PouchDB from 'pouchdb'
+import PouchDB from 'pouchdb-browser'
 import publicGlossary from './dataExPublicGlossary';
 import { GlossaryContextType } from '../lib/types';
 
