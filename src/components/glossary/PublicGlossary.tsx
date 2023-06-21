@@ -4,14 +4,13 @@ import Term from './PublicTerm';
 import Search from './PublicSearch';
 import { useCallback, useEffect, useState } from 'react'
 import { GlossaryContextType } from '../../../lib/types';
-import { getPublicDocs } from '../../../utils/db.pouch.Public';
 
 export default function PublicGlossary() {
-  //const publicGlossary = useContext(GlossaryContext);
   const [data, setData] = useState<GlossaryContextType[]>([]);
 
   // declare the async data fetching function
   const fetchData = useCallback(async () => {
+    const { getPublicDocs } = await import('../../../utils/db.pouch.Public');
     const docs = await getPublicDocs();
     if (docs != undefined) {
       setData(docs);
@@ -22,7 +21,7 @@ export default function PublicGlossary() {
   useEffect(() => {
     fetchData()
       // make sure to catch any error
-      .catch(console.error);;
+      .catch(console.error);
   }, [fetchData])
 
   return (
