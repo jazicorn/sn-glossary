@@ -3,6 +3,7 @@ import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
 import { GlossaryProvider } from '@/context/contextGlossary';
+import { DashboardProvider } from "@/context/contextDashboard";
 
 export default function App({ Component, pageProps: { session, ...pageProps }, }: AppProps) {
   useEffect(() => {
@@ -14,8 +15,10 @@ export default function App({ Component, pageProps: { session, ...pageProps }, }
   }, []);
     return (
     <SessionProvider session={session}>
-      <GlossaryProvider>
-        <Component {...pageProps} />
+        <GlossaryProvider>
+          <DashboardProvider>
+            <Component {...pageProps} />
+          </DashboardProvider>
       </GlossaryProvider>
     </SessionProvider>
   );

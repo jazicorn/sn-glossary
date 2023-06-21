@@ -51,3 +51,25 @@ export const getPlaygroundDocs = async () => {
     console.log(err);
   };
 }
+
+/**<!-- Create Playground Single Doc-> */
+export const createPlaygroundDoc = async (data: ListType) => {
+  data._id = data.id;
+  try {
+    //console.log(data);
+    await dbPlayground.put(data);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+/**<!-- Delete Playground Single Doc --> */
+export const deletePlaygroundDoc = async (id: string) => {
+    try {
+      const doc = await dbPlayground.get(id);
+      await dbPlayground.remove(doc);
+    } catch (err) {
+      console.log(err);
+    }
+}
+
