@@ -1,33 +1,78 @@
 import TermNew from './terms/TermNew';
 import Term from './terms/TermEdit';
 import TermOptions from './terms/TermOptions'
+import TermSearch from './terms/TermSearch';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { dataMenuFindByName, useDashboard } from '@/context/contextDashboard';
-import TermSearch from './terms/TermSearch';
-import { ListType } from '../../../lib/types';
-import { useCallback } from 'react';
+import { useDashboard } from '@/context/contextDashboard';
+import { GlossaryContextType, ListType } from '../../../lib/types';
+import { useCallback, useState } from 'react';
+import { dataMenuFindByName, findList } from '@/helpers/funcDashboard';
+import { v4 as uuidv4 } from 'uuid'
 
 export default function ListOfTerms({data}: {data:ListType[]}) {
   const { state, dispatch } = useDashboard();
-  
+  const [show, setShow] = useState(false);
+
   const menuItem = state.getMenuItem
   const menuProtected = menuItem === "Favorites" || menuItem === "Public Glossary" || menuItem === "Database";
-  //const data = state.lists;
-  let dataIndex = 0;
+
   const getList = data.find(element => element.name === menuItem);
+  const [text, setText] = useState('');
+  const defaultTextWidth = menuItem?.length + "ch";
+  const [textWidth, setTextWidth] = useState(defaultTextWidth);
+
+  const handleText = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const textLen: number = e.target.value.length;
+    const textWidth: string = e.target.value.length.toString() + "ch" as string;
+    if (textLen < 1) {
+      setText(e.target.value.trim());
+      setTextWidth(defaultTextWidth)
+    } else {
+      setText(e.target.value.trim());
+    setTextWidth(textWidth)
+    }
+  };
+  
+  const handleTitle = () => {
+    setShow(!show)
+  };
+
+  const handleTitleEdit = useCallback(async (e: React.KeyboardEvent) => {
+    if (!menuProtected && e.key === 'Enter') {
+      const menuName: string = state.getMenuItem as string;
+      const getList = findList(state.lists, menuName);
+      console.log(getList)
+      const { deletePlaygroundDoc, createPlaygroundDoc } = await import('../../../utils/db.pouch.Playground');
+      const id: string | undefined = getList?.id as string;
+      const items: GlossaryContextType[] | undefined = getList?.items as GlossaryContextType[];
+      console.log(items);
+      const itemsArr = [...items]
+      const obj: ListType = {
+        id: uuidv4(),
+        name: text,
+        items: itemsArr
+      };
+      await createPlaygroundDoc(obj);
+      await deletePlaygroundDoc(id);
+      setShow(false);
+      dispatch({ type: "MENU", getMenuItem: text });
+    }
+  }, [state, menuProtected, text, setShow, dispatch]);
 
   // Delete PouchDB Data Doc
-  const deleteMenuItem = useCallback(async () => {
+  const handleDeleteMenuItem = useCallback(async () => {
     const lists = state.menu;
     const list = state.getMenuItem as string;
-    const id = dataMenuFindByName(lists, list)
-    const { deletePlaygroundDoc } = await import('../../../utils/db.pouch.Playground');
-    await deletePlaygroundDoc(id);
     if (!menuProtected) {
-      dispatch({ type: "MENU", deleteMenuItem: state.getMenuItem })
+      const id = dataMenuFindByName(lists, list)
+      const { deletePlaygroundDoc } = await import('../../../utils/db.pouch.Playground');
+      await deletePlaygroundDoc(id);
+      dispatch({ type: "MENU", deleteMenuItem: state.getMenuItem });
     }
-  },[state, dispatch, menuProtected]);
+  }, [state, dispatch, menuProtected]);
+  
+  let dataIndex: number = getList?.items?.length as number + 1;
 
   return (
     <div className='mx-5 mb-5 mt-1 h-fit w-auto rounded-xl border border-slate-400 bg-slate-700 pb-1 xl:my-5 xl:ml-2 xl:mr-5 xl:h-auto xl:grow'>
@@ -35,20 +80,34 @@ export default function ListOfTerms({data}: {data:ListType[]}) {
         {
           menuProtected ?
             <div className='w-full justify-between flex flex-row'>
-              <div className='' />
+              <div />
               <h2>
                 <FontAwesomeIcon icon={faStar} />
-                <span className='px-2'>{menuItem}</span>
+                <button className='px-2 m-0 p-0'>{menuItem}</button>
               </h2>
-              <div className='' />
+              <div/>
             </div>
           :
             <div className='w-full justify-between flex flex-row' >
-              <div className='' />
-              <div>{menuItem}</div>
+              <div/>
+              <div>
+                {show ?
+                  <button className='px-2' onDoubleClick={() => handleTitle()}>
+                    <input
+                      id="menuTitleWidth"
+                      onChange={(e) => handleText(e)}
+                      onKeyDown={(e) => handleTitleEdit(e)}
+                      style={{ width: textWidth }}
+                      placeholder={menuItem}
+                      value={text}
+                    />
+                  </button> :
+                  <button className='px-2' onDoubleClick={() => handleTitle()}>{menuItem}</button>
+                }
+              </div>
               <div className='w-[72px] h-[54px] py-1 mr-1 flex flex-row place-self-center rounded px-1'>
                 <button type='submit'
-                  onClick={() => deleteMenuItem()}
+                  onClick={() => handleDeleteMenuItem()}
                   className='w-[62px] h-[25px] my-0.5 ml-1 px-1 items-baseline place-self-center rounded border-2 border-deep-blue bg-red-200 text-sm font-medium uppercase'>
                   Delete
                 </button>
@@ -70,7 +129,7 @@ export default function ListOfTerms({data}: {data:ListType[]}) {
       {/**Display All Terms */}
       {/******************* */}
       {getList?.items?.map((term) => (
-        dataIndex += 1,
+        dataIndex -= 1,
         <Term key={term.id} index={dataIndex}  term={term} />
       ))
       }
