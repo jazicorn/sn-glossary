@@ -1,10 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { faChevronCircleDown, faChevronCircleUp, faClipboardList, faDatabase, faRectangleList, faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { dataMenuItems, useDashboard } from '@/context/contextDashboard';
-//import { ListType } from '../../../lib/types';
+import { useDashboard } from '@/context/contextDashboard';
 import { v4 as uuidv4 } from 'uuid';
-const getUUID = uuidv4();
+import { dataMenuItems } from '@/helpers/funcDashboard';
 
 export default function ListMenu()  {
   const { state, dispatch } = useDashboard();
@@ -41,29 +40,30 @@ export default function ListMenu()  {
     const menu = state.menu;
     const names = dataMenuItems(menu, "names") as string[];
     const untitled = names.includes('Untitled');
-    let newID = '';
-    let newName = '';
+    const obj = {
+      id: uuidv4(),
+      name: '',
+      items: []
+    };
       if (lists.length > 10) {
         return
       } else if (!untitled) {
-        newID = getUUID;
-        newName = 'Untitled';
+        obj.name = 'Untitled';
+        await createPlaygroundDoc(obj);
       } else {
-        let total = 0;
+        let total = 1;
         for (const item of names) {
           if (item.includes('Untitled')) {
-            total += 1;
+            const name = 'Untitled' + total.toString()
+            const dupe = names.find((element) => { if (element === name) { return true } else { return false } });
+            if (dupe) {
+              total += 1;
+            }
           }
         }
-        newID = getUUID;
-        newName = 'Untitled' + total.toString();
+        obj.name = 'Untitled' + total.toString();
+        await createPlaygroundDoc(obj);
       }
-    const obj = {
-      id: newID,
-      name: newName,
-      lists: []
-    };
-    await createPlaygroundDoc(obj);
   }, [state]);
 
   const setMenuItem = (prop: string) =>{
@@ -114,9 +114,9 @@ export default function ListMenu()  {
               </div>
             <div>
             <ul className='text-l flex flex-col'>
-            {state.getMenuNames?.map((list) => (
-              <li key={list} className='mx-2 my-1 rounded border-4 bg-slate-100'>
-                <button key={ list } onClick={() => setMenuItem(list)} className='px-2 hover:italic inline-block h-full w-full from-violet-100 to-blue-200 hover:bg-gradient-to-r '>
+            {state.getMenuNames?.map((list:string, index) => (
+              <li key={index} className='mx-2 my-1 rounded border-4 bg-slate-100'>
+                <button key={ index} onClick={() => setMenuItem(list)} className='px-2 hover:italic inline-block h-full w-full from-violet-100 to-blue-200 hover:bg-gradient-to-r '>
                  {list}
                 </button>
               </li>
