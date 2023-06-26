@@ -9,7 +9,7 @@ export const enum snRef {
 // array of glossary entries interface
 export interface GlossaryContextType {
   _id?: string,
-  rev?: string,
+  _rev?: string,
   id: string;
   public: boolean;
   favorite: boolean;
@@ -24,7 +24,7 @@ export interface GlossaryContextType {
 // list interface
 export interface ListType {
   _id?: string,
-  rev?: string,
+  _rev?: string,
   index?: number
   id: string;
   name: string;
@@ -45,7 +45,7 @@ export interface MenuItem {
 // user object interface
 export interface UserContextType {
   _id?: string,
-  rev?: string,
+  _rev?: string,
   id: string;
   name?: string;
   email: string;
