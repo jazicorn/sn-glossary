@@ -11,13 +11,13 @@ import {
   faSquareXmark
 } from '@fortawesome/free-solid-svg-icons';
 import {faSquareCheck, faStar as faStarOutline} from '@fortawesome/free-regular-svg-icons'
-
-//react inline styling | to change border on edit
-//https://www.pluralsight.com/guides/inline-styling-with-react
+import { GlossaryContextType } from '../../../../lib/types';
+import { dataListFind, findList } from '@/helpers/funcDashboard';
 
 const TermNew: React.FC = () => {
   const { state } = useDashboard();
   const getListName = state.getMenuItem;
+  const defaultFav = isListFav(getListName as string);
   
   function handleMoreClick() {
     setShowMore(!showMore);
@@ -50,37 +50,19 @@ const TermNew: React.FC = () => {
 
   // generate new nano id & collision check for id
   const nano = nanoid(10);
-  const collisionCheck = (nanoID: string) => {
-    let check = false;
-    const lists = state.lists
-    lists.forEach((list) => list?.items?.forEach((item) => {
-      if (item.id === nanoID) {
-        check = true;
-      }
-    }))
-    return check
-  }
-  const newTermId = (nanoID: string) => {
-    if (collisionCheck(nanoID)) {
-      const newNano = nanoid(10);
-      newTermId(newNano);
-    } else {
-      return nanoID;
-    }
-  }
-  const termID = newTermId(nano);
+
+  const termID = nano;
   // Make default fav true if Favorite List
   function isListFav(termName:string) {
-    if (termName === 'Favorites') {
+    if (termName === 'Favorites' && termName != undefined) {
       return true
     }
     return false
   };
-  const defaultFav = isListFav(getListName);
+
   const [showMore, setShowMore] = useState(false);
   const [newTerm, setNewTerm] = useState({});
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [data, setData] = useState({});
+  const [data, setData] = useState<GlossaryContextType>();
   {/**<!-- State: Edits-> */ }
   const [inputTags, setInputTags] = useState('');
   const [editTags, setEditTags] = useState([]);
@@ -93,7 +75,7 @@ const TermNew: React.FC = () => {
   const [editRef, setEditRef] = useState('');
   const [editVer, setEditVer] = useState('Utah');
   
-   {/**<!-- State: Handle Edits-> */ }
+  {/**<!-- State: Handle Edits-> */ }
   const handleEditName = (e: { target: { value: React.SetStateAction<string>; }; }) => {
     setEditName(e.target.value)
   }
@@ -111,31 +93,61 @@ const TermNew: React.FC = () => {
   }
   const handleEditFav = () => {
     if (defaultFav) {
-      return
+      setEditFav(true);
     }
     setEditFav(!editFav);
   }
-  
   const fetchData = useCallback(async () => {
-    const newTermObj = {
-          id: editId,
-          public: false,
-          favorite: editFav,
-          name: editName,
-          def: editDef,
-          version: editVer,
-          product: editProduct,
-          ref: editRef,
-          tags: editTags
-        };
-
-    setData(newTermObj);
+    if (editId !== undefined) {
+      const newTermObj = {
+        id: editId,
+        public: false,
+        favorite: editFav,
+        name: editName,
+        def: editDef,
+        ver: editVer,
+        product: editProduct,
+        ref: editRef,
+        tags: editTags
+      };
+      setData(newTermObj);
+    }
   }, [editDef, editFav, editId, editName, editProduct, editRef, editVer, editTags])
 
   useEffect(() => {
     fetchData()
       .catch(console.error);
   }, [fetchData]);
+  
+  const handleTermCreate = useCallback(async () => {
+    const { updatePlaygroundDoc } = await import('../../../../utils/db.pouch.Playground');
+    const menuItem = state.getMenuItem;
+    console.log(menuItem);
+    if (menuItem !== undefined && data !== undefined) {
+      const getLists = state.lists;
+      const id: string | string[] | undefined = dataListFind(getLists, menuItem, 'id');
+      if (typeof id === 'string') {
+        const getList = findList(getLists, id);
+        if (getList !== undefined) {
+          getList?.items?.unshift(data);
+          const items: GlossaryContextType[] | undefined = getList?.items;
+          const name: string = getList?.name;
+          if (items !== undefined) {
+            await updatePlaygroundDoc(id, name, items);
+            const termID = nanoid(10);
+            setEditId(termID);
+            setEditName('');
+            setEditDef('');
+            setEditProduct('');
+            setEditRef('');
+            setEditVer('Utah');
+            setEditTags([]);
+          }
+        }
+      }
+    }  
+  }, [state, data]);
+
   return (
     <div>
       {/***************** */}
@@ -156,9 +168,15 @@ const TermNew: React.FC = () => {
               className='content-left flex grow flex-row rounded-l border border-r-0 border-gray-300 text-sm leading-tight tracking-tighter'
               >
                 {/**Favorite */}
-                <button key='favoriteButton' onClick={handleEditFav} className='w-fit px-2 border-r border-gray-300 flex flex-col justify-center'>
-                  {editFav ? <FontAwesomeIcon icon={faStar} size='lg' className=''/> : <FontAwesomeIcon icon={faStarOutline} size='lg'/>}
-                </button>
+                {defaultFav ?
+                  <button key='favoriteButton' className='w-fit px-2 border-r border-gray-300 flex flex-col justify-center'>
+                    <FontAwesomeIcon icon={faStar} size='lg' className='' />
+                  </button>
+                  :
+                  <button key='favoriteButton' onClick={handleEditFav} className='w-fit px-2 border-r border-gray-300 flex flex-col justify-center'>
+                    {editFav ? <FontAwesomeIcon icon={faStar} size='lg' className='' /> : <FontAwesomeIcon icon={faStarOutline} size='lg' />}
+                  </button>
+                }
                 <input
                   value={editName}
                   onChange={handleEditName}
@@ -169,7 +187,6 @@ const TermNew: React.FC = () => {
                   placeholder='Term'
                   className='w-[90px] p-0.5 rounded-l border-2 border-transparent border-r-slate-200 bg-green-100  text-sm text-center focus:border focus:border-blue-100 focus:outline-none'
                 />
-              
                 <input
                   value={editDef}
                   onChange={handleEditDef}
@@ -181,7 +198,6 @@ const TermNew: React.FC = () => {
                   className='w-full self-center bg-gray-100 px-1 py-1 text-sm text-left focus:border-0 active:border-0 border-0 rounded'
                 />
             </div>
-            
             {/** Expand/Collpase*/}
             <button
               key='showMore'
@@ -207,7 +223,8 @@ const TermNew: React.FC = () => {
             {!showMore ? 
               <div className='h-[54px] py-1 mr-1 flex flex-row place-self-center rounded px-1'>
               <button
-                type='submit'
+                  type='submit'
+                  onClick={() => handleTermCreate()}
                 className='w-[72px] h-[25px] my-0.5 ml-1 items-baseline place-self-center rounded border-2 border-slate-400 bg-green-100 px-2 text-sm font-medium uppercase'
               >
                 Create
@@ -216,6 +233,7 @@ const TermNew: React.FC = () => {
             : <div className='h-[54px] mr-1 flex flex-col place-self-center rounded px-1'>
               <button
                 type='submit'
+                onClick={() => handleTermCreate()}
                 className='w-[72px] my-0.5 ml-1 items-baseline rounded border-2 border-slate-400 bg-green-100 px-2 text-sm font-medium uppercase'
               >
                 Create
@@ -234,7 +252,6 @@ const TermNew: React.FC = () => {
             <div className='custom-term-details mx-2 flex flex-col rounded bg-gray-200 p-1'>
               {/**Lines: Details*/}
               <div className='mt-1 flex flex-col items-baseline rounded px-1 xl:m-0 xl:flex xl:flex-row'>
-                
                 {/**ID*/}
                 <div className='w-full xl:w-fit mr-1 flex flex-row rounded bg-gray-100 xl:w-auto'>
                   <label className='flex-none w-[90px] mb-1 ml-1 mt-1 pl-2 pr-1 rounded-l border-2 border-blue-300 bg-slate-200 text-sm text-right'>
