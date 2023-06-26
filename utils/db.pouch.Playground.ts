@@ -1,6 +1,6 @@
 import PouchDB from 'pouchdb-browser';
 import publicLists from './dataExPublicLists';
-import { ListType } from '../lib/types';
+import { GlossaryContextType, ListType } from '../lib/types';
 
 // import example lists
 export const publicPlayground: ListType[] = publicLists;
@@ -10,7 +10,7 @@ export const dbPlayground = new PouchDB('glossaryPlayground');
 
 /**<!-- Seed Public Glossary Database-> */
 export const seedDBPlayground = async (data: ListType[]) => {
-  data.forEach((item) => { item._id = item.id });
+  data.forEach((list) => { list._id = list.id });
   try {
     //console.log(data)
     await dbPlayground.bulkDocs(data);
@@ -65,11 +65,29 @@ export const createPlaygroundDoc = async (data: ListType) => {
 
 /**<!-- Delete Playground Single Doc --> */
 export const deletePlaygroundDoc = async (id: string) => {
-    try {
-      const doc = await dbPlayground.get(id);
-      await dbPlayground.remove(doc);
-    } catch (err) {
-      console.log(err);
-    }
+  try {
+    const doc = await dbPlayground.get(id);
+    await dbPlayground.remove(doc);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+/**<!-- Update Playground Single Doc Items --> */
+export const updatePlaygroundDoc = async (id: string, name: string, items: GlossaryContextType[]) => {
+  try {
+    const idStr = id.toString();
+    const doc = await dbPlayground.get(id);
+    const revStr = doc._rev.toString();
+    await dbPlayground.put({
+      _id: idStr,
+      _rev: revStr,
+      id: idStr,
+      name: name,
+      items: items
+    });
+  } catch (err) {
+    console.log(err);
+  }
 }
 
