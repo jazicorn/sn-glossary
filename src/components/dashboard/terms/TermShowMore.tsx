@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faSquareXmark
 } from '@fortawesome/free-solid-svg-icons';
-import {faSquareCheck, faSquare } from '@fortawesome/free-regular-svg-icons'
+import {faSquareCheck } from '@fortawesome/free-regular-svg-icons'
 import { GlossaryContextType } from '../../../../lib/types';
 
 type Props = {
@@ -35,7 +35,7 @@ const ShowMore: React.FC<Props> = ({ term, edit, editFav }) => {
                 </label>
                 <div className='mr-1 mt-1 w-full xl:w-fit inline text-left text-xs'>
                     <div className='h-6 w-full xl:w-[30px] pl-1.5 pt-0.5 justify-items-center rounded-r border-l-0 border border-gray-300 bg-transparent focus:border-slate-400 focus:outline-none'>
-                        {term.public ? <FontAwesomeIcon icon={faSquareCheck} size='xl' className='' /> : <FontAwesomeIcon icon={faSquare} size='xl' />}
+                        {term.public ? <FontAwesomeIcon icon={faSquareCheck} size='xl' className='' /> : <FontAwesomeIcon icon={faSquareXmark} size='xl' />}
                     </div>
                 </div>
             </div>
@@ -55,17 +55,9 @@ const ShowMore: React.FC<Props> = ({ term, edit, editFav }) => {
                 <label className='flex-none mb-1 ml-1 mt-1 pl-2 pr-1 w-[90px] rounded-l border-2 border-slate-300 bg-violet-100 text-sm text-right'>
                     Version:
                 </label>
-                <div className='w-full mr-1 mt-1 inline text-left text-xs'>
-                {/**For wrapping text have to use textarea */}
-                <input
-                    disabled={edit}
-                    value={term.ver}
-                    type='text'
-                    maxLength={30}
-                    name='product'
-                    placeholder='Product'
-                    className='h-6 w-full pl-1 xl:w-[70px] text-left text-xs truncate rounded-r border-l-0 border border-gray-300 bg-transparent  focus:border-slate-400 focus:outline-none'
-                />
+                <div className='h-6 w-full xl:w-[70px] pl-1 pt-1 mr-1 mt-1 inline text-left text-xs truncate rounded-r border-l-0 border border-gray-300 bg-transparent  focus:border-slate-400 focus:outline-none'>
+                    {/**For wrapping text have to use textarea */}
+                    {term.ver}
                 </div>
             </div>
             {/**Category */}
@@ -73,17 +65,9 @@ const ShowMore: React.FC<Props> = ({ term, edit, editFav }) => {
                 <label className='flex-none mb-1 ml-1 mt-1 pl-2 pr-1 w-[90px] rounded-l border-2 border-slate-300 bg-violet-100 text-sm text-right'>
                     Product:
                 </label>
-                <div className='w-full mr-1 mt-1 inline text-left text-xs'>
+                <div className='h-6 w-full mr-1 mt-1 pt-1 pl-1 inline text-left text-xs truncate rounded-r border-l-0 border border-gray-300 bg-transparent focus:border-slate-400 focus:outline-none'>
                 {/**For wrapping text have to use textarea */}
-                <input
-                    disabled={edit}
-                    value={term.product}
-                    type='text'
-                    maxLength={30}
-                    name='product'
-                    placeholder='Product'
-                    className='h-6 w-full pl-1 text-left text-xs truncate rounded-r border-l-0 border border-gray-300 bg-transparent  focus:border-slate-400 focus:outline-none'
-                />
+                    {term.product}
                 </div>
             </div>
             
