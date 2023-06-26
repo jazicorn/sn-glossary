@@ -14,7 +14,10 @@ import {
   faSquareXmark
 } from '@fortawesome/free-solid-svg-icons';
 import {faStar as faStarOutline, faSquareCheck} from '@fortawesome/free-regular-svg-icons'
-import { GlossaryContextType } from '../../../../lib/types';
+import { GlossaryContextType, ListType } from '../../../../lib/types';
+import { useDashboard } from '@/context/contextDashboard';
+import { dataListFind, findList } from '@/helpers/funcDashboard';
+import { handleKeyEnter, handleKeyExit } from '@/helpers/funcKeyboard';
 
 type Props = {
   index: number,
@@ -22,7 +25,8 @@ type Props = {
 }
 
 const TermEdit: React.FC<Props> = ({ index, term }) => {
-  const [isView, setView] = useState(false);
+  const { state } = useDashboard();
+  const [, setView] = useState(false);
   useEffect(() => {
     if (window.innerWidth > 1280) {
       setView(true);
@@ -64,6 +68,7 @@ const TermEdit: React.FC<Props> = ({ index, term }) => {
       e.target.value = '';
     }
   };
+
   const removeTags = (index: number) => {
     if (editTags !== undefined) {
       setEditTags([...editTags.filter((tag) => editTags.indexOf(tag) !== index)]);
@@ -73,24 +78,24 @@ const TermEdit: React.FC<Props> = ({ index, term }) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onChangeTags = (e: any) => {
     const { value } = e.target;
-    setInputTags(value);
+    setInputTag(value);
   };
 
-  const [showMore, setShowMore] = useState(false);
-  const [edit, setEdit] = useState(false);
+  const [showMore, setShowMore] = useState<boolean>(false);
+  const [edit, setEdit] = useState<boolean>(false);
   const [newTerm, setNewTerm] = useState({});
   const [data, setData] = useState({});
   {/**<!-- Edit Text-> */ }
-  const [inputTags, setInputTags] = useState('');
-  const [editTags, setEditTags] = useState(term.tags);
-  const [editPublic, setPublicEdit] = useState(term.public);
-  const [editId, setEditId] = useState(term.id);
-  const [editName, setEditName] = useState(term.name);
-  const [editDef, setEditDef] = useState(term.def);
-  const [editFav, setEditFav] = useState(term.favorite);
-  const [editProduct, setEditProduct] = useState(term.product);
-  const [editRef, setEditRef] = useState(term.ref);
-  const [editVer, setEditVer] = useState(term.ver);
+  const [, setInputTag] = useState('');
+  const [editTags, setEditTags] = useState<string[] | undefined>(term.tags);
+  const [editPublic] = useState<boolean>(term.public);
+  const [editId] = useState<string>(term.id);
+  const [editName, setEditName] = useState<string>(term.name);
+  const [editDef, setEditDef] = useState<string>(term.def);
+  const [editFav, setEditFav] = useState<boolean>(term.favorite);
+  const [editProduct, setEditProduct] = useState<string | undefined>(term.product);
+  const [editRef, setEditRef] = useState<string | undefined>(term.ref);
+  const [editVer, setEditVer] = useState<string | undefined>(term.ver);
   
   const handleEditName = (e: { target: { value: React.SetStateAction<string>; }; }) => {
     setEditName(e.target.value)
@@ -102,27 +107,27 @@ const TermEdit: React.FC<Props> = ({ index, term }) => {
     setEditFav(!editFav);
   }
   const handleEditProduct = (e: { target: { value: React.SetStateAction<string | undefined>; }; }) => {
-        setEditProduct(e.target.value)
-    }
+    setEditProduct(e.target.value)
+  }
   const handleEditRef = (e: { target: { value: React.SetStateAction<string | undefined>; }; }) => {
-      setEditRef(e.target.value)
+    setEditRef(e.target.value)
   }
   const handleEditVer = (e: { target: { value: React.SetStateAction<string | undefined>; }; }) => {
-      setEditVer(e.target.value)
+    setEditVer(e.target.value)
   }
 
   const fetchData = useCallback(async () => {
     const newTermObj = {
-          id: editId,
-          public: editPublic,
-          favorite: editFav,
-          name: editName,
-          def: editDef,
-          version: editVer,
-          product: editProduct,
-          ref: editRef,
-          tags: editTags
-        };
+      id: editId,
+      public: editPublic,
+      favorite: editFav,
+      name: editName,
+      def: editDef,
+      ver: editVer,
+      product: editProduct,
+      ref: editRef,
+      tags: editTags
+    };
 
     setData(newTermObj);
   }, [editDef, editPublic, editFav, editId, editName, editProduct, editRef, editVer, editTags])
@@ -132,11 +137,73 @@ const TermEdit: React.FC<Props> = ({ index, term }) => {
       .catch(console.error);
   }, [fetchData]);
 
+  const handleTermRemove = useCallback(async (_option?: string) => {
+    const { updatePlaygroundDoc } = await import('../../../../utils/db.pouch.Playground');
+    const menuItem = state.getMenuItem;
+    console.log(menuItem);
+    if (menuItem !== undefined) {
+      const getLists = state.lists;
+      const id: string | string[] | undefined = dataListFind(getLists, menuItem, 'id');
+      if (typeof id === 'string') {
+        const getList = findList(getLists, id);
+        if (getList !== undefined) {
+          const getItems: GlossaryContextType[] | undefined = getList?.items;
+          const items: GlossaryContextType[] | undefined = getItems?.filter(term => term.id !== editId);
+          const name: string = getList?.name;
+          if (items !== undefined) {
+            await updatePlaygroundDoc(id, name, items);
+            if (_option === 'delete') {
+              // #TODO delete from database if option delete
+              return
+            }
+          }
+        }
+      }
+    }
+  }, [state, editId]);
+
+  const handleTermEdit = useCallback(async (e: React.KeyboardEvent | null, event: React.MouseEvent | null) => {
+      const menuItem = state.getMenuItem;
+      const menuProtected = menuItem === "Favorites" || menuItem === "Public Glossary" || menuItem === "Database";
+      if (!menuProtected && menuItem !== undefined && data !== undefined) {
+        const { updatePlaygroundDoc } = await import('../../../../utils/db.pouch.Playground');
+        const getLists = state.lists;
+        const id: string | string[] | undefined = dataListFind(getLists, menuItem, 'id');
+        if (typeof id === 'string') {
+          const getList: ListType | undefined = findList(getLists, id);
+          if (getList !== undefined) {
+            const name: string = getList?.name;
+            const items: GlossaryContextType[] | undefined = getList?.items;
+            const itemsFiltered = items?.filter((item) => item.id !== editId);
+            const termObj = {
+              id: editId,
+              public: editPublic,
+              favorite: editFav,
+              name: editName,
+              def: editDef,
+              version: editVer,
+              product: editProduct,
+              ref: editRef,
+              tags: editTags
+            };
+            itemsFiltered?.unshift(termObj);
+            if (e !== null && e.key === 'Enter') {
+              if (itemsFiltered !== undefined) {
+                await updatePlaygroundDoc(id, name, itemsFiltered);
+              }
+            } else if (e === null && event !== null ) {
+              if (itemsFiltered !== undefined) {
+                await updatePlaygroundDoc(id, name, itemsFiltered);
+              }
+            }
+          }
+        }
+      }
+  }, [state.getMenuItem, state.lists, data, editId, editPublic, editFav, editName, editDef, editVer, editProduct, editRef, editTags]);
+
   return (
     <div>
-      {/***************** */}
       {/*****Edit Term*** */}
-      {/***************** */}
       <div className='flex flex-col'>
         <form onSubmit={handleSubmit}>
           {/**All Term Information*/}
@@ -148,13 +215,23 @@ const TermEdit: React.FC<Props> = ({ index, term }) => {
                   {edit ? <div className='text-blue-500'><span className='px0.5'>Mode:</span>Edit</div> : <div className=''><span className='px-0.5'>Mode:</span>Display</div>}
                 </div>
                 <ul className='flex flex-row'>
-                  <ol><button className='text-teal-500 hover:text-gray-400 place-items-center'><FontAwesomeIcon icon={faFile} size='xs' /><span className='pl-1'>Copy</span></button></ol>
-                  <ol><span className='px-1'>|</span><button className='text-violet-500 hover:text-gray-400 place-items-center'><FontAwesomeIcon icon={faSquareMinus} size='xs' /><span className='pl-1'>Remove</span></button></ol>
+                  <ol><button className='text-teal-500 hover:text-gray-400 place-items-center'><FontAwesomeIcon icon={faFile} size='xs'/><span className='pl-1'>Copy</span></button></ol>
+                  <ol>
+                    <span className='px-1'>|</span>
+                    <button
+                      onClick={() => handleTermRemove()}
+                      className='text-violet-500 hover:text-gray-400 place-items-center'>
+                      <FontAwesomeIcon icon={faSquareMinus} size='xs'/>
+                      <span className='pl-1'>Remove</span>
+                    </button>
+                  </ol>
                   <ol>
                     {!term.public &&
                       <div>
                         <span className='px-1'>|</span>
-                        <button className='text-red-500 hover:text-gray-400 place-items-center'><FontAwesomeIcon icon={faTrash} size='xs' />
+                        <button
+                          onClick={() => handleTermRemove('delete')}
+                          className='text-red-500 hover:text-gray-400 place-items-center'><FontAwesomeIcon icon={faTrash} size='xs' />
                           <span className='px-1'>Delete</span>
                         </button>
                         <span className='px-1'>|</span>
@@ -170,13 +247,15 @@ const TermEdit: React.FC<Props> = ({ index, term }) => {
                 </ul>
               </div>
               <div className='content-left grow flex flex-col lg:flex-row rounded border border-gray-300 text-sm leading-tight tracking-tighter'>
+                {/**Fav Button */}
+                {/**Term Name */}
                  <div className='flex flex-row border-b xl:border-b-0 border-gray-300'>
                     <button key='favoriteButton' onClick={handleEditFav} className='w-fit px-2 border-r border-gray-300 flex flex-col justify-center'>
                       {editFav ? <FontAwesomeIcon icon={faStar} size='lg' className=''/> : <FontAwesomeIcon icon={faStarOutline} size='lg'/>}
                     </button>
                     <div key='term-index' className='w-fit px-2 border-r border-gray-300 flex flex-col justify-center'>{index}</div>
                     <input
-                      disabled={edit}
+                      disabled={!edit}
                       id='name'
                       key='name'
                       maxLength={25}
@@ -185,11 +264,13 @@ const TermEdit: React.FC<Props> = ({ index, term }) => {
                       placeholder='Term'
                       value={editName}
                       onChange={handleEditName}
+                      onKeyUp={(e) => { handleTermEdit(e, null), handleKeyEnter(e), handleKeyExit(e) }}
                       className='w-full xl:w-fit p-0.5 text-sm text-center border-b-transparent border-t-transparent border-l-transparent border-r-0 xl:border-r border-gray-300 bg-slate-100 focus:border focus:border-blue-100 focus:outline-none'
                     />
                 </div>
+                {/**Term Def */}
                 <div className='w-full flex flex-row '>
-                  {edit ?
+                  {!edit ?
                     <div
                       key='def'
                       placeholder='Definition'
@@ -197,9 +278,9 @@ const TermEdit: React.FC<Props> = ({ index, term }) => {
                     >{editDef}</div>
                     :
                     <textarea
-                    disabled={edit}
                     value={editDef}
                     onChange={handleEditDef}
+                    onKeyUp={(e) => { handleTermEdit(e, null), handleKeyEnter(e), handleKeyExit(e) }}
                     key='def'
                     maxLength={300}
                     name='def'
@@ -227,50 +308,8 @@ const TermEdit: React.FC<Props> = ({ index, term }) => {
                 </div>
               </div>
             </div>
-            {/** Expand/Collpase*/}
-            {/**Delete/Edit Term */} {/**row-2 */}
-            {isView && !term.public ?
-              <div>
-                {!showMore ? 
-                  <div className='h-full py-1 mr-1 flex flex-row rounded px-1'>
-                    {!edit ?
-                      <button
-                        type='submit'
-                        onClick={() => handleEdit()}
-                        className='w-[62px] h-[25px] my-0.5 ml-1 items-baseline place-self-center rounded border-2 border-blue-500 bg-blue-200 px-2 text-sm font-medium uppercase'
-                      >
-                        Edit
-                      </button> : <button
-                          type='submit'
-                          onClick={() => handleEdit()}
-                        className='w-[62px] h-[25px] my-0.5 ml-1 items-baseline place-self-center rounded border-2 border-slate-300 bg-blue-200 px-2 text-sm font-medium uppercase'
-                      >
-                        Edit
-                      </button>
-                    }
-                  </div>
-                  :
-                  <div className='h-full py-1 mr-1 flex flex-row place-self-center rounded px-1'>
-                    {!edit ?
-                      <button
-                        type='submit'
-                        onClick={() => handleEdit()}
-                        className='w-[62px] h-[25px] my-0.5 ml-1 items-baseline place-self-center rounded border-2 border-blue-500 bg-blue-200 px-2 text-sm font-medium uppercase'
-                      >
-                        Edit
-                      </button> : <button
-                          type='submit'
-                          onClick={() => handleEdit()}
-                        className='w-[62px] h-[25px] my-0.5 ml-1 items-baseline place-self-center rounded border-2 border-slate-300 bg-blue-200 px-2 text-sm font-medium uppercase'
-                      >
-                        Edit
-                      </button>
-                    }
-                  </div>
-                }
-              </div> : <div/>
-            } 
           </div>
+          {/** Expand/Collapse*/}
           {/** */}
           {/** Term Details */}
           {/** */}
@@ -278,7 +317,6 @@ const TermEdit: React.FC<Props> = ({ index, term }) => {
             <div className='custom-term-details mx-2 flex flex-col rounded bg-gray-200 p-1'>
               {/**Lines: Details*/}
               <div className='mt-1 flex flex-col items-baseline rounded px-1 xl:m-0 xl:flex xl:flex-row'>
-                
                 {/**ID*/}
                 <div className='w-full xl:w-fit mr-1 flex flex-row rounded bg-gray-100 xl:w-auto'>
                   <label className='flex-none w-[90px] mb-1 ml-1 mt-1 pl-2 pr-1 rounded-l border-2 border-blue-300 bg-slate-200 text-sm text-right'>
@@ -322,9 +360,11 @@ const TermEdit: React.FC<Props> = ({ index, term }) => {
                     <input
                       value={editVer}
                       onChange={handleEditVer}
+                      onKeyUp={(e) => { handleTermEdit(e, null), handleKeyEnter(e), handleKeyExit(e) }}
                       type='text'
                       maxLength={30}
-                      name='product'
+                      name='version'
+                      placeholder='Version'
                       className='h-6 w-full pl-1 xl:w-[70px] text-left text-xs truncate rounded-r border-l-0 border border-gray-300 bg-transparent  focus:border-slate-400 focus:outline-none'
                     />
                   </div>
@@ -339,10 +379,9 @@ const TermEdit: React.FC<Props> = ({ index, term }) => {
                     <input
                       value={editProduct}
                       onChange={handleEditProduct}
+                      onKeyUp={(e) => { handleTermEdit(e, null), handleKeyEnter(e), handleKeyExit(e) }}
                       type='text'
                       maxLength={30}
-                      name='product'
-                      placeholder='Product'
                       className='h-6 w-full pl-1 rounded-r border-l-0 border border-gray-300 bg-transparent text-left text-xs focus:border-slate-400 focus:outline-none'
                     />
                   </div>
@@ -359,6 +398,7 @@ const TermEdit: React.FC<Props> = ({ index, term }) => {
                     <input
                       value={editRef}
                       onChange={handleEditRef}
+                      onKeyUp={(e) => { handleTermEdit(e, null), handleKeyEnter(e), handleKeyExit(e) }}
                       type='text'
                       maxLength={200}
                       name='ref'
@@ -379,26 +419,24 @@ const TermEdit: React.FC<Props> = ({ index, term }) => {
                     maxLength={25}
                     type='text'
                     name='tag'
-                    placeholder="tag, tag, tag"
-                    value={inputTags}
-                    onKeyUp={(e) => addTags(e)}
-                    onChange={onChangeTags}
+                    placeholder="tag"
+                    onKeyDown={(e) => addTags(e)}
+                    onKeyUp={(e) => { handleTermEdit(e, null), handleKeyExit(e) }}
+                    onChange={(e) => onChangeTags(e)}
                     className='mt-1 h-6 max-h-6 w-min grow items-baseline text-left text-xs bg-transparent border-0 focus:border-0 active:border-0 '
                   />
                   {/**Input-tags */}
                   <div className='mr-1 p-1 flex flex-row flex-wrap content-center items-center text-xs'>
                     {editTags?.map((tag, index) => ( 
                       <div key={tag} className='mx-1 flex flex-row content-center items-center rounded border  bg-slate-200 focus:border-2 border-slate-400'>
-                        <input
-                          name='editTag'
-                          value={tag}
-                          className='mr-1 px-1 h-6 w-auto pr-2 text-sm flex flex-row content-center items-center rounded-l'
-                        />
+                        <div className='mr-1 px-1 h-6 w-auto pr-2 text-sm flex flex-row content-center items-center rounded-l'>
+                          {tag}
+                        </div>
                         <span className='mr-1 px-1 text-center'>
                           <FontAwesomeIcon
                             icon={faXmark}
                             size='sm'
-                            onClick={() => removeTags(index)}
+                            onClick={() => { removeTags(index) }}
                           />
                         </span>
                       </div>
