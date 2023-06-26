@@ -3,6 +3,7 @@ import React, { createContext, useContext, useReducer } from "react";
 import { ListType, MenuItem } from '../../lib/types'
 //import { getPlaygroundDocs } from "../../utils/db.PouchPlayground";
 import { v4 as uuidv4 } from 'uuid';
+import { dataReducerList, dataMenuItems, deleteItem } from "@/helpers/funcDashboard";
 const getUUID = uuidv4();
 
 const myData: ListType[] = [];
@@ -20,62 +21,10 @@ export const defaultDataMenu = (prop:ListType[]) => {
 // array of menu items
 const dataMenu = defaultDataMenu(myData)
 
-// lists of menu names
-export const dataMenuItems = (prop: MenuItem[], option?: string) => {
-  const names: string[] = [];
-  const ids: string[] = [];
-  prop.forEach((item: MenuItem) => {
-    names.push(item.name);
-    ids.push(item.id);
-  })
-  if (option === 'ids') {
-    return ids
-  } else if (option === 'names') {
-    return names
-  } else {
-    return { ids, names }
-  }
-}
-
-// find menu item by name and return id
-export const dataMenuFindByName = (prop: MenuItem[], title: string) => {
-  let getId = '';
-  prop.filter((item) => {
-    const { id, name } = item;
-    if (name === title) {
-      getId = id
-    }
-  });
-  return getId
-}
-
-// true if name found in list, false if not
-// returns bool
-export const dataIncludesMenuName = (prop:string[], name:string) => {
-  return prop.includes(name) 
-}
-
-// requests list by list name
-// returns object
-export const dataReducerList = (prop: ListType[], name: string) => {
-  return prop.find(entry => entry.name === name)
-}
-
 // favorite list
-const favorites = dataReducerList(myData, 'Favorites')
+const favorites = dataReducerList(myData, 'Favorites');
 
-export const findList = (lists: ListType[], prop: string) => {
-  return lists.find((element) => {
-    return prop === element.id || prop === element.name
-  })
-}
 
-export const deleteItem = (lists: ListType[] | MenuItem[], prop: string) => {
-  //console.log(prop);
-  const results: MenuItem[] | ListType[] = lists.filter((list) => { return list.name !== prop || list.id !== prop });
-  //console.log(results);
-  return results
-}
 
 //lists of term definitions
 type ListData = {
