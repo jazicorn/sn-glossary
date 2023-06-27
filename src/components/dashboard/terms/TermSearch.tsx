@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
-const PublicSearch = () => {
+const TermSearch = () => {
   return (
     <div className='mx-2 my-1 flex flex-row justify-between rounded bg-gray-200 p-1 '>
       <div className='h-[40px] mb-1 ml-1 mr-2 mt-1 flex grow flex-row justify-between rounded bg-gray-100 p-1'>
@@ -32,4 +32,4 @@ const PublicSearch = () => {
   );
 };
 
-export default PublicSearch;
+export default TermSearch;

@@ -10,9 +10,9 @@ export default function LandingPage() {
           ServiceNow
         </h1>
         <h1 className='text-3xl text-sn-light md:text-5xl'>Glossary</h1>
-        <div className='text-md my-2 place-content-center text-center italic md:text-lg'>
-          <p>...database for your ServiceNow terms</p>
-        </div>
+        <p className='text-md my-2 place-content-center text-center italic md:text-lg'>
+          <span>...database for your ServiceNow terms</span>
+        </p>
       </div>
       <hr className='my-18 h-[2px] border-t-0 bg-transparent bg-gradient-to-r from-transparent via-neutral-500 to-transparent opacity-25 dark:opacity-100' />
       <div className='mt-6 flex h-full w-full flex-col gap-4 text-center'>

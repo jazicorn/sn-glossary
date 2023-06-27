@@ -3,10 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleChevronDown,
   faChevronCircleUp,
+  faBug,
 } from '@fortawesome/free-solid-svg-icons';
 import { GlossaryContextType } from '../../../lib/types';
 import { faStar } from '@fortawesome/free-regular-svg-icons';
 import { faStar as faStarSolid } from '@fortawesome/free-solid-svg-icons';
+import Link from 'next/link';
 
 const PublicTerm = ({ term }: { term: GlossaryContextType }) => {
   const [showMore, setShowMore] = useState(false);
@@ -21,63 +23,74 @@ const PublicTerm = ({ term }: { term: GlossaryContextType }) => {
 
   return (
     <div>
-      <div className='mx-2 my-1 flex flex-row justify-between rounded bg-gray-200 p-1'>
-        
-        <div className='mb-1 ml-1 mr-2 mt-1 flex grow flex-row justify-between rounded bg-gray-100 p-1'>
-          {/**Star Favorite*/}
-          <button key='term-index' onClick={getfavorite} className='w-fit px-2 flex flex-col justify-center'>
-            {!favorite ? <FontAwesomeIcon
-              icon={faStar}
-              size='lg'
-              color={'#334155'}
-            /> : <FontAwesomeIcon
-              icon={faStarSolid}
-              size='lg'
-              color={'#334155'}
-            />
-            }
-          </button>
+      <div className='mx-2 my-1 flex flex-col justify-between rounded bg-gray-200 p-1'>
+        <div className='mb-1 ml-1 mr-2 flex grow flex-row justify-between rounded bg-gray-100 p-1'>
           {/**Line: Term Definition */}
-          <div className='content-left flex grow flex-row rounded-l border border-l-0 border-r-0 border-gray-300 text-sm leading-tight tracking-tighter'>
-            <div
-              key={term.name}
-              className='w-24 rounded border-2 border-blue-300 bg-slate-200 p-0.5 text-center focus:border-2 focus:border-blue-400 focus:outline-none'
-            >
-              {term.name}
+          <div className='content-left grow flex flex-col xl:flex-row rounded border border-gray-300 text-sm leading-tight tracking-tighter'>
+            {/**Star Favorite*/}
+            <div className='flex flex-row border-b border-blue-300 xl:border-b-0'>
+              <button key='term-index' onClick={getfavorite} className='border-r xl:border-r-0 border-blue-300 w-fit px-2 flex flex-col justify-center'>
+                {!favorite ? <FontAwesomeIcon
+                  icon={faStar}
+                  size='lg'
+                  color={'#334155'}
+                /> : <FontAwesomeIcon
+                  icon={faStarSolid}
+                  size='lg'
+                  color={'#334155'}
+                />
+                }
+              </button>
+              <div
+                key={term.name}
+                className='w-full xl:w-24 xl:border-r-2 xl:border-blue-300 bg-slate-200 p-0.5 text-center focus:border-2 focus:border-blue-400 focus:outline-none'
+              >
+                {term.name}
+              </div>
             </div>
-            <div
-              key={term.def}
-              className='w-full self-center bg-gray-100 px-1 py-1 text-left'
-              placeholder='Definition'
-            >
-              {term.def}
+            <div className='flex flex-row w-full'>
+              <div
+                key={term.def}
+                className='w-full self-center bg-gray-100 px-1 py-1 text-left'
+                placeholder='Definition'
+              >
+                {term.def}
+              </div>
+              {/** Expand/Collpase*/}
+              <button
+                key='showMore'
+                className=' px-2 '
+                onClick={() => handleMoreClick()}
+              >
+                {showMore ? (
+                  <FontAwesomeIcon
+                    icon={faChevronCircleUp}
+                    size='lg'
+                    color={'#334155'}
+                  />
+                ) : (
+                  <FontAwesomeIcon
+                    icon={faCircleChevronDown}
+                    size='lg'
+                    color={'#334155'}
+                  />
+                )}
+              </button>
             </div>
           </div>
-          {/** Expand/Collpase*/}
-          <button
-            key='showMore'
-            className='rounded-r border border-l-0 border-gray-300 px-2 '
-            onClick={() => handleMoreClick()}
-          >
-            {showMore ? (
-              <FontAwesomeIcon
-                icon={faChevronCircleUp}
-                size='lg'
-                color={'#334155'}
-              />
-            ) : (
-              <FontAwesomeIcon
-                icon={faCircleChevronDown}
-                size='lg'
-                color={'#334155'}
-              />
-            )}
-          </button>
         </div>
       </div>
       {/**More Info */}
       {showMore && (
         <div className='custom-term-details mx-2 flex flex-col rounded bg-gray-200 p-1'>
+          <div className='mx-3 mb-0.5 flex flex-row justify-end text-xs text-red-700'>
+            <button >
+              <Link href='' target='_blank'>
+                <FontAwesomeIcon icon={faBug} size='xs' className='self-center mx-1' />
+                Report
+              </Link>
+            </button>
+          </div>
           {/**Lines: Details*/}
           <div className='mt-1 flex flex-col items-baseline rounded px-1 xl:m-0 xl:flex xl:flex-row'>
             {/**ID*/}
@@ -93,7 +106,20 @@ const PublicTerm = ({ term }: { term: GlossaryContextType }) => {
                 
               </div>
             </div>
-            {/**Category */}
+            {/**Version */}
+            <div className='mr-1 mt-1 w-full xl:w-max flex flex-row no-wrap rounded bg-gray-100 xl:mt-0'>
+              <label className='flex-none mb-1 ml-1 mt-1 pl-2 pr-1 w-[90px] rounded-l border-2 border-slate-300 bg-violet-100 text-sm text-right'>
+                Version:
+              </label>
+              <div className='mr-1 mt-1 w-full xl:fit inline text-left text-xs'>
+                {/**For wrapping text have to use textarea */}
+                <div
+                  placeholder='Product'
+                  className='px-2 pt-1 h-6 w-full xl:fit truncate rounded-r border-l-0 border border-gray-300 bg-transparent text-left text-xs focus:border-slate-400 focus:outline-none'
+                >{ term.ver }</div>
+              </div>
+            </div>
+            {/** */}
             <div className='mr-1 mt-1 w-full xl:w-max flex flex-row no-wrap rounded bg-gray-100 xl:mt-0'>
               <label className='flex-none mb-1 ml-1 mt-1 pl-2 pr-1 w-[90px] rounded-l border-2 border-slate-300 bg-violet-100 text-sm text-right'>
                 Product:
@@ -129,7 +155,7 @@ const PublicTerm = ({ term }: { term: GlossaryContextType }) => {
               </label>
               
               {/**Input-tags */}
-              <div className='mr-1 p-1 flex flex-row flex-wrap content-center items-center text-xs'>
+              <div className='mr-1 px-1 pt-1 flex flex-row flex-wrap content-center items-center text-xs'>
                 {term.tags?.map((tag) => (
                   <div
                     key='tag'

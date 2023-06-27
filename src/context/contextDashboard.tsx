@@ -1,20 +1,19 @@
-import React, { createContext, useContext, useReducer  } from "react";
-//import dataEntries from '../../utils/dataExamplePublicGlossary'
-import dataLists from '../../utils/dataExPublicLists'
-import { ListType } from '../../lib/types'
-
+import React, { createContext, useContext, useReducer } from "react";
+//import dataLists from '../../utils/dataExPublicLists'
+import { ListType, MenuItem } from '../../lib/types'
+//import { getPlaygroundDocs } from "../../utils/db.PouchPlayground";
 import { v4 as uuidv4 } from 'uuid';
-
+import { dataReducerList, dataMenuItems, deleteItem } from "@/helpers/funcDashboard";
 const getUUID = uuidv4();
 
-const myData:ListType[] = dataLists;
-// PublicList Array contains Object list | Array[ Object{ id: number, name: string, items: Array[ Objects{} ] } ]
-// returns string[]
+const myData: ListType[] = [];
+
+//console.log(myData)
+// PublicList Array 
 export const defaultDataMenu = (prop:ListType[]) => {
-  const menu: string[] = []
+  const menu: MenuItem[] = [];
   prop.forEach((entry:ListType) => {
-    const item: string = entry.name;
-    menu.push(item);
+    menu.push({  id: entry.id, name: entry.name });
   })
   return menu
 };
@@ -22,32 +21,24 @@ export const defaultDataMenu = (prop:ListType[]) => {
 // array of menu items
 const dataMenu = defaultDataMenu(myData)
 
-// true if name found in list, false if not
-// returns bool
-export const dataReducerMenu = (prop:string[], name:string) => {
-  return prop.includes(name) 
-}
-
-// requests list by list name
-// returns object
-export const dataReducerList = (prop: ListType[], name: string) => {
-  return prop.find(entry => entry.name === name)
-}
-
 // favorite list
-const favorites = dataReducerList(myData, 'Favorites')
+const favorites = dataReducerList(myData, 'Favorites');
+
+
 
 //lists of term definitions
 type ListData = {
-  menu: string[];
-  getMenuItem: string;
-  addMenuItem: boolean;
-  deleteMenuItem: string;
+  menu: MenuItem[];
+  getMenuIds?: string[],
+  getMenuNames?: string[],
+  getMenuItem?: string;
+  addMenuItem?: boolean;
+  deleteMenuItem?: string;
   favoriteList: ListType | undefined;
   publicFavorites?: string[];
   getFavorite?: string;
-  addFavorite: string;
-  removeFavorite: string;
+  addFavorite?: string;
+  removeFavorite?: string;
   currentList: ListType | undefined;
   lists: ListType[];
 };
@@ -55,7 +46,9 @@ type ListData = {
 type ListAction =
   | {
     type: "MENU";
-    menu?: string[];
+    menu?: MenuItem[];
+    getMenuIds?: string[],
+    getMenuNames?: string[],
     getMenuItem?: string;
     addMenuItem?: boolean;
     deleteMenuItem?: string;
@@ -81,29 +74,71 @@ const ListReducer = (
 ): ListData => {
   switch (action.type) {
     case 'MENU':
-      if (action.addMenuItem) {
+      if (action.menu) {
+        const lists = action.menu;
+        const ids = dataMenuItems(state.lists, 'ids') as string[];
+        const idsMenu = [...ids].sort().filter((item) => item != 'Favorites') as string[];
+        const names: string[] = dataMenuItems(lists, 'names') as string[];
+        const namesMenu: string[] = [...names].sort().reverse().filter((item) => item != 'Favorites');
+        return { ...state, menu: lists, getMenuIds: idsMenu, getMenuNames: namesMenu };
+      } else if (action.getMenuIds) {
+        const ids = dataMenuItems(state.lists, 'ids') as string[];
+        const idsMenu = [...ids].sort().reverse().filter((item) => item != 'Favorites') as string[];
+        return {...state, getMenuIds: idsMenu }
+      } else if (action.getMenuNames) {
+        const names = dataMenuItems(state.lists, 'names') as string[];
+        const namesMenu = [...names].sort().reverse().filter((item) => item != 'Favorites') as string[];
+        return {...state, getMenuNames: namesMenu}
+      } else if (action.addMenuItem) {
+        const lists = state.lists;
         const menu = state.menu;
-        let total = 1;
-        for (const item of menu) {
-          if (item.includes('Untitled')) {
-            total += 1;
+        const names = dataMenuItems(menu, "names") as string[];
+        const untitled = names.includes('Untitled');
+        if (lists.length > 10) {
+          return { ...state, menu: menu }
+        } else if (!untitled) {
+          const newID = getUUID;
+          const newName = 'Untitled'
+          menu.unshift({ id: newID, name: newName });
+          const items = dataMenuItems(state.lists, 'names') as string[];
+          items.unshift(newName);
+          lists.push({ id: newID, name: newName, items: [] });
+          return { ...state, menu: menu, getMenuNames: items, lists: lists } ;
+        } else {
+          let total = 0;
+          for (const item of names) {
+            if (item.includes('Untitled')) {
+              total += 1;
+            }
           }
+          const newID = getUUID;
+          const newName = 'Untitled' + total.toString();
+          menu.unshift({ id: newID, name: newName });
+          
+          state.lists.push({ id: newID, name: newName, items: [] })
+          total = 0;
+          return { ...state, menu: menu }
         }
-        const newItem = 'Untitled' + total.toString();
-        menu.unshift(newItem);
-        state.lists.push({ id: getUUID, name: newItem, items: [] })
-        total = 0;
-        return { ...state, menu: menu};
       } else if (action.deleteMenuItem) {
-        //const deleteItem = state.deleteMenuItem;
-        return { ...state, menu: state.menu};
+        const lists: ListType[] = state.lists;
+        //console.log(lists)
+        const menu: MenuItem[] = state.menu;
+        const item: string = state.getMenuItem as string;
+        const filteredLists = deleteItem(lists, item) ;
+        const filteredMenu = deleteItem(menu, item);
+        return { ...state, menu: filteredMenu, getMenuItem: 'Favorites', lists: filteredLists };
       } else if (action.getMenuItem) {
         return {...state, getMenuItem: action.getMenuItem}
       }
       return { ...state, menu: dataMenu };
     case 'LISTS':
-      const resultList = dataReducerList(myData, state.getMenuItem)
-      if (action.currentList && resultList) {
+      const resultList = () => { if(state.getMenuItem !== undefined) return dataReducerList(myData, state.getMenuItem) };
+      if (action.lists) {
+        return { ...state, lists: action.lists}
+      }
+      else if (action.currentList && resultList) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         return { ...state, currentList: resultList };
       }
       return { ...state, lists: state.lists};
@@ -118,6 +153,8 @@ interface Props {
 
 const defaultValues: ListData = {
   menu: dataMenu,
+  getMenuIds: [],
+  getMenuNames: [],
   getMenuItem: 'Favorites',
   addMenuItem: false,
   deleteMenuItem: '',
