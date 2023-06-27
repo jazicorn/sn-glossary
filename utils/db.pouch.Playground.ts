@@ -19,8 +19,10 @@ export const seedDBPlayground = async (data: ListType[]) => {
   }
 }
 
-// Initilize Seeding
-seedDBPlayground(publicLists);
+if (process.env.NODE_ENV === 'development') {
+  // Initilize Seeding
+  seedDBPlayground(publicLists);
+}
 
 // Get Playground Document
 export const getPlaygroundDoc = async (id: string) => { 
