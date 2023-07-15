@@ -1,4 +1,5 @@
 import '@/styles/globals.css';
+import { ClerkProvider } from "@clerk/nextjs";
 import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
 import { GlossaryProvider } from '@/context/contextGlossary';
@@ -15,7 +16,9 @@ export default function App({ Component, pageProps: { ...pageProps }, }: AppProp
     return (
       <GlossaryProvider>
         <DashboardProvider>
-          <Component {...pageProps} />
+          <ClerkProvider {...pageProps}>
+            <Component {...pageProps} />
+          </ClerkProvider>
         </DashboardProvider>
     </GlossaryProvider>
   );
