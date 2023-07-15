@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { isSignedIn, SignOutButton } from '@clerk/nextjs';
+import { SignOutButton  } from '@clerk/nextjs';
 import {
   faLock,
   faKey,
@@ -15,23 +15,15 @@ export default function AccountMenu() {
         <h1 className='w-full border-b border-slate-300 pb-2 text-xl text-blue-500'>
           Account Menu
         </h1>
-        <div className='mx-4 divide-y'>
+        <div className='mx-4 mt-2 divide-y'>
           <ul className='text-xl'>
-            {!isSignedIn ? 
-              <ol className='flex flex-row justify-center px-2 py-1 text-blue-300 hover:text-gray-500'><Link
-                  href='/sign-in/'
-                  className=''
-                >
-                  Login
-                </Link></ol> :
-              <div>
-                <ol className='flex flex-row justify-center px-2 pb-1 text-blue-300 hover:text-gray-500'><SignOutButton>
-                  <button className=''>
+              <ol className='flex flex-row justify-center px-2 pb-1 text-blue-300 hover:text-gray-500'>
+                <SignOutButton>
+                  <button>
                     Logout
                   </button>
-                </SignOutButton></ol>
-              </div>
-             }
+                </SignOutButton>
+              </ol>
           </ul>
           <ul>
             <ol className='flex flex-row justify-center p-2 hover:text-blue-300'>

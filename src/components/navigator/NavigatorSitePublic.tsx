@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/router';
-import { useUser, SignOutButton } from '@clerk/nextjs';
+import { useUser } from '@clerk/nextjs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowUpRightFromSquare,
@@ -13,10 +13,11 @@ import {
   faGifts,
   faMinus,
 } from '@fortawesome/free-solid-svg-icons';
-import { faSun } from '@fortawesome/free-regular-svg-icons';
+import { faSun,faCircleUser as faUser } from '@fortawesome/free-regular-svg-icons';
 import NavigatorSitePublicMenu from './NavigatorSitePublicMenu';
-import AccountMenu from './AccountMenu';
-import MoreMenu from './MoreMenu';
+import AccountMenuLogout from './menu/AccountMenuLogout';
+import AccountMenuLogin from './menu/AccountMenuLogin';
+import MoreMenu from './menu/MoreMenu';
 
 //tw-elements: Initialization for ES Users
 import { Input, Modal, Ripple, initTE } from 'tw-elements';
@@ -42,6 +43,28 @@ export default function NavigatorSitePublic() {
     setMenu(false);
     setAccountMenu(!accountMenu);
   }
+  const useOutsideAlert = (ref) => {
+    useEffect(() => {
+      /**
+       * Alert if clicked on outside of element
+       */
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          setMenu(false);
+          setMoreMenu(false);
+          setAccountMenu(false);
+        }
+      }
+      // Bind the event listener
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        // Unbind the event listener on clean up
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  }
+  const wrapperRef = useRef(null);
+  useOutsideAlert(wrapperRef);
   return (
     <div className='relative z-10'>
       <div className='relative z-20 flex h-10 flex-row border-b border-slate-200'>
@@ -49,7 +72,6 @@ export default function NavigatorSitePublic() {
         <nav className='z-3 relative flex h-[42px] w-full flex-row justify-between px-4'>
           <div className='z-4 divide-x-{12px} relative flex min-h-[34px] w-1/3 min-w-[34px] flex-row place-items-center justify-start divide-x divide-deep-blue'>
             <div className='pr-2'>
-              
                 {!Menu ? (
                   <button
                 onClick={() => menuClick()}
@@ -65,7 +87,6 @@ export default function NavigatorSitePublic() {
                     size='xl'
                   /></button>
                 )}
-              
               {/**<!-- logo -->*/}
               <Link
                 href='/'
@@ -99,37 +120,33 @@ export default function NavigatorSitePublic() {
               </div>
               {/**<!-- Features--> */}
               <div className='no-wrap flex min-w-[66px] flex-row'>
-                
-                  {!moreMenu ? (
-                    <button onClick={moreMenuClick} className='mx-1 flex flex-row text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center hover:text-blue-300'>
-                      <FontAwesomeIcon
+                {!moreMenu ? (
+                  <button ref={wrapperRef} onClick={moreMenuClick} className='mx-1 flex flex-row text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center hover:text-blue-300'>
+                    <FontAwesomeIcon
+                      icon={faGifts}
+                      size='sm'
+                      className='w-[18px] pt-1'
+                    />
+                    <span className='px-0.5'>More</span>
+                  </button>
+                ) : (
+                  <div className='flex flex-col'>
+                    <button ref={wrapperRef} onClick={moreMenuClick} className='text-blue-300 mx-1 flex flex-col text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center hover:text-blue-300'>
+                      <span className='flex flex-row'>
+                        <FontAwesomeIcon
                         icon={faGifts}
                         size='sm'
-                        className='w-[18px] pt-1'
+                        className='w-[18px] pt-1 '
                       />
                       <span className='px-0.5'>More</span>
+                      </span>
+                      
                     </button>
-                  ) : (
-                    <div className='flex flex-col'>
-                    
-                      <button onClick={moreMenuClick} className='text-blue-300 mx-1 flex flex-col text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center hover:text-blue-300'>
-                        <span className='flex flex-row'>
-                          <FontAwesomeIcon
-                          icon={faGifts}
-                          size='sm'
-                          className='w-[18px] pt-1 '
-                        />
-                        <span className='px-0.5'>More</span>
-                        </span>
-                        
-                      </button>
-                      <div className=''>
-                        <MoreMenu />
-                      </div>
-                  </div>
-                    
-                  )}
-                
+                    <div className=''>
+                      <MoreMenu />
+                    </div>
+                </div>
+                )}
               </div>
             </div>
             <div className='hidden flex-row pr-2 hover:text-blue-300  xl:flex'>
@@ -181,20 +198,27 @@ export default function NavigatorSitePublic() {
             <Link href='/'>SN-Glossary</Link>
           </div>
           <div className='my-2 flex w-1/3 flex-row justify-end whitespace-nowrap pl-1.5 pt-0.5 text-xs font-medium xl:hidden'>
-            {/**<!-- Moblie:login/logout --> */}
+            {/**<!--login/logout --> */}
             <div className=' flex flex-row px-2'>
-              <Link
-                href=''
-                className='text-grey-900 hover:text-grey-300 mx-1 h-fit place-self-center p-0 text-center'
-              >
-                <FontAwesomeIcon
-                  icon={faCircleUser}
-                  color='#334155'
-                  size='2xl'
-                  className='hover:text-gray-500'
-                  onClick={() => accountMenuClick()}
-                />
-              </Link>
+               <div className="pb-1">
+                {isSignedIn ? 
+                  <FontAwesomeIcon
+                    icon={faCircleUser}
+                    color='#334155'
+                    size='2xl'
+                    className='hover:text-gray-500'
+                    onClick={() => accountMenuClick()}
+                  /> 
+                  :
+                  <FontAwesomeIcon
+                    icon={faUser}
+                    color='#334155'
+                    size='2xl'
+                    className='hover:text-gray-500'
+                    onClick={() => accountMenuClick()}
+                  />
+                }
+              </div>
             </div>
           </div>
           {/**<!-- Links large Screen --> */}
@@ -252,21 +276,23 @@ export default function NavigatorSitePublic() {
             </div>
             {/**<!-- login/logout --> */}
             <div className='flex flex-row px-2'>
-             {!isSignedIn ? 
-              <Link
-                  href='/sign-in/'
-                  className='text-grey-900 hover:text-blue-300 hover:bg-deep-blue ml-1 h-fit w-16 place-self-center rounded-md border border-blue-300 p-0 text-center text-sm transition duration-300 hover:border-blue-400'
-                >
-                  Login
-                </Link> :
-              <div>
-                <SignOutButton>
-                  <button className='text-grey-900 hover:text-blue-300 hover:bg-deep-blue ml-1 h-fit w-16 place-self-center rounded-md border border-blue-300 p-0 text-center text-sm transition duration-300 hover:border-blue-400'>
-                    Logout
-                  </button>
-                </SignOutButton>
+              <div className="pt-[1px]">
+                {isSignedIn ? <FontAwesomeIcon
+                  icon={faCircleUser}
+                  color='#334155'
+                  size='xl'
+                  className='hover:text-gray-500'
+                  onClick={() => accountMenuClick()}/> 
+                  :
+                  <FontAwesomeIcon
+                    icon={faUser}
+                    color='#334155'
+                    size='xl'
+                    className='hover:text-gray-500'
+                    onClick={() => accountMenuClick()}
+                  />
+                }
               </div>
-             }
             </div>
           </div>
         </nav>
@@ -275,8 +301,9 @@ export default function NavigatorSitePublic() {
       <div className='z-1000 absolute flex w-screen flex-col items-center overflow-visible border-b-2 bg-white sm:items-start  sm:border-0 sm:bg-transparent xl:hidden'>
         {Menu && <NavigatorSitePublicMenu />}
       </div>
-      <div className='z-1000 absolute flex w-screen flex-col items-center overflow-visible border-b-2 bg-white sm:items-end  sm:border-0 sm:bg-transparent xl:hidden'>
-        {accountMenu && <AccountMenu />}
+      <div className='z-1000 absolute flex w-screen flex-col items-center overflow-visible border-b-2 bg-white sm:items-end  sm:border-0 sm:bg-transparent'>
+        {accountMenu && isSignedIn && <AccountMenuLogout />}
+        {accountMenu && !isSignedIn && <AccountMenuLogin />}
       </div>
     </div>
   );
