@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useUser, SignOutButton } from '@clerk/nextjs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowUpRightFromSquare,
@@ -21,6 +22,7 @@ import MoreMenu from './MoreMenu';
 import { Input, Modal, Ripple, initTE } from 'tw-elements';
 
 export default function NavigatorSitePublic() {
+  const { isSignedIn } = useUser();
   const router = useRouter().pathname;
   useEffect(() => {
     initTE({ Input, Modal, Ripple });
@@ -250,18 +252,21 @@ export default function NavigatorSitePublic() {
             </div>
             {/**<!-- login/logout --> */}
             <div className='flex flex-row px-2'>
+             {!isSignedIn ? 
               <Link
-                href=''
-                className='text-grey-900 hover:text-blue-300 hover:bg-deep-blue mx-1 h-fit w-16 place-self-center rounded-md border border-blue-300 p-0 text-center text-sm transition duration-300 hover:border-blue-400'
-              >
-                Signup
-              </Link>
-              <Link
-                href=''
-                className='text-grey-900 hover:text-blue-300 hover:bg-deep-blue ml-1 h-fit w-16 place-self-center rounded-md border border-blue-300 p-0 text-center text-sm transition duration-300 hover:border-blue-400'
-              >
-                Login
-              </Link>
+                  href='/sign-in/'
+                  className='text-grey-900 hover:text-blue-300 hover:bg-deep-blue ml-1 h-fit w-16 place-self-center rounded-md border border-blue-300 p-0 text-center text-sm transition duration-300 hover:border-blue-400'
+                >
+                  Login
+                </Link> :
+              <div>
+                <SignOutButton>
+                  <button className='text-grey-900 hover:text-blue-300 hover:bg-deep-blue ml-1 h-fit w-16 place-self-center rounded-md border border-blue-300 p-0 text-center text-sm transition duration-300 hover:border-blue-400'>
+                    Logout
+                  </button>
+                </SignOutButton>
+              </div>
+             }
             </div>
           </div>
         </nav>
