@@ -108,7 +108,7 @@ export default function NavigatorSitePublicMenu() {
                     size='sm'
                     className='place-self-center'
                   />
-                  <span className='px-1'>Dashboard</span>
+                  <Link href='/dashboard' className='px-1'>Dashboard</Link>
                   <FontAwesomeIcon
                     icon={faArrowUpRightFromSquare}
                     color=''
