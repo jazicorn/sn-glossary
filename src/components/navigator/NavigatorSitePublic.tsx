@@ -63,7 +63,7 @@ export default function NavigatorSitePublic() {
       };
     }, [ref]);
   }
-  const wrapperRef = useRef(null);
+  const wrapperRef = useRef();
   useOutsideAlert(wrapperRef);
   return (
     <div className='relative z-10'>
@@ -130,8 +130,8 @@ export default function NavigatorSitePublic() {
                     <span className='px-0.5'>More</span>
                   </button>
                 ) : (
-                  <div className='flex flex-col'>
-                    <button ref={wrapperRef} onClick={moreMenuClick} className='text-blue-300 mx-1 flex flex-col text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center hover:text-blue-300'>
+                  <div className='flex flex-col' ref={wrapperRef}>
+                    <button onClick={moreMenuClick} className='text-blue-300 mx-1 flex flex-col text-grey-900 hover:text-grey-300 h-fit w-auto place-self-center truncate px-0.5 py-0 text-center hover:text-blue-300'>
                       <span className='flex flex-row'>
                         <FontAwesomeIcon
                         icon={faGifts}
@@ -298,10 +298,10 @@ export default function NavigatorSitePublic() {
         </nav>
       </div>
       {/**DropDown Menu */}
-      <div className='z-1000 absolute flex w-screen flex-col items-center overflow-visible border-b-2 bg-white sm:items-start  sm:border-0 sm:bg-transparent xl:hidden'>
+      <div ref={wrapperRef} className='z-1000 absolute flex w-screen flex-col items-center overflow-visible border-b-2 bg-white sm:items-start  sm:border-0 sm:bg-transparent xl:hidden'>
         {Menu && <NavigatorSitePublicMenu />}
       </div>
-      <div className='z-1000 absolute flex w-screen flex-col items-center overflow-visible border-b-2 bg-white sm:items-end  sm:border-0 sm:bg-transparent'>
+      <div ref={wrapperRef} className='z-1000 absolute flex w-screen flex-col items-center overflow-visible border-b-2 bg-white sm:items-end  sm:border-0 sm:bg-transparent'>
         {accountMenu && isSignedIn && <AccountMenuLogout />}
         {accountMenu && !isSignedIn && <AccountMenuLogin />}
       </div>
